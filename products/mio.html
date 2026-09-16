@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="zh-CN"><head>
 <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>Mio · 每人一个 AI 办公坐席 | 句子互动</title>
-<meta name="description" content="Mio 是句子互动给每个员工配的 AI 办公坐席：写方案、做 PPT、理数据、查资料，一句话布置，交回能直接验收的成果。接着企业自己的数据问数、搭看板、盯指标。企业统一开通，注册即用。" />
+<title>Mio · 你的 AI 办公搭子 | 句子互动</title>
+<meta name="description" content="Mio 是句子互动给每个员工配的 AI 办公搭子：写方案、做 PPT、理数据、查资料，一句话布置，交回能直接验收的成果。接着企业自己的数据问数、搭看板、盯指标，干顺的活做成 Skill 全公司复用。企业统一开通，注册即用。" />
 <link rel="icon" href="../logo.png" />
 <link rel="canonical" href="https://juzibot.com/products/mio.html" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -133,6 +133,21 @@
   #cta .cta-actions{display:flex;flex-wrap:wrap;gap:12px}
   @media(max-width:640px){#cta .cta-actions .btn{flex:1 1 100%;justify-content:center}}
 
+  /* —— 客户案例 · 六件事 —— */
+  .mio-cases{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
+  .mio-case{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,2.2vw,26px);display:flex;flex-direction:column;gap:12px;
+    transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+  .mio-case:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .mio-case .ind{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--ink-3)}
+  .mio-case .ind b{color:var(--blue);background:var(--blue-50);border:1px solid var(--line);border-radius:999px;padding:3px 9px;letter-spacing:.06em;font-weight:750}
+  .mio-case h3{font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1.35}
+  .mio-case .q{background:var(--blue-50);border:1px solid var(--line);border-radius:12px 12px 12px 4px;padding:10px 13px;font-size:13.5px;line-height:1.55;color:var(--ink)}
+  .mio-case .q::before{content:"问一句";display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-3);margin-bottom:4px}
+  .mio-case .a{font-size:14px;line-height:1.65;color:var(--ink-2);flex:1}
+  .mio-case .a::before{content:"交回";display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--orange-deep);margin-bottom:4px}
+  @media(max-width:900px){.mio-cases{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.mio-cases{grid-template-columns:1fr}}
+
   /* —— 怎么干活 · 四步 —— */
   .mio-how{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
   .mio-step{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,2.2vw,26px)}
@@ -148,7 +163,7 @@
   @media(max-width:900px){.mio-how{grid-template-columns:1fr 1fr}.mio-step::after{display:none}}
   @media(max-width:600px){.mio-how,.mio-twin{grid-template-columns:1fr}}
 
-  /* —— 越用越懂你 / 一个大脑 —— */
+  /* —— 越用越懂你 · 记忆 + Skill —— */
   .mio-brain{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
   .mio-bcard{background:var(--blue-50);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,2.6vw,32px)}
   .mio-bcard.alt{background:#fff}
@@ -160,6 +175,7 @@
   .mio-bcard li b{color:var(--ink);font-weight:750}
   .mio-bcard li::before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:6px;background:var(--blue-100)}
   .mio-bcard li::after{content:"";position:absolute;left:5.5px;top:7px;width:6px;height:3px;border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg)}
+  .mio-bcard .foot{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;line-height:1.6;color:var(--ink)}
   @media(max-width:760px){.mio-brain{grid-template-columns:1fr}}
 
   /* —— 企业级六条 —— */
@@ -171,15 +187,24 @@
   @media(max-width:900px){.mio-six{grid-template-columns:1fr 1fr}}
   @media(max-width:600px){.mio-six{grid-template-columns:1fr}}
 
-  /* —— 能长多大 / 接得进来 —— */
+  /* —— 三种数据 / 能长多大 —— */
+  .mio-data{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
+  .mio-dcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,2.2vw,26px);display:grid;gap:10px;align-content:start}
+  .mio-dcard .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:16px;background:linear-gradient(135deg,var(--blue),var(--purple))}
+  .mio-dcard h3{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .mio-dcard p{font-size:14px;line-height:1.65;color:var(--ink-2)}
+  .mio-dcard .how{margin-top:4px;padding-top:10px;border-top:1px solid var(--line);font-size:13.5px;line-height:1.55;color:var(--ink)}
+  .mio-dcard .how b{color:var(--blue);font-weight:800}
+  .mio-pipe{margin-top:clamp(14px,1.6vw,20px);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.2vw,14px)}
+  .mio-pipe div{position:relative;background:var(--blue-50);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+  .mio-pipe b{display:block;color:var(--ink);font-weight:800;margin-bottom:3px}
+  .mio-pipe b::before{content:counter(pipe) " ";counter-increment:pipe;font-family:var(--mono);color:var(--blue);font-size:11px;letter-spacing:.1em;margin-right:4px}
+  .mio-pipe{counter-reset:pipe}
   .mio-grow{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
   .mio-grow .mio-step h3{font-size:20px}
   .mio-grow .mio-step .n{color:var(--orange-deep)}
-  .mio-plug{margin-top:clamp(14px,1.6vw,20px);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.2vw,14px)}
-  .mio-plug div{background:var(--blue-50);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;font-size:13.5px;line-height:1.55;color:var(--ink-2)}
-  .mio-plug b{display:block;color:var(--ink);font-weight:800;margin-bottom:3px}
-  @media(max-width:900px){.mio-grow{grid-template-columns:1fr}.mio-plug{grid-template-columns:1fr 1fr}}
-  @media(max-width:600px){.mio-plug{grid-template-columns:1fr}}
+  @media(max-width:900px){.mio-data,.mio-grow{grid-template-columns:1fr}.mio-pipe{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.mio-pipe{grid-template-columns:1fr}}
 
   /* —— 怎么开始 · 三步 —— */
   .mio-start{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
@@ -214,10 +239,10 @@
         <div class="ph-copy">
           <div class="mio-brand">
             <img src="../assets/brand/mio-cat-logo.png" alt="Mio" width="40" height="40" decoding="async" />
-            <span class="nm">Mio<small>AI 办公坐席</small></span>
+            <span class="nm">Mio<small>AI 办公搭子</small></span>
           </div>
-          <h1>每人一个 AI，<br/><span class="accent">全公司一个大脑</span></h1>
-          <p class="ph-lede">Mio 是给每个员工配的 AI 办公坐席。写方案、做 PPT、理数据、查资料，一句话布置，<strong>交回的是能直接验收的成果</strong>。企业统一开通，像配工位一样；接上经营数据，问数、搭看板、盯指标也在同一段对话里。</p>
+          <h1>你的 <span class="accent">AI 办公搭子</span></h1>
+          <p class="ph-lede">写方案、做 PPT、理数据、查资料，一句话布置，<strong>交回的是能直接验收的成果</strong>。Mio 先和企业的数据库、业务系统连起来，问数、搭看板、盯指标也在同一段对话里。企业统一开通，注册就能用。</p>
           <div class="ph-cta">
             <a href="https://az-bg.juzibot.com/auth/register" class="btn btn-blue btn-lg ar-host" data-track-name="免费注册使用" data-track-source="Mio页·页头" data-track-area="页头">
               免费注册使用
@@ -227,7 +252,7 @@
           </div>
           <div class="hero-kpis">
             <div class="hero-kpi"><div class="v">一句话</div><div class="l">布置，不用学指令</div></div>
-            <div class="hero-kpi"><div class="v">7 类活</div><div class="l">一个坐席全包</div></div>
+            <div class="hero-kpi"><div class="v">7 类活</div><div class="l">一个搭子全包</div></div>
             <div class="hero-kpi"><div class="v">当天</div><div class="l">注册就能用</div></div>
             <div class="hero-kpi"><div class="v">1000+</div><div class="l">企业验证的底座</div></div>
           </div>
@@ -323,7 +348,7 @@
             <div class="say">“把上周的渠道业务整理成周报，周一早上发我。”</div>
             <div class="mk-doc">
               <div class="t">渠道业务周报</div>
-              <div class="meta">2026 · 第 35 周 · 自动生成</div>
+              <div class="meta">2026 · 第 37 周 · 自动生成</div>
               <span class="ln h" style="width:46%"></span>
               <span class="ln" style="width:100%"></span>
               <span class="ln" style="width:92%"></span>
@@ -375,7 +400,7 @@
           <div class="mio-copy">
             <span class="k">问数 · 搭看板 · 盯指标</span>
             <h3>接着企业的数，才干得了的三件事</h3>
-            <p>把业务系统接进来，一句话问经营数据，秒级出图表，一层层追问到底，答案带出处。想盯的指标一句话搭成看板；指标异动它先发现、先提醒。</p>
+            <p>它不是把数据查一下就答：读你的库，复制进专属沙盒，写代码重算，答案带出处，每个数能追到哪张表。想盯的指标一句话搭成看板；指标异动它先发现、先提醒。</p>
             <ul>
               <li><b>答案带出处</b>查得到数据库里的原始数，不写 SQL、不约 BI。</li>
               <li><b>看板一句话搭</b>指标卡加分天趋势，时间范围自己选，明细点得进去。</li>
@@ -410,6 +435,57 @@
     </div>
   </section>
 
+  <!-- ════════════ 客户案例 · 六件事 ════════════ -->
+  <section class="sec pad" id="cases">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">客户案例</span>
+          <h2>客户已经在用 Mio 干的<span class="hl warm"><span>六件事</span></span>。</h2>
+        </div>
+        <p class="sub">都是客户拿自己的数据布置的活，不是演示。客户名已隐去。</p>
+      </div>
+      <div class="mio-cases">
+        <div class="mio-case rv">
+          <span class="ind"><b>在线教育</b>某语文培训 IP</span>
+          <h3>助教点评统计与学员学情月报</h3>
+          <div class="q">“三位助教这个月各点评了多少次，质量怎么样，多久回一次？”</div>
+          <div class="a">柱图加逐条明细一次出。客户接着提了 7 个学情问题，补齐范围后生成 8 个模块的月报，发一个公开链接给家长看。</div>
+        </div>
+        <div class="mio-case rv rv-d1">
+          <span class="ind"><b>金融</b>某理财教育公司</span>
+          <h3>课程运营与账号巡检</h3>
+          <div class="q">“某账号 8 月底至今和学员的沟通情况，分析一下。”</div>
+          <div class="a">每日消息总览、活跃群前五、四条结论。追问一个班的互动为什么掉得快，它把衰减曲线拉出来；顺手把账号巡检也做了。</div>
+        </div>
+        <div class="mio-case rv rv-d1">
+          <span class="ind"><b>在线教育</b>某在线教育机构</span>
+          <h3>AI 上线前后效果对比</h3>
+          <div class="q">“用 AI 的和不用 AI 的到底差多少？”</div>
+          <div class="a">运营要向老板证明 AI 有用。Mio 自己定策略、分组，出两条论证链和一段汇报话术，一键做成看板和 PPT。</div>
+        </div>
+        <div class="mio-case rv rv-d2">
+          <span class="ind"><b>医疗健康</b>某医美品牌</span>
+          <h3>AI 用量对账：处理了多少消息、服务了多少人</h3>
+          <div class="q">“AI 处理了多少条消息，服务了多少人？”</div>
+          <div class="a">43 个账号、7 个月的处理消息按账号和自然月出 Excel 对账表加月度柱图。口径一变，它自己复盘重跑。</div>
+        </div>
+        <div class="mio-case rv rv-d2">
+          <span class="ind"><b>消费电商</b>某消费品牌</span>
+          <h3>社群运营日报与好评素材</h3>
+          <div class="q">“昨天退了多少人、哪个群、为什么？把好评做成朋友圈图。”</div>
+          <div class="a">退群原因指到具体的运营动作，留存报告分五个维度，好评检索归类后生成聊天截图。客户用两个月，已经自己写提示词。</div>
+        </div>
+        <div class="mio-case rv rv-d2">
+          <span class="ind"><b>通用</b>某招投标服务公司</span>
+          <h3>标书审核 Skill</h3>
+          <div class="q">“帮我审核一下。”加一份 56 页的标书 PDF。</div>
+          <div class="a">审核报告：风险评级、违规明细、整改清单。交付团队把审核方法做成 Skill 交给客户，核保材料、OA 文件审核同样能做。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ════════════ 怎么干活 · 四步 ════════════ -->
   <section class="sec pad" id="how">
     <div class="wrap">
@@ -427,44 +503,83 @@
         <div class="mio-step rv rv-d2"><span class="n">STEP 4</span><h3>交回成果</h3><p>文档、PPT、表格，能下载能转发。不满意，一句话让它改。</p></div>
       </div>
       <div class="mio-twin rv">
-        <div><b>熟活不走样</b>：干顺的活沉淀成固定流程，天天照着跑。</div>
+        <div><b>熟活不走样</b>：干顺的活存成 Skill，天天照着跑。</div>
         <div><b>新活摸得出</b>：没干过的它自己拆步骤，全程看得见、随时叫停。</div>
       </div>
     </div>
   </section>
 
-  <!-- ════════════ 越用越懂你 · 全公司一个大脑 ════════════ -->
-  <section class="sec pad" id="brain">
+  <!-- ════════════ 越用越懂你 · 记忆 + Skill ════════════ -->
+  <section class="sec pad" id="skill">
     <div class="wrap">
       <div class="sec-top rv">
         <div>
           <span class="sec-eyebrow">越用越懂你</span>
-          <h2>每人一个坐席，<span class="hl"><span>全公司一个大脑</span></span>。</h2>
+          <h2>干顺的活做成 Skill，<span class="hl"><span>全公司拿来就用</span></span>。</h2>
         </div>
-        <p class="sub">模型一代比一代聪明，可每次打开对话，它都像上班第一天：不认识你的客户，不知道你的规矩。缺的是经验，经验只能在活里攒。</p>
+        <p class="sub">模型不缺聪明，缺的是你们公司的做法。Mio 记得你说过的话；干顺的活能存成 Skill，别人一句话就能调用。</p>
       </div>
       <div class="mio-brain">
         <div class="mio-bcard rv">
-          <span class="k">统一配的坐席</span>
-          <h3>工龄，每天都在涨</h3>
-          <p class="lead">用一年，它就是个有一年工龄的员工。</p>
+          <span class="k">记忆</span>
+          <h3>说过的话，不用再交代</h3>
+          <p class="lead">用得越久，它越像你们公司的人。</p>
           <ul>
-            <li><b>说过的话，不用再交代</b>：定过的口径、改过的格式，下次开口直接带上</li>
-            <li><b>出过的错，不会再犯</b>：出错的对话自动变成测试用例，修好才放行新版本</li>
-            <li><b>干过的活，都有底</b>：怎么来的、人改了什么都记着，改第二版不用从头讲</li>
-            <li><b>这些都发生在深夜</b>：统计、调优、回归自动跑完，你睡觉的时候，它在变好</li>
+            <li><b>口径和格式记得住</b>：定过的指标口径、改过的版式，下次开口直接带上</li>
+            <li><b>改第二版不用从头讲</b>：怎么来的、你改了什么，都有底</li>
+            <li><b>接过的数据源记得住</b>：常问的表、常盯的指标，下次直接问</li>
           </ul>
         </div>
         <div class="mio-bcard alt rv rv-d1">
-          <span class="k">共享一个大脑</span>
-          <h3>好做法回流，攒成公司的大脑</h3>
-          <p class="lead">谁把一件活干顺了，他的做法就沉淀成公司的流程：别人一句话调用，天天跑、跑错了能发现。</p>
+          <span class="k">Skill</span>
+          <h3>把一次干对的活写下来</h3>
+          <p class="lead">Skill 不是一段代码，是这件活该怎么干。谁把活干顺了，他的做法就能存成 Skill，别人一句话调用，天天照着跑。</p>
           <ul>
-            <li><b>新人第一天就有老手的做法</b>：不用师傅带三个月，开箱就是全公司最好的用法</li>
-            <li><b>别的部门拿来就用</b>：销售调顺的周报做法，运营、客服一句话就用上</li>
-            <li><b>越用越像你们公司的人</b>：攒下的做法越多，换谁来用都是这个水准</li>
+            <li><b>Skill 库里有现成的</b>：写周报、做 PPT、审标书这类，注册就能用</li>
+            <li><b>自家的做法做成自家的 Skill</b>：审核规则、汇报格式、行业干法，固化下来</li>
+            <li><b>交付团队帮你做</b>：复杂的活，交付团队把方法搭成 Skill，直接交给你用</li>
           </ul>
+          <div class="foot">以前公司固化流程靠流程引擎，固化的是人的动作。AI 干活的动作固化下来，靠的是 Skill。</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 三种数据 · 都接得进来 ════════════ -->
+  <section class="sec pad" id="data">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">接得进来</span>
+          <h2>企业的数据分三种，<span class="hl"><span>都接得进来</span></span>。</h2>
+        </div>
+        <p class="sub">接的不是一份导出来的表，是企业每天在产生的数据。授权一次，在给你的专属环境里读，答案带出处。</p>
+      </div>
+      <div class="mio-data">
+        <div class="mio-dcard rv">
+          <span class="ico"><i class="fa-solid fa-folder-open"></i></span>
+          <h3>文档数据</h3>
+          <p>飞书、钉钉等办公平台里的文档、表格、知识库。</p>
+          <div class="how"><b>怎么接</b>：授权一次，只在专属环境里读；你有权限看的，它才看得到。</div>
+        </div>
+        <div class="mio-dcard rv rv-d1">
+          <span class="ico"><i class="fa-solid fa-database"></i></span>
+          <h3>系统数据</h3>
+          <p>OA、CRM、ERP、订单库这些业务系统里的数。</p>
+          <div class="how"><b>怎么接</b>：接口同步进来，字段能关联，同一个客户在各平台的记录对得上。</div>
+        </div>
+        <div class="mio-dcard rv rv-d2">
+          <span class="ico"><i class="fa-solid fa-robot"></i></span>
+          <h3>AI 员工产生的数据</h3>
+          <p>句子秒回里 AI 员工每天接的对话、线索、订单。</p>
+          <div class="how"><b>怎么接</b>：同一套底座，原生接入，不用另外接。句子懂行里整理好的知识，对话里直接调用。</div>
+        </div>
+      </div>
+      <div class="mio-pipe rv">
+        <div><b>读库</b>接上你的数据库或业务系统，授权只在专属环境内用。</div>
+        <div><b>进沙盒</b>数据复制进隔离沙盒，碰不到生产系统。</div>
+        <div><b>写代码重算</b>不是查一下就答，Mio 自己写代码算，复杂口径也算得对。</div>
+        <div><b>答案带出处</b>每个数能追到哪张表、哪条查询，审计按这条验收。</div>
       </div>
     </div>
   </section>
@@ -477,39 +592,33 @@
           <span class="sec-eyebrow">企业级保障</span>
           <h2>企业敢全员配，<span class="hl"><span>靠这六条</span></span>。</h2>
         </div>
-        <p class="sub">员工各用各的 AI，好用法攒不下，公司材料还往外网跑。统一配坐席，企业先问的不是聪不聪明，是可不可控。</p>
+        <p class="sub">员工各用各的 AI，好用法攒不下，公司材料还往外网跑。企业统一配 Mio，先问的不是聪不聪明，是可不可控。</p>
       </div>
       <div class="mio-six">
-        <div class="mio-chk rv"><i class="fa-solid fa-check"></i><div><h3>统一开通，用量看得见</h3><p>坐席由企业统一开通；谁在用、用了多少，后台一目了然。</p></div></div>
-        <div class="mio-chk rv rv-d1"><i class="fa-solid fa-check"></i><div><h3>数据不出企业的域</h3><p>支持私有化、一体机部署；员工问的写的，留在自己域里。</p></div></div>
+        <div class="mio-chk rv"><i class="fa-solid fa-check"></i><div><h3>统一开通，用量看得见</h3><p>账号由企业统一开通；谁在用、用了多少，后台一目了然。</p></div></div>
+        <div class="mio-chk rv rv-d1"><i class="fa-solid fa-check"></i><div><h3>数据不出企业的域</h3><p>授权一次，只在给你的专属环境里用；支持私有化、一体机部署。</p></div></div>
         <div class="mio-chk rv rv-d1"><i class="fa-solid fa-check"></i><div><h3>每一次产出可追溯</h3><p>答案来自哪些数据、怎么来的，全程可审计。金融、政务按这条验收。</p></div></div>
-        <div class="mio-chk rv rv-d2"><i class="fa-solid fa-check"></i><div><h3>在隔离环境里干活</h3><p>动作可控、可回滚，碰不到不该碰的系统。</p></div></div>
+        <div class="mio-chk rv rv-d2"><i class="fa-solid fa-check"></i><div><h3>在隔离沙盒里干活</h3><p>动作可控、可回滚，碰不到不该碰的系统。</p></div></div>
         <div class="mio-chk rv rv-d2"><i class="fa-solid fa-check"></i><div><h3>用真实工位身份上岗</h3><p>账号、权限、行为记录，和员工同一套体系管理。</p></div></div>
         <div class="mio-chk rv rv-d2"><i class="fa-solid fa-check"></i><div><h3>模型不绑定</h3><p>100+ 国内外主流模型一键切换；按任务选模型，不被绑死。</p></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ════════════ 能长多大 · 接得进来 ════════════ -->
+  <!-- ════════════ 能长多大 ════════════ -->
   <section class="sec pad" id="grow">
     <div class="wrap">
       <div class="sec-top rv">
         <div>
           <span class="sec-eyebrow">能长多大</span>
-          <h2>从办公坐席开始，能长成一套 <span class="hl"><span>AI 员工体系</span></span>。</h2>
+          <h2>从办公搭子开始，能长成一套 <span class="hl"><span>AI 员工体系</span></span>。</h2>
         </div>
         <p class="sub">今天解决员工的写、查、盯；企业要往深走，同一套底子接得住。先给员工配上，用出感觉了再往深走，不用换平台。</p>
       </div>
       <div class="mio-grow">
         <div class="mio-step rv"><span class="n">第一步</span><h3>员工先用起来</h3><p>写方案、做 PPT、查资料，不接任何系统也好用，全员当天上手。</p></div>
-        <div class="mio-step rv rv-d1"><span class="n">第二步</span><h3>接上经营数据</h3><p>把业务系统接进来，它答的就是你真实的生意；企业自己的做法一点点沉淀成它的本事。</p></div>
-        <div class="mio-step rv rv-d2"><span class="n">第三步</span><h3>AI 员工上岗</h3><p>需要时，长出直接对客干活的 <a href="../workforce/sales.html">AI 销售</a>、<a href="../workforce/service.html">AI 客服</a>、<a href="../workforce/marketing.html">AI 导购</a>。1000+ 企业在用的就是这套体系。</p></div>
-      </div>
-      <div class="mio-plug rv">
-        <div><b>企业业务系统</b>OA / CRM / ERP 的数据接进来，问答和产出用的是真实业务。</div>
-        <div><b>企业已建的智能体</b>各部门已经做的 Agent 接进来，员工在坐席里一句话调用。</div>
-        <div><b>定制上岗的 AI 员工</b>AI 销售、HR、后勤管家的进展和产出，汇报到同一个入口。</div>
-        <div><b>行业智能体</b>带着各行业干法的现成智能体，你的行业有，就能挂进来。</div>
+        <div class="mio-step rv rv-d1"><span class="n">第二步</span><h3>接上经营数据</h3><p>把业务系统接进来，它答的就是你真实的生意；自家的做法一点点存成 Skill。</p></div>
+        <div class="mio-step rv rv-d2"><span class="n">第三步</span><h3>AI 员工上岗</h3><p>需要时，长出直接对客干活的 <a href="../workforce/sales.html">AI 销售</a>、<a href="../workforce/service.html">AI 客服</a>、<a href="../workforce/marketing.html">AI 导购</a>，它们的产出回到 Mio 里一句话就能问。1000+ 企业在用的就是这套体系。</p></div>
       </div>
     </div>
   </section>
@@ -522,16 +631,16 @@
           <span class="sec-eyebrow">怎么开始</span>
           <h2>注册就能用，<span class="hl warm"><span>用出感觉再全员开</span></span>。</h2>
         </div>
-        <p class="sub">按坐席开通，一个坐席对应一名员工，人员变动可换绑。先自己试，再给一个部门开，最后全员配上。</p>
+        <p class="sub">按账号开通，一个账号对应一名员工，人员变动可换绑。先自己试，再给一个部门开，最后全员配上。</p>
       </div>
       <div class="mio-start">
         <div class="mio-step rv">
           <span class="n">第 1 步</span><h3>注册，拿手头的活试一件</h3>
-          <p>注册即用，不用装软件。拿你今天要交的周报、PPT 布置一件，看它交回什么。</p>
+          <p>注册即用，不用装软件。拿你今天要交的周报、PPT 布置一件，或者拖一份自己的数据进去问一句，看它交回什么。</p>
           <a href="https://az-bg.juzibot.com/auth/register" class="btn btn-blue" data-track-name="免费注册使用" data-track-source="Mio页·怎么开始" data-track-area="怎么开始">免费注册使用</a>
         </div>
-        <div class="mio-step rv rv-d1"><span class="n">第 2 步</span><h3>给一个部门开坐席</h3><p>先跑一个月，接上这个部门的数据，看看大家离不离得开。</p></div>
-        <div class="mio-step rv rv-d2"><span class="n">第 3 步</span><h3>全员开通</h3><p>批量开坐席、接业务系统，让每个员工都配上。定制和接系统由交付团队来做。</p></div>
+        <div class="mio-step rv rv-d1"><span class="n">第 2 步</span><h3>给一个部门开</h3><p>先跑一个月，接上这个部门的数据，看看大家离不离得开。</p></div>
+        <div class="mio-step rv rv-d2"><span class="n">第 3 步</span><h3>全员开通，做成 Skill</h3><p>批量开通、接业务系统；交付团队把自家的活做成 Skill，留给下一个人直接用。</p></div>
       </div>
     </div>
   </section>
@@ -540,8 +649,8 @@
   <section class="cta" id="cta">
     <div class="wrap cta-inner">
       <div class="rv">
-        <h2>给每个员工，配一个<br/><span class="acc">能把活干完</span>的 AI。</h2>
-        <p class="sub">Mio，企业统一开通的 AI 办公坐席。注册就能用，拿你手头的活试一件。</p>
+        <h2>给每个员工，配一个<br/><span class="acc">能把活干完</span>的 AI 搭子。</h2>
+        <p class="sub">Mio，企业统一开通。注册就能用，拿你手头的活试一件。</p>
         <div class="cta-actions">
           <a href="https://az-bg.juzibot.com/auth/register" class="btn btn-blue btn-lg ar-host" data-track-name="免费注册使用" data-track-source="Mio页·底部CTA" data-track-area="底部 CTA">
             免费注册使用
@@ -552,7 +661,7 @@
       </div>
       <div class="cta-stats">
         <div class="cta-stat rv" style="--ac:#4338CA"><div class="csv">一句话</div><div class="csl">布置任务，交回成果</div></div>
-        <div class="cta-stat rv rv-d1" style="--ac:#14B8A6"><div class="csv">7 类活</div><div class="csl">一个坐席全包</div></div>
+        <div class="cta-stat rv rv-d1" style="--ac:#14B8A6"><div class="csv">7 类活</div><div class="csl">一个搭子全包</div></div>
         <div class="cta-stat rv rv-d2" style="--ac:#6366F1"><div class="csv">1000+</div><div class="csl">企业验证的底座</div></div>
       </div>
     </div>
@@ -561,7 +670,7 @@
 </main>
 <div id="site-footer"></div>
 
-<script>window.SITE_REL='../';window.PAGE_CTX={entity:'mio',type:'product',title:'Mio · AI 办公坐席'};</script>
+<script>window.SITE_REL='../';window.PAGE_CTX={entity:'mio',type:'product',title:'Mio · AI 办公搭子'};</script>
 <script src="../assets/site.js"></script>
 </body>
 </html>
