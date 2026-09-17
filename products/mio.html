@@ -67,10 +67,10 @@
     .mio-row.flip .mio-copy{order:0}
   }
 
-  /* 示意图舞台（脱敏：正文一律用色条占位） */
-  .mk{position:relative;overflow:hidden;min-height:340px;border-radius:var(--radius);border:1px solid var(--line);
+  /* 示意图舞台（脱敏：内容为示例，客户信息不出现） */
+  .mk{position:relative;overflow:hidden;min-height:360px;border-radius:var(--radius);border:1px solid var(--line);
     background:radial-gradient(520px 260px at 90% -10%,var(--blue-100),transparent 70%),linear-gradient(180deg,#FBFCFF,var(--blue-50));
-    padding:clamp(18px,2.4vw,28px);display:flex;flex-direction:column;gap:14px}
+    padding:clamp(18px,2.4vw,28px) clamp(18px,2.4vw,28px) 66px;display:flex;flex-direction:column;gap:14px}
   .mk .say{align-self:flex-end;max-width:88%;background:var(--blue);color:#fff;padding:10px 14px;border-radius:14px 4px 14px 14px;
     font-size:13.5px;font-weight:600;line-height:1.5;box-shadow:0 8px 18px -10px rgba(67,56,202,.6)}
   .mk .badge{position:absolute;left:clamp(18px,2.4vw,28px);bottom:clamp(18px,2.4vw,28px);display:inline-flex;align-items:center;gap:7px;
@@ -79,36 +79,65 @@
   .ln{display:block;height:8px;border-radius:4px;background:var(--line-2)}
   .ln.h{height:12px;background:var(--blue-100)}
   .ln.d{background:var(--line)}
-  /* Word 文档 */
-  .mk-doc{width:min(100%,330px);margin:0 auto 34px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px 24px 26px;
-    box-shadow:0 18px 40px -22px rgba(14,20,48,.25);display:grid;gap:9px}
-  .mk-doc .t{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:2px}
-  .mk-doc .meta{font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.04em;margin-bottom:6px}
-  .mk-doc .h2{font-size:11.5px;font-weight:750;color:var(--blue);margin-top:6px}
-  .mk-tbl{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:6px 10px;margin-top:4px;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--blue-50)}
-  .mk-tbl .ln{height:6px}
-  .mk-tbl .ln.hd{background:var(--blue-200)}
-  /* PPT + 海报 */
-  .mk-ppt{display:grid;grid-template-columns:56px 1fr;gap:10px;width:min(100%,340px);margin:0 auto 46px 0}
-  .mk-ppt .thumbs{display:grid;gap:6px;align-content:start}
-  .mk-ppt .thumbs i{display:block;aspect-ratio:16/9;border-radius:4px;background:#fff;border:1px solid var(--line)}
-  .mk-ppt .thumbs i.on{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue-100)}
-  .mk-slide{aspect-ratio:16/9;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:0 18px 40px -22px rgba(14,20,48,.25);display:grid;grid-template-rows:auto auto 1fr;gap:8px}
-  .mk-slide .t{font-size:12.5px;font-weight:800;color:var(--ink)}
-  .mk-bars{display:flex;align-items:flex-end;gap:8px;height:100%;padding-top:6px;border-bottom:1px solid var(--line)}
-  .mk-bars i{flex:1;border-radius:4px 4px 0 0;background:var(--blue-200)}
+  /* 应用窗：标题栏带文件图标 + 文件名 + 格式，一眼看出是 Word / PPT / 看板 */
+  .mk-app{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 18px 40px -22px rgba(14,20,48,.28);min-width:0}
+  .mk-app-hd{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);background:#F8FAFF}
+  .mk-app-hd .ic{font-size:15px;flex:0 0 auto}
+  .mk-app-hd .ic.w{color:#2B579A}
+  .mk-app-hd .ic.p{color:#D24726}
+  .mk-app-hd .ic.d{color:var(--blue)}
+  .mk-app-hd .fn{font-size:12px;font-weight:750;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .mk-app-hd .fmt{margin-left:auto;flex:0 0 auto;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink-3);background:#fff;border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+  .mk-tools{display:flex;align-items:center;gap:6px;padding:6px 12px;border-bottom:1px solid var(--line)}
+  .mk-tools i{display:block;height:6px;border-radius:3px;background:var(--line);width:30px}
+  .mk-tools i:nth-child(2){width:18px}.mk-tools i:nth-child(3){width:44px}.mk-tools i:nth-child(4){width:14px}.mk-tools i:nth-child(5){width:26px}
+  /* Word：灰色画布上一张白纸，页面往下延伸出窗 */
+  .mk-app.word{width:min(100%,380px);margin:0 auto}
+  .mk-canvas{background:#EDF0F7;padding:14px 16px 0}
+  .mk-page{margin:0 auto;width:min(100%,330px);background:#fff;border:1px solid var(--line);border-bottom:0;border-radius:4px 4px 0 0;
+    padding:18px 20px 6px;box-shadow:0 -2px 12px -8px rgba(14,20,48,.2);display:grid;gap:7px;font-size:10.5px;line-height:1.55;color:var(--ink-2)}
+  .mk-page .t{font-size:14px;font-weight:800;color:var(--ink);text-align:center;letter-spacing:.02em}
+  .mk-page .meta{font-size:9.5px;color:var(--ink-3);text-align:center;margin-bottom:2px}
+  .mk-page p{margin:0;text-align:justify}
+  .mk-page .h2{font-size:11px;font-weight:800;color:var(--ink);margin-top:4px}
+  .mk-table{width:100%;border-collapse:collapse;font-size:9.5px}
+  .mk-table th,.mk-table td{border:1px solid var(--line);padding:3px 6px;text-align:left;white-space:nowrap}
+  .mk-table th{background:var(--blue-50);color:var(--ink);font-weight:750}
+  .mk-table td{color:var(--ink-2)}
+  .mk-table td.up{color:var(--orange-deep);font-weight:700}
+  /* PPT + 海报并排 */
+  .mk-two{display:grid;grid-template-columns:1fr 150px;gap:14px;align-items:start}
+  .mk-pptbody{display:grid;grid-template-columns:44px 1fr;gap:8px;padding:10px;background:#EDF0F7}
+  .mk-pptbody .thumbs{display:grid;gap:6px;align-content:start}
+  .mk-pptbody .thumbs i{position:relative;display:block;aspect-ratio:16/9;border-radius:3px;background:#fff;border:1px solid var(--line)}
+  .mk-pptbody .thumbs i::before{content:attr(data-n);position:absolute;left:3px;bottom:1px;font:700 7px/1 var(--mono);color:var(--ink-3)}
+  .mk-pptbody .thumbs i.on{border-color:#D24726;box-shadow:0 0 0 2px rgba(210,71,38,.18)}
+  .mk-slide{position:relative;aspect-ratio:16/9;background:#fff;border:1px solid var(--line);border-radius:6px;padding:12px 14px 20px;box-shadow:0 8px 20px -12px rgba(14,20,48,.25);display:grid;grid-template-rows:auto auto 1fr;gap:6px;min-width:0}
+  .mk-slide .t{font-size:12px;font-weight:800;color:var(--ink);line-height:1.2}
+  .mk-slide .sub{font-size:9px;color:var(--ink-3);line-height:1.3}
+  .mk-slide .pg{position:absolute;right:10px;bottom:6px;font:700 8px/1 var(--mono);color:var(--ink-3)}
+  .mk-bars{display:flex;align-items:flex-end;gap:7px;height:100%;padding-top:4px;border-bottom:1px solid var(--line)}
+  .mk-bars i{flex:1;border-radius:3px 3px 0 0;background:var(--blue-200)}
   .mk-bars i.b{background:var(--blue)}.mk-bars i.t{background:var(--teal)}
-  .mk-poster{position:absolute;right:clamp(18px,2.4vw,28px);bottom:clamp(18px,2.4vw,28px);width:118px;aspect-ratio:3/4;border-radius:10px;padding:12px;
-    background:linear-gradient(160deg,#DCF7F2 0%,#C9CEFB 55%,#4338CA 100%);box-shadow:0 18px 40px -20px rgba(67,56,202,.55);display:grid;align-content:end;gap:6px}
-  .mk-poster .ln{background:rgba(255,255,255,.85);height:6px}
-  .mk-poster .ln.h{height:10px;width:70%}
-  .mk-poster .tag{position:absolute;top:10px;left:10px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--blue-deep);background:rgba(255,255,255,.8);padding:3px 6px;border-radius:999px}
+  .mk-posterwrap{display:grid;gap:8px;justify-items:center}
+  .mk-poster{position:relative;overflow:hidden;width:100%;aspect-ratio:3/4;border-radius:10px;padding:14px 12px;color:#fff;
+    background:linear-gradient(165deg,#0D9488 0%,#2DD4BF 28%,#6366F1 62%,#3730A3 100%);box-shadow:0 18px 40px -18px rgba(67,56,202,.6);display:flex;flex-direction:column;gap:4px}
+  .mk-poster::before{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.18)}
+  .mk-poster::after{content:"";position:absolute;left:-24px;bottom:34px;width:70px;height:70px;border-radius:50%;border:8px solid rgba(255,255,255,.14)}
+  .mk-poster .ey{position:relative;font:700 8px/1 var(--mono);letter-spacing:.16em;opacity:.92;white-space:nowrap}
+  .mk-poster .big{position:relative;font-size:19px;font-weight:900;line-height:1.12;letter-spacing:-.01em;margin-top:6px;text-shadow:0 2px 10px rgba(14,20,48,.25)}
+  .mk-poster .date{position:relative;margin-top:auto;font-size:11px;font-weight:800;letter-spacing:.04em}
+  .mk-poster .loc{position:relative;font-size:9px;opacity:.9}
+  .mk-poster .qr{position:absolute;right:10px;bottom:10px;width:26px;height:26px;border-radius:4px;background:
+    repeating-linear-gradient(0deg,#fff 0 3px,transparent 3px 6px),repeating-linear-gradient(90deg,#fff 0 3px,transparent 3px 6px);background-blend-mode:multiply;opacity:.85}
+  .mk-posterwrap .cap{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink-3);background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 9px}
   /* 看板 + 预警 */
-  .mk-dash{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:56px;box-shadow:0 18px 40px -22px rgba(14,20,48,.25);display:grid;gap:12px}
+  .mk-dash{margin-bottom:30px}
+  .mk-dashbody{padding:12px;display:grid;gap:10px}
   .mk-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-  .mk-kpi{background:var(--blue-50);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:6px}
-  .mk-kpi .l{font-size:11px;color:var(--ink-3);font-weight:650}
-  .mk-kpi .v{font-size:16px;font-weight:850;letter-spacing:-.02em;color:var(--ink)}
+  .mk-kpi{background:var(--blue-50);border:1px solid var(--line);border-radius:8px;padding:9px 11px;display:grid;gap:5px}
+  .mk-kpi .l{font-size:10.5px;color:var(--ink-3);font-weight:650}
+  .mk-kpi .v{font-size:15px;font-weight:850;letter-spacing:-.02em;color:var(--ink)}
   .mk-kpi .v small{font-size:10px;font-weight:750;color:var(--orange-deep);margin-left:5px}
   .mk-chart svg{display:block;width:100%;height:auto}
   .mk-alert{position:absolute;right:clamp(18px,2.4vw,28px);bottom:clamp(18px,2.4vw,28px);width:min(62%,250px);background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;
@@ -118,15 +147,22 @@
   .mk-alert p{font-size:11.5px;line-height:1.5;color:var(--ink-2)}
   .mk-alert .src{font-family:var(--mono);font-size:9.5px;color:var(--ink-3);letter-spacing:.04em}
   @media(max-width:600px){
-    .mk{min-height:300px}
-    .mk-ppt{width:calc(100% - 96px);grid-template-columns:40px 1fr;gap:8px;margin-bottom:40px}
-    .mk-slide{padding:10px 12px}
-    .mk-poster{width:84px}
+    .mk{min-height:300px;padding-bottom:60px}
+    .mk-canvas{padding:10px 10px 0}
+    .mk-page{padding:14px 14px 4px;font-size:10px}
+    .mk-table{font-size:9px}
+    .mk-two{grid-template-columns:1fr 104px;gap:10px}
+    .mk-pptbody{grid-template-columns:32px 1fr;gap:6px;padding:8px}
+    .mk-slide{padding:9px 10px 16px}
+    .mk-slide .t{font-size:10.5px}
+    .mk-poster{padding:10px 9px}
+    .mk-poster .big{font-size:14px}
+    .mk-poster .ey{font-size:6.5px;letter-spacing:.1em}
+    .mk-poster .qr{width:20px;height:20px}
     .mk-kpis{gap:6px}
     .mk-kpi{padding:8px 9px;min-width:0;overflow:hidden}
     .mk-kpi .v{font-size:13.5px}
     .mk-kpi .v small{display:block;margin:2px 0 0}
-    .mk-dash{margin-bottom:44px}
     .mk-alert{width:min(72%,230px)}
   }
   /* CTA 双按钮 */
@@ -346,23 +382,26 @@
           </div>
           <div class="mk" aria-label="Word 周报示意图">
             <div class="say">“把上周的渠道业务整理成周报，周一早上发我。”</div>
-            <div class="mk-doc">
-              <div class="t">渠道业务周报</div>
-              <div class="meta">2026 · 第 37 周 · 自动生成</div>
-              <span class="ln h" style="width:46%"></span>
-              <span class="ln" style="width:100%"></span>
-              <span class="ln" style="width:92%"></span>
-              <span class="ln" style="width:78%"></span>
-              <div class="h2">一、核心指标总览</div>
-              <div class="mk-tbl">
-                <span class="ln hd"></span><span class="ln hd"></span><span class="ln hd"></span><span class="ln hd"></span>
-                <span class="ln d"></span><span class="ln"></span><span class="ln"></span><span class="ln"></span>
-                <span class="ln d"></span><span class="ln"></span><span class="ln"></span><span class="ln"></span>
-                <span class="ln d"></span><span class="ln"></span><span class="ln"></span><span class="ln"></span>
+            <div class="mk-app word">
+              <div class="mk-app-hd"><i class="fa-solid fa-file-word ic w"></i><span class="fn">渠道业务周报-第37周.docx</span><span class="fmt">Word</span></div>
+              <div class="mk-tools"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="mk-canvas">
+                <div class="mk-page">
+                  <div class="t">渠道业务周报</div>
+                  <div class="meta">2026 年第 37 周（9.7 – 9.13） · Mio 自动生成</div>
+                  <p>本周全渠道新增线索 12,436 条，环比增长 8%，整体转化率 6.8%。抖音与小红书贡献六成线索，微信客服转化率最高。</p>
+                  <div class="h2">一、核心指标总览</div>
+                  <table class="mk-table">
+                    <tr><th>渠道</th><th>线索量</th><th>转化率</th><th>环比</th></tr>
+                    <tr><td>抖音</td><td>4,812</td><td>5.2%</td><td class="up">+11%</td></tr>
+                    <tr><td>小红书</td><td>2,960</td><td>4.1%</td><td class="up">+6%</td></tr>
+                    <tr><td>微信客服</td><td>2,205</td><td>12.4%</td><td class="up">+3%</td></tr>
+                  </table>
+                  <div class="h2">二、每日数据趋势</div>
+                  <span class="ln" style="width:96%"></span>
+                  <span class="ln" style="width:72%"></span>
+                </div>
               </div>
-              <div class="h2">二、每日数据趋势</div>
-              <span class="ln" style="width:96%"></span>
-              <span class="ln" style="width:70%"></span>
             </div>
             <span class="badge"><i class="fa-solid fa-check"></i>Word · 已排版 · 可直接转发</span>
           </div>
@@ -381,16 +420,31 @@
             </ul>
           </div>
           <div class="mk" aria-label="PPT 与海报示意图">
-            <div class="say">“把这个月经营情况做成汇报 PPT。”</div>
-            <div class="mk-ppt">
-              <div class="thumbs"><i></i><i></i><i class="on"></i><i></i><i></i></div>
-              <div class="mk-slide">
-                <div class="t">经营情况 · 月度汇报</div>
-                <span class="ln" style="width:58%"></span>
-                <div class="mk-bars"><i style="height:38%"></i><i style="height:52%"></i><i class="b" style="height:74%"></i><i style="height:61%"></i><i class="t" style="height:88%"></i><i style="height:66%"></i></div>
+            <div class="say">“把这个月经营情况做成汇报 PPT，再出一张峰会邀请海报。”</div>
+            <div class="mk-two">
+              <div class="mk-app">
+                <div class="mk-app-hd"><i class="fa-solid fa-file-powerpoint ic p"></i><span class="fn">经营情况-月度汇报.pptx</span><span class="fmt">12 页</span></div>
+                <div class="mk-pptbody">
+                  <div class="thumbs"><i data-n="1"></i><i data-n="2"></i><i class="on" data-n="3"></i><i data-n="4"></i><i data-n="5"></i></div>
+                  <div class="mk-slide">
+                    <div class="t">各渠道转化率 · 8 月</div>
+                    <div class="sub">微信客服 12.4%，是小红书的 3 倍</div>
+                    <div class="mk-bars"><i style="height:38%"></i><i style="height:52%"></i><i style="height:30%"></i><i class="b" style="height:88%"></i><i class="t" style="height:66%"></i></div>
+                    <span class="pg">3 / 12</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mk-posterwrap">
+                <div class="mk-poster" aria-label="峰会邀请海报">
+                  <span class="ey">2026 · AUTUMN</span>
+                  <b class="big">行业峰会<br/>邀请函</b>
+                  <span class="date">10.18 · 14:00</span>
+                  <span class="loc">北京 · 扫码报名</span>
+                  <span class="qr"></span>
+                </div>
+                <span class="cap"><i class="fa-solid fa-image"></i>海报 · PNG</span>
               </div>
             </div>
-            <div class="mk-poster"><span class="tag">POSTER</span><span class="ln h"></span><span class="ln" style="width:85%"></span><span class="ln" style="width:55%"></span></div>
             <span class="badge"><i class="fa-solid fa-check"></i>PPT · 海报 · 一次成稿</span>
           </div>
         </div>
@@ -409,19 +463,22 @@
           </div>
           <div class="mk" aria-label="数据看板与预警示意图">
             <div class="say">“这个月各渠道转化率对比，做成看板盯着。”</div>
-            <div class="mk-dash">
-              <div class="mk-kpis">
-                <div class="mk-kpi"><span class="l">线索量</span><span class="v">12.4k<small>+8%</small></span></div>
-                <div class="mk-kpi"><span class="l">转化率</span><span class="v">6.8%<small>+1.2pp</small></span></div>
-                <div class="mk-kpi"><span class="l">客单价</span><span class="v">¥2,180<small>+3%</small></span></div>
-              </div>
-              <div class="mk-chart" aria-hidden="true">
-                <svg viewBox="0 0 420 120" fill="none">
-                  <line x1="0" y1="30" x2="420" y2="30" stroke="#F2F5FB"/><line x1="0" y1="60" x2="420" y2="60" stroke="#F2F5FB"/><line x1="0" y1="90" x2="420" y2="90" stroke="#F2F5FB"/>
-                  <path d="M0 96 L60 88 L120 92 L180 70 L240 74 L300 52 L360 46 L420 30 L420 120 L0 120 Z" fill="rgba(67,56,202,.08)"/>
-                  <path d="M0 96 L60 88 L120 92 L180 70 L240 74 L300 52 L360 46 L420 30" stroke="#4338CA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M0 104 L60 100 L120 98 L180 92 L240 86 L300 84 L360 78 L420 72" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4"/>
-                </svg>
+            <div class="mk-app mk-dash">
+              <div class="mk-app-hd"><i class="fa-solid fa-table-columns ic d"></i><span class="fn">各渠道转化率 · 数据看板</span><span class="fmt">实时</span></div>
+              <div class="mk-dashbody">
+                <div class="mk-kpis">
+                  <div class="mk-kpi"><span class="l">线索量</span><span class="v">12.4k<small>+8%</small></span></div>
+                  <div class="mk-kpi"><span class="l">转化率</span><span class="v">6.8%<small>+1.2pp</small></span></div>
+                  <div class="mk-kpi"><span class="l">客单价</span><span class="v">¥2,180<small>+3%</small></span></div>
+                </div>
+                <div class="mk-chart" aria-hidden="true">
+                  <svg viewBox="0 0 420 120" fill="none">
+                    <line x1="0" y1="30" x2="420" y2="30" stroke="#F2F5FB"/><line x1="0" y1="60" x2="420" y2="60" stroke="#F2F5FB"/><line x1="0" y1="90" x2="420" y2="90" stroke="#F2F5FB"/>
+                    <path d="M0 96 L60 88 L120 92 L180 70 L240 74 L300 52 L360 46 L420 30 L420 120 L0 120 Z" fill="rgba(67,56,202,.08)"/>
+                    <path d="M0 96 L60 88 L120 92 L180 70 L240 74 L300 52 L360 46 L420 30" stroke="#4338CA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M0 104 L60 100 L120 98 L180 92 L240 86 L300 84 L360 78 L420 72" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4"/>
+                  </svg>
+                </div>
               </div>
             </div>
             <div class="mk-alert">
