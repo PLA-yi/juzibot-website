@@ -1,0 +1,794 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Mio · 你的 AI 办公搭子 | 句子互动</title>
+<meta name="description" content="Mio 是句子互动给每个员工配的 AI 办公搭子：写方案、做 PPT、理数据、查资料，一句话布置，交回能直接验收的成果。接着企业自己的数据问数、搭看板、盯指标，干顺的活做成 Skill 全公司复用。企业统一开通，注册即用。" />
+<link rel="icon" href="../logo.png" />
+<link rel="canonical" href="https://juzibot.com/products/mio.html" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="../assets/site.css" />
+<style>
+  /* scoped · 仅用 site.css 既有变量，承接首页配色，不引入异色 */
+  /* —— 产品页头 —— */
+  .ph{position:relative;overflow:hidden;padding:clamp(104px,13vh,150px) var(--gut) clamp(48px,6vw,76px);
+    background:radial-gradient(1100px 540px at 82% 4%,var(--blue-100),transparent 60%),
+               radial-gradient(680px 480px at 4% 10%,var(--orange-lt),transparent 56%),
+               linear-gradient(180deg,var(--blue-50),#fff 78%)}
+  .ph .wrap{position:relative}
+  .crumbs{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-3);margin-bottom:clamp(16px,2.4vw,24px);flex-wrap:wrap}
+  .crumbs a{color:var(--ink-2)}
+  .crumbs a:hover{color:var(--blue)}
+  .crumbs .sep{color:var(--line)}
+  .crumbs .here{color:var(--ink-2);font-weight:650}
+  .ph-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(34px,5vw,72px);align-items:center}
+  .ph h1{font-size:clamp(34px,5vw,64px);font-weight:850;letter-spacing:-.04em;line-height:1.12;
+    max-width:20ch;word-break:keep-all;text-wrap:balance;margin-bottom:clamp(14px,2vw,24px)}
+  .ph h1 .accent{color:var(--blue)}
+  .ph-lede{font-size:clamp(16px,1.4vw,18.5px);color:var(--ink-2);max-width:52ch;line-height:1.7}
+  .ph-lede strong{color:var(--ink);font-weight:700}
+  .ph-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:clamp(20px,2.6vw,30px)}
+  .mio-brand{display:inline-flex;align-items:center;gap:10px;margin-bottom:clamp(12px,2vw,20px)}
+  .mio-brand img{width:40px;height:40px;border-radius:50%;box-shadow:0 6px 16px -8px rgba(67,56,202,.55)}
+  .mio-brand .nm{font-size:15px;font-weight:800;letter-spacing:-.01em}
+  .mio-brand .nm small{display:block;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--ink-3);margin-top:2px}
+  .mio-hero-img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:var(--radius-lg);
+    box-shadow:0 1px 2px rgba(14,20,48,.05),0 40px 80px -30px rgba(67,56,202,.35),0 12px 24px -12px rgba(14,20,48,.12)}
+  @media(max-width:980px){
+    .ph-grid{grid-template-columns:1fr;gap:clamp(32px,6vw,48px)}
+    .ph-art{order:2}
+  }
+
+  /* —— 七件事 · 图标卡 —— */
+  .mio-group{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:13.5px;font-weight:750;color:var(--ink-2)}
+  .mio-group .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;
+    background:var(--ink);padding:5px 10px;border-radius:999px}
+  .mio-group.solo .tag{background:var(--blue)}
+  .mio-group + .tier-cards{margin-bottom:clamp(22px,2.6vw,30px)}
+  .tier-cards.mio-four{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.tier-cards.mio-four{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.tier-cards.mio-four{grid-template-columns:1fr}}
+  .pcard .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:16px;margin-bottom:14px;
+    background:linear-gradient(135deg,var(--blue),var(--purple))}
+  .pcard.c-purple .ico{background:linear-gradient(135deg,var(--purple),var(--blue))}
+  .pcard h3.sm{font-size:19px}
+
+  /* —— 交回的活 · 左文右示意图，交替 —— */
+  .mio-rows{display:grid;gap:clamp(22px,3vw,40px);margin-top:clamp(28px,3.4vw,44px)}
+  .mio-row{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(24px,4vw,64px);align-items:center;
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:clamp(22px,3vw,40px)}
+  .mio-row.flip{grid-template-columns:1.15fr 1fr}
+  .mio-row.flip .mio-copy{order:2}
+  .mio-copy .k{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);display:block;margin-bottom:12px}
+  .mio-copy h3{font-size:clamp(22px,2.3vw,30px);font-weight:830;letter-spacing:-.025em;line-height:1.25;margin-bottom:12px;text-wrap:balance}
+  .mio-copy p{font-size:15px;line-height:1.72;color:var(--ink-2)}
+  .mio-copy ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+  .mio-copy li{position:relative;padding-left:16px;border-left:2px solid var(--blue-200);font-size:14.5px;line-height:1.6;color:var(--ink-2)}
+  .mio-copy li b{display:block;color:var(--ink);font-weight:750;margin-bottom:2px}
+  @media(max-width:860px){
+    .mio-row,.mio-row.flip{grid-template-columns:1fr}
+    .mio-row.flip .mio-copy{order:0}
+  }
+
+  /* 示意图舞台（脱敏：内容为示例，客户信息不出现） */
+  .mk{position:relative;overflow:hidden;min-height:360px;border-radius:var(--radius);border:1px solid var(--line);
+    background:radial-gradient(520px 260px at 90% -10%,var(--blue-100),transparent 70%),linear-gradient(180deg,#FBFCFF,var(--blue-50));
+    padding:clamp(18px,2.4vw,28px) clamp(18px,2.4vw,28px) 66px;display:flex;flex-direction:column;gap:14px}
+  .mk .say{align-self:flex-end;max-width:88%;background:var(--blue);color:#fff;padding:10px 14px;border-radius:14px 4px 14px 14px;
+    font-size:13.5px;font-weight:600;line-height:1.5;box-shadow:0 8px 18px -10px rgba(67,56,202,.6)}
+  .mk .badge{position:absolute;left:clamp(18px,2.4vw,28px);bottom:clamp(18px,2.4vw,28px);display:inline-flex;align-items:center;gap:7px;
+    font-size:12px;font-weight:750;color:var(--orange-deep);background:var(--green-lt);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+  .mk .badge i{font-size:11px}
+  .ln{display:block;height:8px;border-radius:4px;background:var(--line-2)}
+  .ln.h{height:12px;background:var(--blue-100)}
+  .ln.d{background:var(--line)}
+  /* 应用窗：标题栏用各软件自己的主色 + 字母图标 + 文件名，下面跟选项卡和状态栏，一眼看出是 Word / PPT / 图片 */
+  .mk-app{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 18px 40px -22px rgba(14,20,48,.28);min-width:0}
+  .mk-app-hd{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);background:#F8FAFF}
+  .mk-app-hd .ic{font-size:15px;flex:0 0 auto}
+  .mk-app-hd .ic.d{color:var(--blue)}
+  .mk-app-hd .fn{font-size:12px;font-weight:750;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .mk-app-hd .fmt{margin-left:auto;flex:0 0 auto;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink-3);background:#fff;border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+  .mk-app-hd.w,.mk-app-hd.p,.mk-app-hd.g{border-bottom:0}
+  .mk-app-hd.w{background:#2B579A}
+  .mk-app-hd.p{background:#C43E1C}
+  .mk-app-hd.g{background:var(--ink)}
+  .mk-app-hd.w .fn,.mk-app-hd.p .fn,.mk-app-hd.g .fn{color:#fff}
+  .mk-app-hd.w .fmt,.mk-app-hd.p .fmt,.mk-app-hd.g .fmt{background:rgba(255,255,255,.16);border-color:transparent;color:#fff}
+  .mk-tile{flex:0 0 auto;width:18px;height:18px;border-radius:4px;background:#fff;display:grid;place-items:center;font:900 12px/1 var(--sans)}
+  .mk-app-hd.w .mk-tile{color:#2B579A}
+  .mk-app-hd.p .mk-tile{color:#C43E1C}
+  .mk-app-hd.g .mk-tile{color:var(--ink);font-size:9.5px}
+  .mk-tabs{display:flex;flex-wrap:wrap;align-content:flex-start;gap:0 2px;height:28px;padding:0 8px;border-bottom:1px solid var(--line);background:#F8FAFF;font-size:10.5px;line-height:16px;color:var(--ink-2);white-space:nowrap;overflow:hidden}
+  .mk-tabs span{padding:6px 7px 4px;border-bottom:2px solid transparent}
+  .mk-tabs .on{font-weight:750}
+  .mk-app.word .mk-tabs .on{color:#2B579A;border-bottom-color:#2B579A}
+  .mk-app.ppt .mk-tabs .on{color:#C43E1C;border-bottom-color:#C43E1C}
+  .mk-ribbon{display:flex;flex-wrap:wrap;align-content:flex-start;align-items:center;gap:12px 7px;height:31px;padding:6px 10px;border-bottom:1px solid var(--line);background:#fff;white-space:nowrap;overflow:hidden;font-size:10px;color:var(--ink-2)}
+  .mk-ribbon .box{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;height:18px;padding:0 6px;border:1px solid var(--line);border-radius:4px}
+  .mk-ribbon .box i{font-size:7px;color:var(--ink-3)}
+  .mk-ribbon .g{flex:0 0 auto;display:inline-flex;align-items:center;gap:1px}
+  .mk-ribbon .g i{width:18px;height:18px;display:grid;place-items:center;font-size:9.5px;border-radius:3px;color:var(--ink-2)}
+  .mk-ribbon .g i.on{background:var(--blue-100);color:var(--ink)}
+  .mk-ribbon .sep{flex:0 0 auto;width:1px;height:14px;background:var(--line)}
+  .mk-ribbon .sty{flex:0 0 auto;display:inline-flex;align-items:center;height:18px;padding:0 8px;border:1px solid var(--line);border-radius:4px;font-size:9.5px}
+  .mk-ribbon .sty.on{border-color:#2B579A;color:var(--ink);font-weight:700}
+  .mk-status{display:flex;align-items:center;gap:12px;padding:4px 12px;border-top:1px solid var(--line);background:#F8FAFF;font-size:9.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden}
+  .mk-status .r{margin-left:auto;display:inline-flex;align-items:center;gap:6px}
+  .mk-status .zoom{position:relative;width:44px;height:2px;border-radius:2px;background:var(--line)}
+  .mk-status .zoom::after{content:"";position:absolute;left:50%;top:-3px;width:2px;height:8px;border-radius:1px;background:var(--ink-3)}
+  /* Word：灰色画布上一张白纸，纸往下延伸到状态栏后面 */
+  .mk-app.word{width:min(100%,470px);margin:0 auto}
+  .mk-canvas{position:relative;background:#EDF0F7;padding:14px 16px 0;max-height:248px;overflow:hidden}
+  .mk-app.word .mk-canvas::after{content:"";position:absolute;left:0;right:0;bottom:0;height:26px;background:linear-gradient(180deg,rgba(237,240,247,0),#EDF0F7)}
+  .mk-page{margin:0 auto;width:min(100%,390px);background:#fff;border:1px solid var(--line);border-bottom:0;border-radius:4px 4px 0 0;
+    padding:18px 24px 6px;box-shadow:0 -2px 12px -8px rgba(14,20,48,.2);display:grid;gap:7px;font-size:10.5px;line-height:1.55;color:var(--ink-2)}
+  .mk-page .t{font-size:14px;font-weight:800;color:var(--ink);text-align:center;letter-spacing:.02em}
+  .mk-page .meta{font-size:9.5px;color:var(--ink-3);text-align:center;margin-bottom:2px}
+  .mk-page p{margin:0;text-align:justify}
+  .mk-page .h2{font-size:11px;font-weight:800;color:var(--ink);margin-top:4px}
+  .mk-table{width:100%;border-collapse:collapse;font-size:9.5px}
+  .mk-table th,.mk-table td{border:1px solid var(--line);padding:3px 6px;text-align:left;white-space:nowrap}
+  .mk-table th{background:var(--blue-50);color:var(--ink);font-weight:750}
+  .mk-table td{color:var(--ink-2)}
+  .mk-table td.up{color:var(--orange-deep);font-weight:700}
+  /* PPT + 海报：左列对话气泡 + PPT 窗，右列一整张竖版海报 */
+  .mk.mk-duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,38%);gap:14px;align-items:start;padding-bottom:clamp(18px,2.4vw,28px)}
+  .mk-col{display:flex;flex-direction:column;gap:14px;min-width:0;padding-bottom:46px}
+  .mk-pptbody{display:grid;grid-template-columns:44px 1fr;gap:8px;padding:10px;background:#EDF0F7}
+  .mk-pptbody .thumbs{display:grid;gap:6px;align-content:start}
+  .mk-pptbody .thumbs i{position:relative;display:block;aspect-ratio:16/9;border-radius:3px;background:#fff;border:1px solid var(--line)}
+  .mk-pptbody .thumbs i::before{content:attr(data-n);position:absolute;left:3px;bottom:1px;font:700 7px/1 var(--mono);color:var(--ink-3)}
+  .mk-pptbody .thumbs i.on{border-color:#D24726;box-shadow:0 0 0 2px rgba(210,71,38,.18)}
+  .mk-slide{position:relative;aspect-ratio:16/9;background:#fff;border:1px solid var(--line);border-radius:6px;padding:12px 14px 20px;box-shadow:0 8px 20px -12px rgba(14,20,48,.25);display:grid;grid-template-rows:auto auto 1fr;gap:6px;min-width:0}
+  .mk-slide .t{font-size:12px;font-weight:800;color:var(--ink);line-height:1.2}
+  .mk-slide .sub{font-size:9px;color:var(--ink-3);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mk-slide .pg{position:absolute;right:10px;bottom:6px;font:700 8px/1 var(--mono);color:var(--ink-3)}
+  .mk-bars{display:flex;align-items:flex-end;gap:7px;height:100%;min-height:22px;padding-top:4px;border-bottom:1px solid var(--line)}
+  .mk-bars i{flex:1;border-radius:3px 3px 0 0;background:var(--blue-200)}
+  .mk-bars i.b{background:var(--blue)}.mk-bars i.t{background:var(--teal)}
+  /* 海报：竖版 5:8，大标题 + 议程 + 白底页脚（日期、二维码），字号跟海报宽度走（cqw） */
+  .mk-app.poster .mk-canvas{padding:10px;max-height:none}
+  .mk-poster{container-type:inline-size;position:relative;overflow:hidden;width:100%;aspect-ratio:5/8;border-radius:3px;color:#fff;display:flex;flex-direction:column;
+    background:linear-gradient(162deg,#0D9488 0%,#14B8A6 20%,#4F46E5 60%,#312E81 100%);box-shadow:0 10px 24px -12px rgba(14,20,48,.5)}
+  .mk-poster::before{content:"";position:absolute;right:-22%;top:-12%;width:74%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.16)}
+  .mk-poster::after{content:"";position:absolute;left:-18%;top:40%;width:46%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(255,255,255,.22);box-shadow:0 0 0 10px rgba(255,255,255,.06)}
+  .mk-poster .pin{position:relative;z-index:1;flex:1;min-height:0;display:flex;flex-direction:column;padding:15px 15px 12px;padding:8cqw 8cqw 6cqw}
+  .mk-poster .ptop{display:flex;justify-content:space-between;font:700 7px/1 var(--mono);font-size:3.6cqw;letter-spacing:.16em;opacity:.9;white-space:nowrap}
+  .mk-poster .pre{display:block;margin-top:22px;margin-top:12cqw;font-size:10.5px;font-size:5.6cqw;font-weight:700;letter-spacing:.08em}
+  .mk-poster .big{display:block;margin-top:2px;font-size:29px;font-size:15.5cqw;font-weight:900;line-height:1.1;letter-spacing:-.01em;text-shadow:0 2px 10px rgba(14,20,48,.25);white-space:nowrap}
+  .mk-poster .inv{display:flex;align-items:center;gap:8px;margin-top:8px;margin-top:4cqw;font-size:12px;font-size:6.4cqw;font-weight:700;letter-spacing:.42em;white-space:nowrap}
+  .mk-poster .inv::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.55)}
+  .mk-poster .pag{list-style:none;margin:auto 0 0;padding:0;display:block}
+  .mk-poster .pag li{display:flex;gap:8px;gap:4cqw;padding:3px 0;padding:1.7cqw 0;border:0;border-top:1px solid rgba(255,255,255,.26);font-size:8.5px;font-size:4.5cqw;line-height:1.3;color:#fff}
+  .mk-poster .pag li b{display:inline;margin:0;color:#fff;font-family:var(--mono);font-weight:700}
+  .mk-poster .pfoot{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:8px;background:#fff;color:var(--ink);padding:9px 15px;padding:4.6cqw 8cqw}
+  .mk-poster .when{display:grid;gap:2px;min-width:0}
+  .mk-poster .when b{font-size:19px;font-size:10.4cqw;font-weight:900;line-height:1;letter-spacing:-.01em}
+  .mk-poster .when span{font-size:8.5px;font-size:4.5cqw;color:var(--ink-2);white-space:nowrap}
+  .mk-poster .pqr{flex:0 0 auto;display:grid;justify-items:center;gap:2px;font-size:6.5px;font-size:3.5cqw;color:var(--ink-2);white-space:nowrap}
+  .mk-poster .pqr svg{width:36px;width:19cqw;height:auto;color:var(--ink)}
+  /* 看板 + 预警 */
+  .mk-dash{margin-bottom:30px}
+  .mk-dashbody{padding:12px;display:grid;gap:10px}
+  .mk-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .mk-kpi{background:var(--blue-50);border:1px solid var(--line);border-radius:8px;padding:9px 11px;display:grid;gap:5px}
+  .mk-kpi .l{font-size:10.5px;color:var(--ink-3);font-weight:650}
+  .mk-kpi .v{font-size:15px;font-weight:850;letter-spacing:-.02em;color:var(--ink)}
+  .mk-kpi .v small{font-size:10px;font-weight:750;color:var(--orange-deep);margin-left:5px}
+  .mk-chart svg{display:block;width:100%;height:auto}
+  .mk-alert{position:absolute;right:clamp(18px,2.4vw,28px);bottom:clamp(18px,2.4vw,28px);width:min(62%,250px);background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;
+    box-shadow:0 18px 44px -18px rgba(14,20,48,.3);display:grid;gap:6px}
+  .mk-alert .hd{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:800;color:var(--ink)}
+  .mk-alert .hd i{width:8px;height:8px;border-radius:50%;background:var(--orange-deep);box-shadow:0 0 0 3px var(--green-lt)}
+  .mk-alert p{font-size:11.5px;line-height:1.5;color:var(--ink-2)}
+  .mk-alert .src{font-family:var(--mono);font-size:9.5px;color:var(--ink-3);letter-spacing:.04em}
+  @media(max-width:600px){
+    .mk{min-height:300px;padding-bottom:60px}
+    .mk-canvas{padding:10px 10px 0}
+    .mk-page{padding:14px 14px 4px;font-size:10px}
+    .mk-table{font-size:9px}
+    .mk-ribbon .opt,.mk-ribbon .g i.opt{display:none}
+    .mk-pptbody{grid-template-columns:32px 1fr;gap:6px;padding:8px}
+    .mk-slide{padding:9px 10px 16px}
+    .mk-slide .t{font-size:10.5px}
+    .mk-kpis{gap:6px}
+    .mk-kpi{padding:8px 9px;min-width:0;overflow:hidden}
+    .mk-kpi .v{font-size:13.5px}
+    .mk-kpi .v small{display:block;margin:2px 0 0}
+    .mk-alert{width:min(72%,230px)}
+  }
+  /* 舞台窄的时候（手机，以及刚进双栏的平板宽度）PPT 和海报上下叠放 */
+  @media (max-width:600px),(min-width:861px) and (max-width:1100px){
+    .mk.mk-duo{grid-template-columns:1fr;padding-bottom:60px}
+    .mk-col{padding-bottom:0}
+    .mk-app.poster{width:min(100%,210px);justify-self:center}
+  }
+  /* CTA 双按钮 */
+  #cta .cta-actions{display:flex;flex-wrap:wrap;gap:12px}
+  @media(max-width:640px){#cta .cta-actions .btn{flex:1 1 100%;justify-content:center}}
+
+  /* —— 客户案例 · 六件事 —— */
+  .mio-cases{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
+  .mio-case{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,2.2vw,26px);display:flex;flex-direction:column;gap:12px;
+    transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+  .mio-case:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .mio-case .ind{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--ink-3)}
+  .mio-case .ind b{color:var(--blue);background:var(--blue-50);border:1px solid var(--line);border-radius:999px;padding:3px 9px;letter-spacing:.06em;font-weight:750}
+  .mio-case h3{font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1.35}
+  .mio-case .q{background:var(--blue-50);border:1px solid var(--line);border-radius:12px 12px 12px 4px;padding:10px 13px;font-size:13.5px;line-height:1.55;color:var(--ink)}
+  .mio-case .q::before{content:"问一句";display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-3);margin-bottom:4px}
+  .mio-case .a{font-size:14px;line-height:1.65;color:var(--ink-2);flex:1}
+  .mio-case .a::before{content:"交回";display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--orange-deep);margin-bottom:4px}
+  @media(max-width:900px){.mio-cases{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.mio-cases{grid-template-columns:1fr}}
+
+  /* —— 怎么干活 · 四步 —— */
+  .mio-how{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
+  .mio-step{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,2.2vw,26px)}
+  .mio-step .n{font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--blue);margin-bottom:12px;display:block}
+  .mio-step h3{font-size:19px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+  .mio-step p{font-size:14px;line-height:1.65;color:var(--ink-2)}
+  .mio-step p a{color:var(--blue);font-weight:700}
+  .mio-step::after{content:"";position:absolute;right:-13px;top:50%;width:10px;height:10px;border-top:2px solid var(--blue-200);border-right:2px solid var(--blue-200);transform:translateY(-50%) rotate(45deg)}
+  .mio-step:last-child::after{display:none}
+  .mio-twin{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.6vw,20px);margin-top:clamp(14px,1.6vw,20px)}
+  .mio-twin div{background:var(--blue-50);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+  .mio-twin b{color:var(--ink);font-weight:800}
+  @media(max-width:900px){.mio-how{grid-template-columns:1fr 1fr}.mio-step::after{display:none}}
+  @media(max-width:600px){.mio-how,.mio-twin{grid-template-columns:1fr}}
+
+  /* —— 越用越懂你 · 记忆 + Skill —— */
+  .mio-brain{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
+  .mio-bcard{background:var(--blue-50);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,2.6vw,32px)}
+  .mio-bcard.alt{background:#fff}
+  .mio-bcard .k{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:12px;display:block}
+  .mio-bcard h3{font-size:clamp(20px,2vw,26px);font-weight:820;letter-spacing:-.02em;line-height:1.3;margin-bottom:10px}
+  .mio-bcard .lead{font-size:14.5px;line-height:1.7;color:var(--ink-2);margin-bottom:16px}
+  .mio-bcard ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+  .mio-bcard li{position:relative;padding-left:26px;font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+  .mio-bcard li b{color:var(--ink);font-weight:750}
+  .mio-bcard li::before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:6px;background:var(--blue-100)}
+  .mio-bcard li::after{content:"";position:absolute;left:5.5px;top:7px;width:6px;height:3px;border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg)}
+  .mio-bcard .foot{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;line-height:1.6;color:var(--ink)}
+  @media(max-width:760px){.mio-brain{grid-template-columns:1fr}}
+
+  /* —— 企业级六条 —— */
+  .mio-six{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
+  .mio-chk{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,2vw,24px)}
+  .mio-chk i{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#fff;font-size:13px;background:linear-gradient(135deg,var(--green),#0D9488)}
+  .mio-chk h3{font-size:16.5px;font-weight:800;letter-spacing:-.01em;margin-bottom:5px}
+  .mio-chk p{font-size:13.5px;line-height:1.62;color:var(--ink-2)}
+  @media(max-width:900px){.mio-six{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.mio-six{grid-template-columns:1fr}}
+
+  /* —— 三种数据 / 能长多大 —— */
+  .mio-data{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
+  .mio-dcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,2.2vw,26px);display:grid;gap:10px;align-content:start}
+  .mio-dcard .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:16px;background:linear-gradient(135deg,var(--blue),var(--purple))}
+  .mio-dcard h3{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .mio-dcard p{font-size:14px;line-height:1.65;color:var(--ink-2)}
+  .mio-dcard .how{margin-top:4px;padding-top:10px;border-top:1px solid var(--line);font-size:13.5px;line-height:1.55;color:var(--ink)}
+  .mio-dcard .how b{color:var(--blue);font-weight:800}
+  .mio-pipe{margin-top:clamp(14px,1.6vw,20px);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.2vw,14px)}
+  .mio-pipe div{position:relative;background:var(--blue-50);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;font-size:13.5px;line-height:1.55;color:var(--ink-2)}
+  .mio-pipe b{display:block;color:var(--ink);font-weight:800;margin-bottom:3px}
+  .mio-pipe b::before{content:counter(pipe) " ";counter-increment:pipe;font-family:var(--mono);color:var(--blue);font-size:11px;letter-spacing:.1em;margin-right:4px}
+  .mio-pipe{counter-reset:pipe}
+  .mio-grow{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
+  .mio-grow .mio-step h3{font-size:20px}
+  .mio-grow .mio-step .n{color:var(--orange-deep)}
+  @media(max-width:900px){.mio-data,.mio-grow{grid-template-columns:1fr}.mio-pipe{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.mio-pipe{grid-template-columns:1fr}}
+
+  /* —— 怎么开始 · 三步 —— */
+  .mio-start{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
+  .mio-start .mio-step{background:var(--blue-50)}
+  .mio-start .mio-step:first-child{background:#fff;border-color:var(--blue-200)}
+  .mio-start .btn{margin-top:14px;padding:10px 18px;font-size:13.5px}
+  @media(max-width:760px){.mio-start{grid-template-columns:1fr}}
+
+  /* —— 移动端 ≤640px —— */
+  @media(max-width:640px){
+    .ph h1{font-size:clamp(28px,8vw,40px)}
+    .ph-lede{font-size:15px;line-height:1.65}
+    .ph-cta{gap:12px}
+    .ph-cta .btn{flex:1 1 auto;justify-content:center}
+    .mio-row{padding:18px}
+  }
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+<main>
+
+  <!-- ════════════ 产品页头 · 面包屑 + 标题 + KPI + 首页静态图 ════════════ -->
+  <header class="ph" id="top">
+    <div class="wrap">
+      <div class="crumbs">
+        <a href="../index.html">首页</a><span class="sep">/</span>
+        <span class="here">产品</span><span class="sep">/</span>
+        <span class="here">Mio</span>
+      </div>
+      <div class="ph-grid">
+        <div class="ph-copy">
+          <div class="mio-brand">
+            <img src="../assets/brand/mio-cat-logo.png" alt="Mio" width="40" height="40" decoding="async" />
+            <span class="nm">Mio<small>AI 办公搭子</small></span>
+          </div>
+          <h1>你的 <span class="accent">AI 办公搭子</span></h1>
+          <p class="ph-lede">写方案、做 PPT、理数据、查资料，一句话布置，<strong>交回的是能直接验收的成果</strong>。Mio 先和企业的数据库、业务系统连起来，问数、搭看板、盯指标也在同一段对话里。企业统一开通，注册就能用。</p>
+          <div class="ph-cta">
+            <a href="https://az-bg.juzibot.com/auth/register" class="btn btn-blue btn-lg ar-host" data-track-name="免费注册使用" data-track-source="Mio页·页头" data-track-area="页头">
+              免费注册使用
+              <span class="ar"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h11M10 4l5 5-5 5"/></svg><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h11M10 4l5 5-5 5"/></svg></span>
+            </a>
+            <button type="button" class="btn btn-ghost btn-lg" onclick="openContact('Mio页·页头','预约演示')">预约演示</button>
+          </div>
+          <div class="hero-kpis">
+            <div class="hero-kpi"><div class="v">一句话</div><div class="l">布置，不用学指令</div></div>
+            <div class="hero-kpi"><div class="v">7 类活</div><div class="l">一个搭子全包</div></div>
+            <div class="hero-kpi"><div class="v">当天</div><div class="l">注册就能用</div></div>
+            <div class="hero-kpi"><div class="v">1000+</div><div class="l">企业验证的底座</div></div>
+          </div>
+        </div>
+        <div class="ph-art">
+          <img class="mio-hero-img" src="../assets/product-shots/mio-home.jpg" alt="Mio 首页：一句话布置查数据、找资料、写报告、搭看板、定时通知、做 PPT、做海报" width="1520" height="705" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════ 能干什么 · 七件事 ════════════ -->
+  <section class="sec pad" id="jobs">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">能干什么</span>
+          <h2>替每个员工干的<span class="hl"><span>七件事</span></span>。</h2>
+        </div>
+        <p class="sub">前四件是办公 AI 的基本功。后三件是企业用得最重的活：问数、看板和盯指标，接着企业的数才干得了。</p>
+      </div>
+      <div class="arch rv" style="padding:clamp(18px,2.4vw,28px)">
+        <div class="mio-group"><span class="tag">基本功</span>说清要什么，交回排好版的成品</div>
+        <div class="tier-cards mio-four">
+          <div class="pcard c-blue rv">
+            <span class="ico"><i class="fa-solid fa-file-lines"></i></span>
+            <h3 class="sm">写方案、出文档</h3>
+            <p>周报、总结、方案、通知，说清要什么就动笔，排好格式交回。</p>
+          </div>
+          <div class="pcard c-blue rv rv-d1">
+            <span class="ico"><i class="fa-solid fa-file-powerpoint"></i></span>
+            <h3 class="sm">做 PPT、做海报</h3>
+            <p>汇报 PPT、分析报告、活动海报，图表排版配好，直接能用。</p>
+          </div>
+          <div class="pcard c-blue rv rv-d1">
+            <span class="ico"><i class="fa-solid fa-table"></i></span>
+            <h3 class="sm">处理数据、出分析</h3>
+            <p>表格清洗、汇总、对比分析，表和图一起交。</p>
+          </div>
+          <div class="pcard c-blue rv rv-d2">
+            <span class="ico"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <h3 class="sm">查资料、做调研</h3>
+            <p>要查的它自己去搜、去核，整理成能用的材料。</p>
+          </div>
+        </div>
+        <div class="mio-group solo"><span class="tag">独门</span>接着企业的数据，才干得了这三件</div>
+        <div class="tier-cards three">
+          <div class="pcard c-purple rv">
+            <span class="ico"><i class="fa-solid fa-chart-line"></i></span>
+            <h3 class="sm">问企业自己的数</h3>
+            <p>一句话问经营数据，秒级出图表。一层层追着问到底，答案带出处，查得到数据库里的原始数。</p>
+          </div>
+          <div class="pcard c-purple rv rv-d1">
+            <span class="ico"><i class="fa-solid fa-table-columns"></i></span>
+            <h3 class="sm">搭数据看板</h3>
+            <p>想盯的指标，一句话搭成看板。指标卡加分天趋势，随时刷新，明细点得进去。</p>
+          </div>
+          <div class="pcard c-purple rv rv-d2">
+            <span class="ico"><i class="fa-solid fa-bell"></i></span>
+            <h3 class="sm">主动盯、定时干</h3>
+            <p>指标异动它先发现先提醒。日报周报到点自己来，盯出来的问题追进去就能查。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 交回的成果 · 三组示意 ════════════ -->
+  <section class="sec pad" id="output">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">交回的成果</span>
+          <h2>AI 助手给答案，<span class="hl"><span>Mio 交成果</span></span>。</h2>
+        </div>
+        <p class="sub">不止于问答：听得懂任务，自己拆步骤、动手干，交回能直接验收的成果。下面是三类最常用的活。</p>
+      </div>
+
+      <div class="mio-rows">
+        <!-- 1 · 文档 -->
+        <div class="mio-row rv">
+          <div class="mio-copy">
+            <span class="k">写方案 · 出文档</span>
+            <h3>一句话，交回排好版的成品</h3>
+            <p>周报、总结、方案、通知，说清要什么就动笔。它自己查数、写作、排版，交回的是能直接转发的 Word 文档，不是一段还要你再整理的文字。</p>
+            <ul>
+              <li><b>到点自动出</b>每周一早上的周报，定一次，之后不用管。</li>
+              <li><b>格式一次定好</b>改过的版式和口径，下次开口直接带上。</li>
+              <li><b>不满意一句话改</b>改第二版不用从头讲。</li>
+            </ul>
+          </div>
+          <div class="mk" aria-label="Word 周报示意图">
+            <div class="say">“把上周的渠道业务整理成周报，周一早上发我。”</div>
+            <div class="mk-app word">
+              <div class="mk-app-hd w"><span class="mk-tile">W</span><span class="fn">渠道业务周报-第37周.docx</span><span class="fmt">Word</span></div>
+              <div class="mk-tabs" aria-hidden="true"><span>文件</span><span class="on">开始</span><span>插入</span><span>布局</span><span>引用</span><span>审阅</span><span>视图</span></div>
+              <div class="mk-ribbon" aria-hidden="true">
+                <span class="box">微软雅黑<i class="fa-solid fa-chevron-down"></i></span>
+                <span class="box opt">11<i class="fa-solid fa-chevron-down"></i></span>
+                <span class="g"><i class="fa-solid fa-bold on"></i><i class="fa-solid fa-italic"></i><i class="fa-solid fa-underline"></i><i class="fa-solid fa-highlighter opt"></i></span>
+                <span class="sep"></span>
+                <span class="g"><i class="fa-solid fa-align-left"></i><i class="fa-solid fa-align-center"></i><i class="fa-solid fa-align-justify on"></i><i class="fa-solid fa-list-ul opt"></i></span>
+                <span class="sep opt"></span>
+                <span class="sty on opt">正文</span><span class="sty opt">标题 1</span><span class="sty opt">标题 2</span>
+              </div>
+              <div class="mk-canvas">
+                <div class="mk-page">
+                  <div class="t">渠道业务周报</div>
+                  <div class="meta">2026 年第 37 周（9.7 – 9.13） · Mio 自动生成</div>
+                  <p>本周全渠道新增线索 12,436 条，环比增长 8%，整体转化率 6.8%。抖音与小红书贡献六成线索，微信客服转化率最高。</p>
+                  <div class="h2">一、核心指标总览</div>
+                  <table class="mk-table">
+                    <tr><th>渠道</th><th>线索量</th><th>转化率</th><th>环比</th></tr>
+                    <tr><td>抖音</td><td>4,812</td><td>5.2%</td><td class="up">+11%</td></tr>
+                    <tr><td>小红书</td><td>2,960</td><td>4.1%</td><td class="up">+6%</td></tr>
+                    <tr><td>微信客服</td><td>2,205</td><td>12.4%</td><td class="up">+3%</td></tr>
+                  </table>
+                  <div class="h2">二、每日数据趋势</div>
+                  <span class="ln" style="width:96%"></span>
+                  <span class="ln" style="width:72%"></span>
+                </div>
+              </div>
+              <div class="mk-status" aria-hidden="true"><span>第 1 页，共 3 页</span><span>1,286 个字</span><span class="r">100%<i class="zoom"></i></span></div>
+            </div>
+            <span class="badge"><i class="fa-solid fa-check"></i>Word · 已排版 · 可直接转发</span>
+          </div>
+        </div>
+
+        <!-- 2 · PPT / 海报 -->
+        <div class="mio-row flip rv">
+          <div class="mio-copy">
+            <span class="k">做 PPT · 做海报</span>
+            <h3>汇报和海报，也是一句话的事</h3>
+            <p>说个主题，出一份多页 PPT，图表和数据都填好；活动海报说清风格直接出图。别的工具给思路和草稿，Mio 把成稿也做完，你只需验收。</p>
+            <ul>
+              <li><b>多页 PPT 整份出</b>左栏是整份的页面列表，每一页都能改。</li>
+              <li><b>图表按真实数据画</b>接着企业的数出图，不是占位图。</li>
+              <li><b>海报、邀请函说个主题就出</b>风格、文案、排版一次成稿。</li>
+            </ul>
+          </div>
+          <div class="mk mk-duo" aria-label="PPT 与海报示意图">
+            <div class="mk-col">
+              <div class="say">“把这个月经营情况做成汇报 PPT，再出一张峰会邀请海报。”</div>
+              <div class="mk-app ppt">
+                <div class="mk-app-hd p"><span class="mk-tile">P</span><span class="fn">经营情况-月度汇报.pptx</span><span class="fmt">PPT</span></div>
+                <div class="mk-tabs" aria-hidden="true"><span>文件</span><span class="on">开始</span><span>插入</span><span>设计</span><span>切换</span><span>动画</span><span>放映</span></div>
+                <div class="mk-pptbody">
+                  <div class="thumbs"><i data-n="1"></i><i data-n="2"></i><i class="on" data-n="3"></i><i data-n="4"></i></div>
+                  <div class="mk-slide">
+                    <div class="t">各渠道转化率 · 8 月</div>
+                    <div class="sub">微信客服 12.4%，是小红书的 3 倍</div>
+                    <div class="mk-bars"><i style="height:38%"></i><i style="height:52%"></i><i style="height:30%"></i><i class="b" style="height:88%"></i><i class="t" style="height:66%"></i></div>
+                    <span class="pg">3 / 12</span>
+                  </div>
+                </div>
+                <div class="mk-status" aria-hidden="true"><span>幻灯片 第 3 张，共 12 张</span><span class="r">备注</span></div>
+              </div>
+            </div>
+            <div class="mk-app poster">
+              <div class="mk-app-hd g"><span class="mk-tile"><i class="fa-solid fa-image"></i></span><span class="fn">峰会邀请海报.png</span><span class="fmt">海报</span></div>
+              <div class="mk-canvas">
+                <div class="mk-poster" aria-label="峰会邀请海报">
+                  <div class="pin">
+                    <div class="ptop"><span>INVITATION</span><span>2026</span></div>
+                    <span class="pre">2026 秋季</span>
+                    <b class="big">行业峰会</b>
+                    <span class="inv">邀请函</span>
+                    <ul class="pag">
+                      <li><b>14:00</b>主旨演讲</li>
+                      <li><b>15:30</b>圆桌对话</li>
+                      <li><b>17:30</b>交流晚宴</li>
+                    </ul>
+                  </div>
+                  <div class="pfoot">
+                    <div class="when"><b>10.18</b><span>14:00 · 北京</span><span>凭邀请函入场</span></div>
+                    <div class="pqr"><svg viewBox="-1 -1 23 23" fill="currentColor" aria-hidden="true"><path d="M0 0h7v1h-7zM9 0h1v1h-1zM14 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM14 1h1v1h-1zM20 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM10 2h2v1h-2zM14 2h1v1h-1zM16 2h3v1h-3zM20 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM16 3h3v1h-3zM20 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h3v1h-3zM14 4h1v1h-1zM16 4h3v1h-3zM20 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM11 5h1v1h-1zM14 5h1v1h-1zM20 5h1v1h-1zM0 6h7v1h-7zM8 6h3v1h-3zM14 6h7v1h-7zM8 7h1v1h-1zM10 7h3v1h-3zM3 8h1v1h-1zM9 8h1v1h-1zM12 8h1v1h-1zM14 8h2v1h-2zM17 8h1v1h-1zM19 8h1v1h-1zM0 9h2v1h-2zM3 9h2v1h-2zM6 9h1v1h-1zM8 9h1v1h-1zM11 9h2v1h-2zM14 9h1v1h-1zM17 9h2v1h-2zM20 9h1v1h-1zM1 10h3v1h-3zM5 10h1v1h-1zM10 10h1v1h-1zM13 10h1v1h-1zM16 10h1v1h-1zM18 10h3v1h-3zM1 11h1v1h-1zM3 11h2v1h-2zM13 11h2v1h-2zM19 11h1v1h-1zM0 12h3v1h-3zM6 12h1v1h-1zM8 12h1v1h-1zM12 12h4v1h-4zM18 12h3v1h-3zM9 13h2v1h-2zM12 13h1v1h-1zM15 13h1v1h-1zM18 13h2v1h-2zM0 14h7v1h-7zM8 14h1v1h-1zM14 14h1v1h-1zM18 14h1v1h-1zM20 14h1v1h-1zM0 15h1v1h-1zM6 15h1v1h-1zM8 15h2v1h-2zM13 15h5v1h-5zM0 16h1v1h-1zM2 16h3v1h-3zM6 16h1v1h-1zM9 16h1v1h-1zM11 16h1v1h-1zM13 16h2v1h-2zM17 16h1v1h-1zM19 16h1v1h-1zM0 17h1v1h-1zM2 17h3v1h-3zM6 17h1v1h-1zM8 17h1v1h-1zM14 17h1v1h-1zM17 17h1v1h-1zM0 18h1v1h-1zM2 18h3v1h-3zM6 18h1v1h-1zM10 18h1v1h-1zM12 18h1v1h-1zM14 18h2v1h-2zM17 18h3v1h-3zM0 19h1v1h-1zM6 19h1v1h-1zM9 19h2v1h-2zM12 19h3v1h-3zM19 19h2v1h-2zM0 20h7v1h-7zM9 20h1v1h-1zM12 20h2v1h-2zM16 20h1v1h-1zM18 20h3v1h-3z"/></svg><span>扫码报名</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="badge"><i class="fa-solid fa-check"></i>PPT · 海报 · 一次成稿</span>
+          </div>
+        </div>
+
+        <!-- 3 · 问数 / 看板 / 预警 -->
+        <div class="mio-row rv">
+          <div class="mio-copy">
+            <span class="k">问数 · 搭看板 · 盯指标</span>
+            <h3>接着企业的数，才干得了的三件事</h3>
+            <p>它不是把数据查一下就答：读你的库，复制进专属沙盒，写代码重算，答案带出处，每个数能追到哪张表。想盯的指标一句话搭成看板；指标异动它先发现、先提醒。</p>
+            <ul>
+              <li><b>答案带出处</b>查得到数据库里的原始数，不写 SQL、不约 BI。</li>
+              <li><b>看板一句话搭</b>指标卡加分天趋势，时间范围自己选，明细点得进去。</li>
+              <li><b>异动主动来找你</b>日报周报到点自己来，盯出来的问题追进去就能查。</li>
+            </ul>
+          </div>
+          <div class="mk" aria-label="数据看板与预警示意图">
+            <div class="say">“这个月各渠道转化率对比，做成看板盯着。”</div>
+            <div class="mk-app mk-dash">
+              <div class="mk-app-hd"><i class="fa-solid fa-table-columns ic d"></i><span class="fn">各渠道转化率 · 数据看板</span><span class="fmt">实时</span></div>
+              <div class="mk-dashbody">
+                <div class="mk-kpis">
+                  <div class="mk-kpi"><span class="l">线索量</span><span class="v">12.4k<small>+8%</small></span></div>
+                  <div class="mk-kpi"><span class="l">转化率</span><span class="v">6.8%<small>+1.2pp</small></span></div>
+                  <div class="mk-kpi"><span class="l">客单价</span><span class="v">¥2,180<small>+3%</small></span></div>
+                </div>
+                <div class="mk-chart" aria-hidden="true">
+                  <svg viewBox="0 0 420 120" fill="none">
+                    <line x1="0" y1="30" x2="420" y2="30" stroke="#F2F5FB"/><line x1="0" y1="60" x2="420" y2="60" stroke="#F2F5FB"/><line x1="0" y1="90" x2="420" y2="90" stroke="#F2F5FB"/>
+                    <path d="M0 96 L60 88 L120 92 L180 70 L240 74 L300 52 L360 46 L420 30 L420 120 L0 120 Z" fill="rgba(67,56,202,.08)"/>
+                    <path d="M0 96 L60 88 L120 92 L180 70 L240 74 L300 52 L360 46 L420 30" stroke="#4338CA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M0 104 L60 100 L120 98 L180 92 L240 86 L300 84 L360 78 L420 72" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="mk-alert">
+              <div class="hd"><i></i>指标异动提醒</div>
+              <p>客单价偏离近 30 天基线，已定位到 3 家门店并给出处置建议。</p>
+              <span class="src">来自 Mio · 自动监测推送</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 客户案例 · 六件事 ════════════ -->
+  <section class="sec pad" id="cases">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">客户案例</span>
+          <h2>客户已经在用 Mio 干的<span class="hl warm"><span>六件事</span></span>。</h2>
+        </div>
+        <p class="sub">都是客户拿自己的数据布置的活，不是演示。客户名已隐去。</p>
+      </div>
+      <div class="mio-cases">
+        <div class="mio-case rv">
+          <span class="ind"><b>在线教育</b>某语文培训 IP</span>
+          <h3>助教点评统计与学员学情月报</h3>
+          <div class="q">“三位助教这个月各点评了多少次，质量怎么样，多久回一次？”</div>
+          <div class="a">柱图加逐条明细一次出。客户接着提了 7 个学情问题，补齐范围后生成 8 个模块的月报，发一个公开链接给家长看。</div>
+        </div>
+        <div class="mio-case rv rv-d1">
+          <span class="ind"><b>金融</b>某理财教育公司</span>
+          <h3>课程运营与账号巡检</h3>
+          <div class="q">“某账号 8 月底至今和学员的沟通情况，分析一下。”</div>
+          <div class="a">每日消息总览、活跃群前五、四条结论。追问一个班的互动为什么掉得快，它把衰减曲线拉出来；顺手把账号巡检也做了。</div>
+        </div>
+        <div class="mio-case rv rv-d1">
+          <span class="ind"><b>在线教育</b>某在线教育机构</span>
+          <h3>AI 上线前后效果对比</h3>
+          <div class="q">“用 AI 的和不用 AI 的到底差多少？”</div>
+          <div class="a">运营要向老板证明 AI 有用。Mio 自己定策略、分组，出两条论证链和一段汇报话术，一键做成看板和 PPT。</div>
+        </div>
+        <div class="mio-case rv rv-d2">
+          <span class="ind"><b>医疗健康</b>某医美品牌</span>
+          <h3>AI 用量对账：处理了多少消息、服务了多少人</h3>
+          <div class="q">“AI 处理了多少条消息，服务了多少人？”</div>
+          <div class="a">43 个账号、7 个月的处理消息按账号和自然月出 Excel 对账表加月度柱图。口径一变，它自己复盘重跑。</div>
+        </div>
+        <div class="mio-case rv rv-d2">
+          <span class="ind"><b>消费电商</b>某消费品牌</span>
+          <h3>社群运营日报与好评素材</h3>
+          <div class="q">“昨天退了多少人、哪个群、为什么？把好评做成朋友圈图。”</div>
+          <div class="a">退群原因指到具体的运营动作，留存报告分五个维度，好评检索归类后生成聊天截图。客户用两个月，已经自己写提示词。</div>
+        </div>
+        <div class="mio-case rv rv-d2">
+          <span class="ind"><b>通用</b>某招投标服务公司</span>
+          <h3>标书审核 Skill</h3>
+          <div class="q">“帮我审核一下。”加一份 56 页的标书 PDF。</div>
+          <div class="a">审核报告：风险评级、违规明细、整改清单。交付团队把审核方法做成 Skill 交给客户，核保材料、OA 文件审核同样能做。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 怎么干活 · 四步 ════════════ -->
+  <section class="sec pad" id="how">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">怎么干活</span>
+          <h2>不是聊天框，是一个<span class="hl warm"><span>干活的过程</span></span>。</h2>
+        </div>
+        <p class="sub">布置下去之后，中间每一步它自己跑，你看得见、随时叫停。</p>
+      </div>
+      <div class="mio-how">
+        <div class="mio-step rv"><span class="n">STEP 1</span><h3>听懂任务</h3><p>一句话布置。不用学指令，不用写提示词。</p></div>
+        <div class="mio-step rv rv-d1"><span class="n">STEP 2</span><h3>自己拆步骤</h3><p>把活拆成步骤，列出来给你看，先干什么后干什么。</p></div>
+        <div class="mio-step rv rv-d1"><span class="n">STEP 3</span><h3>动手执行</h3><p>查数、检索、写作、制表、画图，一步步自己干。</p></div>
+        <div class="mio-step rv rv-d2"><span class="n">STEP 4</span><h3>交回成果</h3><p>文档、PPT、表格，能下载能转发。不满意，一句话让它改。</p></div>
+      </div>
+      <div class="mio-twin rv">
+        <div><b>熟活不走样</b>：干顺的活存成 Skill，天天照着跑。</div>
+        <div><b>新活摸得出</b>：没干过的它自己拆步骤，全程看得见、随时叫停。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 越用越懂你 · 记忆 + Skill ════════════ -->
+  <section class="sec pad" id="skill">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">越用越懂你</span>
+          <h2>干顺的活做成 Skill，<span class="hl"><span>全公司拿来就用</span></span>。</h2>
+        </div>
+        <p class="sub">模型不缺聪明，缺的是你们公司的做法。Mio 记得你说过的话；干顺的活能存成 Skill，别人一句话就能调用。</p>
+      </div>
+      <div class="mio-brain">
+        <div class="mio-bcard rv">
+          <span class="k">记忆</span>
+          <h3>说过的话，不用再交代</h3>
+          <p class="lead">用得越久，它越像你们公司的人。</p>
+          <ul>
+            <li><b>口径和格式记得住</b>：定过的指标口径、改过的版式，下次开口直接带上</li>
+            <li><b>改第二版不用从头讲</b>：怎么来的、你改了什么，都有底</li>
+            <li><b>接过的数据源记得住</b>：常问的表、常盯的指标，下次直接问</li>
+          </ul>
+        </div>
+        <div class="mio-bcard alt rv rv-d1">
+          <span class="k">Skill</span>
+          <h3>把一次干对的活写下来</h3>
+          <p class="lead">Skill 不是一段代码，是这件活该怎么干。谁把活干顺了，他的做法就能存成 Skill，别人一句话调用，天天照着跑。</p>
+          <ul>
+            <li><b>Skill 库里有现成的</b>：写周报、做 PPT、审标书这类，注册就能用</li>
+            <li><b>自家的做法做成自家的 Skill</b>：审核规则、汇报格式、行业干法，固化下来</li>
+            <li><b>交付团队帮你做</b>：复杂的活，交付团队把方法搭成 Skill，直接交给你用</li>
+          </ul>
+          <div class="foot">以前公司固化流程靠流程引擎，固化的是人的动作。AI 干活的动作固化下来，靠的是 Skill。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 三种数据 · 都接得进来 ════════════ -->
+  <section class="sec pad" id="data">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">接得进来</span>
+          <h2>企业的数据分三种，<span class="hl"><span>都接得进来</span></span>。</h2>
+        </div>
+        <p class="sub">接的不是一份导出来的表，是企业每天在产生的数据。授权一次，在给你的专属环境里读，答案带出处。</p>
+      </div>
+      <div class="mio-data">
+        <div class="mio-dcard rv">
+          <span class="ico"><i class="fa-solid fa-folder-open"></i></span>
+          <h3>文档数据</h3>
+          <p>飞书、钉钉等办公平台里的文档、表格、知识库。</p>
+          <div class="how"><b>怎么接</b>：授权一次，只在专属环境里读；你有权限看的，它才看得到。</div>
+        </div>
+        <div class="mio-dcard rv rv-d1">
+          <span class="ico"><i class="fa-solid fa-database"></i></span>
+          <h3>系统数据</h3>
+          <p>OA、CRM、ERP、订单库这些业务系统里的数。</p>
+          <div class="how"><b>怎么接</b>：接口同步进来，字段能关联，同一个客户在各平台的记录对得上。</div>
+        </div>
+        <div class="mio-dcard rv rv-d2">
+          <span class="ico"><i class="fa-solid fa-robot"></i></span>
+          <h3>AI 员工产生的数据</h3>
+          <p>句子秒回里 AI 员工每天接的对话、线索、订单。</p>
+          <div class="how"><b>怎么接</b>：同一套底座，原生接入，不用另外接。句子懂行里整理好的知识，对话里直接调用。</div>
+        </div>
+      </div>
+      <div class="mio-pipe rv">
+        <div><b>读库</b>接上你的数据库或业务系统，授权只在专属环境内用。</div>
+        <div><b>进沙盒</b>数据复制进隔离沙盒，碰不到生产系统。</div>
+        <div><b>写代码重算</b>不是查一下就答，Mio 自己写代码算，复杂口径也算得对。</div>
+        <div><b>答案带出处</b>每个数能追到哪张表、哪条查询，审计按这条验收。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 企业级保障 · 六条 ════════════ -->
+  <section class="sec pad" id="enterprise">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">企业级保障</span>
+          <h2>企业敢全员配，<span class="hl"><span>靠这六条</span></span>。</h2>
+        </div>
+        <p class="sub">员工各用各的 AI，好用法攒不下，公司材料还往外网跑。企业统一配 Mio，先问的不是聪不聪明，是可不可控。</p>
+      </div>
+      <div class="mio-six">
+        <div class="mio-chk rv"><i class="fa-solid fa-check"></i><div><h3>统一开通，用量看得见</h3><p>账号由企业统一开通；谁在用、用了多少，后台一目了然。</p></div></div>
+        <div class="mio-chk rv rv-d1"><i class="fa-solid fa-check"></i><div><h3>数据不出企业的域</h3><p>授权一次，只在给你的专属环境里用；支持私有化、一体机部署。</p></div></div>
+        <div class="mio-chk rv rv-d1"><i class="fa-solid fa-check"></i><div><h3>每一次产出可追溯</h3><p>答案来自哪些数据、怎么来的，全程可审计。金融、政务按这条验收。</p></div></div>
+        <div class="mio-chk rv rv-d2"><i class="fa-solid fa-check"></i><div><h3>在隔离沙盒里干活</h3><p>动作可控、可回滚，碰不到不该碰的系统。</p></div></div>
+        <div class="mio-chk rv rv-d2"><i class="fa-solid fa-check"></i><div><h3>用真实工位身份上岗</h3><p>账号、权限、行为记录，和员工同一套体系管理。</p></div></div>
+        <div class="mio-chk rv rv-d2"><i class="fa-solid fa-check"></i><div><h3>模型不绑定</h3><p>100+ 国内外主流模型一键切换；按任务选模型，不被绑死。</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 能长多大 ════════════ -->
+  <section class="sec pad" id="grow">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">能长多大</span>
+          <h2>从办公搭子开始，能长成一套 <span class="hl"><span>AI 员工体系</span></span>。</h2>
+        </div>
+        <p class="sub">今天解决员工的写、查、盯；企业要往深走，同一套底子接得住。先给员工配上，用出感觉了再往深走，不用换平台。</p>
+      </div>
+      <div class="mio-grow">
+        <div class="mio-step rv"><span class="n">第一步</span><h3>员工先用起来</h3><p>写方案、做 PPT、查资料，不接任何系统也好用，全员当天上手。</p></div>
+        <div class="mio-step rv rv-d1"><span class="n">第二步</span><h3>接上经营数据</h3><p>把业务系统接进来，它答的就是你真实的生意；自家的做法一点点存成 Skill。</p></div>
+        <div class="mio-step rv rv-d2"><span class="n">第三步</span><h3>AI 员工上岗</h3><p>需要时，长出直接对客干活的 <a href="../workforce/sales.html">AI 销售</a>、<a href="../workforce/service.html">AI 客服</a>、<a href="../workforce/marketing.html">AI 导购</a>，它们的产出回到 Mio 里一句话就能问。1000+ 企业在用的就是这套体系。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 怎么开始 · 三步 ════════════ -->
+  <section class="sec pad" id="start">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">怎么开始</span>
+          <h2>注册就能用，<span class="hl warm"><span>用出感觉再全员开</span></span>。</h2>
+        </div>
+        <p class="sub">按账号开通，一个账号对应一名员工，人员变动可换绑。先自己试，再给一个部门开，最后全员配上。</p>
+      </div>
+      <div class="mio-start">
+        <div class="mio-step rv">
+          <span class="n">第 1 步</span><h3>注册，拿手头的活试一件</h3>
+          <p>注册即用，不用装软件。拿你今天要交的周报、PPT 布置一件，或者拖一份自己的数据进去问一句，看它交回什么。</p>
+          <a href="https://az-bg.juzibot.com/auth/register" class="btn btn-blue" data-track-name="免费注册使用" data-track-source="Mio页·怎么开始" data-track-area="怎么开始">免费注册使用</a>
+        </div>
+        <div class="mio-step rv rv-d1"><span class="n">第 2 步</span><h3>给一个部门开</h3><p>先跑一个月，接上这个部门的数据，看看大家离不离得开。</p></div>
+        <div class="mio-step rv rv-d2"><span class="n">第 3 步</span><h3>全员开通，做成 Skill</h3><p>批量开通、接业务系统；交付团队把自家的活做成 Skill，留给下一个人直接用。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 终极 CTA ════════════ -->
+  <section class="cta" id="cta">
+    <div class="wrap cta-inner">
+      <div class="rv">
+        <h2>给每个员工，配一个<br/><span class="acc">能把活干完</span>的 AI 搭子。</h2>
+        <p class="sub">Mio，企业统一开通。注册就能用，拿你手头的活试一件。</p>
+        <div class="cta-actions">
+          <a href="https://az-bg.juzibot.com/auth/register" class="btn btn-blue btn-lg ar-host" data-track-name="免费注册使用" data-track-source="Mio页·底部CTA" data-track-area="底部 CTA">
+            免费注册使用
+            <span class="ar"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h11M10 4l5 5-5 5"/></svg><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h11M10 4l5 5-5 5"/></svg></span>
+          </a>
+          <button type="button" class="btn btn-ghost btn-lg" onclick="openContact('Mio页·底部CTA','预约演示')">预约演示</button>
+        </div>
+      </div>
+      <div class="cta-stats">
+        <div class="cta-stat rv" style="--ac:#4338CA"><div class="csv">一句话</div><div class="csl">布置任务，交回成果</div></div>
+        <div class="cta-stat rv rv-d1" style="--ac:#14B8A6"><div class="csv">7 类活</div><div class="csl">一个搭子全包</div></div>
+        <div class="cta-stat rv rv-d2" style="--ac:#6366F1"><div class="csv">1000+</div><div class="csl">企业验证的底座</div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<div id="site-footer"></div>
+
+<script>window.SITE_REL='../';window.PAGE_CTX={entity:'mio',type:'product',title:'Mio · AI 办公搭子'};</script>
+<script src="../assets/site.js"></script>
+</body>
+</html>
