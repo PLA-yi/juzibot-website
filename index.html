@@ -196,20 +196,15 @@
     font-size:min(20vw,260px);line-height:.8;letter-spacing:-.04em;color:transparent;
     -webkit-text-stroke:1.4px rgba(67,56,202,.08);white-space:nowrap}
 
-  /* ---- Hero · Dify 风 Agent 工作流画布 ---- */
+  /* ---- Hero · 右侧演示区 ---- */
   .hero-art{position:relative;z-index:1;min-width:0;display:flex;justify-content:center;align-items:center}
   .hero-art-inner{width:100%;max-width:430px;display:flex;flex-direction:column;gap:clamp(14px,2vw,18px)}
-  .flow-wrap{position:relative;width:100%;max-width:430px;animation:floaty 7s ease-in-out infinite}
-  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-  @media (prefers-reduced-motion:reduce){.flow-wrap{animation:none}}
 
-  /* ---- Hero · 分段切换器（Mio 办公搭子 ⟷ AI 对话 ⟷ Agent 工作流） ---- */
-  .hero-seg{position:relative;align-self:center;display:grid;grid-template-columns:repeat(3,1fr);background:#fff;
+  /* ---- Hero · 分段切换器（Mio 办公搭子 ⟷ 句子懂行 · 记忆 ⟷ AI 对话）：按钮宽度随文字，滑块位置由脚本量 ---- */
+  .hero-seg{position:relative;align-self:center;display:inline-grid;grid-auto-flow:column;background:#fff;
     border:1px solid var(--line);border-radius:999px;padding:4px;box-shadow:var(--shadow-soft);z-index:2}
-  .hero-seg .seg-thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px) / 3);border-radius:999px;
-    background:var(--blue);box-shadow:0 8px 18px -8px rgba(67,56,202,.6);transition:transform .4s var(--ease)}
-  .hero-seg[data-view="chat"] .seg-thumb{transform:translateX(100%)}
-  .hero-seg[data-view="flow"] .seg-thumb{transform:translateX(200%)}
+  .hero-seg .seg-thumb{position:absolute;top:4px;bottom:4px;left:0;width:var(--tw,110px);border-radius:999px;transform:translateX(var(--tx,4px));
+    background:var(--blue);box-shadow:0 8px 18px -8px rgba(67,56,202,.6);transition:transform .4s var(--ease),width .4s var(--ease)}
   .hero-seg .seg-btn{position:relative;z-index:1;border:0;background:none;font:inherit;font-size:13px;font-weight:700;
     letter-spacing:-.01em;color:var(--ink-2);padding:9px 18px;border-radius:999px;cursor:pointer;white-space:nowrap;
     transition:color .3s var(--ease)}
@@ -222,84 +217,16 @@
   .art-view.is-active{display:block;animation:viewIn .5s var(--ease)}
   @keyframes viewIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){.art-view.is-active{animation:none}}
-  /* 工作流视图内的 flow-wrap 已由 hero-art-inner 限宽，居中即可 */
-  .view-flow .flow-wrap{margin:0 auto}
 
   /* 滚动数字（count-up）：等宽数字，避免跳动 */
   .cu{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
-  .flow-canvas{position:relative;width:100%;aspect-ratio:440/470;border:1px solid var(--line);border-radius:var(--radius-lg);
-    overflow:hidden;
-    background:
-      radial-gradient(circle at center,rgba(67,56,202,.16) 1.2px,transparent 1.4px) 0 0/22px 22px,
-      linear-gradient(180deg,#FBFCFF,#F3F7FE);
-    box-shadow:0 1px 2px rgba(14,20,48,.05),0 40px 80px -30px rgba(67,56,202,.35),0 12px 24px -12px rgba(14,20,48,.12)}
-  /* 编辑器工具条（模仿 Dify 画布顶栏） */
-  .flow-bar{position:absolute;top:0;left:0;right:0;height:38px;z-index:5;display:flex;align-items:center;gap:7px;
-    padding:0 14px;background:rgba(255,255,255,.74);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  .flow-bar .d{width:9px;height:9px;border-radius:50%}
-  .flow-bar .d.r{background:#FF5F57}.flow-bar .d.y{background:#FEBC2E}.flow-bar .d.g{background:#28C840}
-  .flow-bar .ttl{margin-left:6px;font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--ink-3)}
-  .flow-bar .run{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:750;color:var(--green);
-    background:var(--green-lt);padding:4px 10px;border-radius:999px}
-  .flow-bar .run i{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:runPulse 1.7s var(--ease) infinite}
+  /* 状态点呼吸、连线流动、输入中省略点：对话面板、行业扇形线等多处复用 */
   @keyframes runPulse{0%,100%{opacity:1}50%{opacity:.25}}
-  /* 连接线 */
-  .flow-edges{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-  .flow-edges .wire{fill:none;stroke:#CDD2F0;stroke-width:2}
-  .flow-edges .flux{fill:none;stroke:url(#fxgrad);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:6 12;
-    animation:fxflow 1.1s linear infinite}
   @keyframes fxflow{to{stroke-dashoffset:-36}}
-  @media (prefers-reduced-motion:reduce){.flow-edges .flux{animation:none}}
-  /* 节点 */
-  .fnode{position:absolute;z-index:3;transform:translate(-50%,-50%);width:max-content;max-width:62%;
-    background:#fff;border:1px solid var(--line);border-radius:13px;padding:9px 13px;
-    box-shadow:0 1px 2px rgba(14,20,48,.05),0 14px 26px -14px rgba(14,20,48,.24)}
-  .fnode .fn-hd{display:flex;align-items:center;gap:9px}
-  .fnode .fn-ic{width:25px;height:25px;border-radius:7px;flex:0 0 25px;display:grid;place-items:center;color:#fff}
-  .fnode .fn-ic svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-  .fnode .fn-t{font-size:13px;font-weight:780;letter-spacing:-.01em;line-height:1.15;white-space:nowrap}
-  .fnode .fn-s{font-size:10.5px;color:var(--ink-3);margin-top:3px;white-space:nowrap}
-  .fnode .fn-tags{display:flex;gap:5px;margin-top:8px}
-  .fnode .fn-tags span{font-size:9.5px;font-weight:650;color:var(--ink-2);background:var(--blue-50);
-    border:1px solid var(--blue-100);border-radius:6px;padding:2px 6px;white-space:nowrap}
-  /* 端口手柄 */
-  .fnode::before,.fnode::after{content:"";position:absolute;left:50%;width:7px;height:7px;border-radius:50%;
-    background:#fff;border:1.6px solid #BFC4EC;transform:translateX(-50%);z-index:4}
-  .fnode::before{top:-4px}.fnode::after{bottom:-4px}
-  .fnode.n-trigger .fn-ic{background:var(--green)}
-  .fnode.n-know .fn-ic{background:var(--purple)}
-  .fnode.n-tools .fn-ic{background:var(--orange)}
-  .fnode.n-out .fn-ic{background:linear-gradient(135deg,var(--green),#2DD4BF)}
-  /* 大脑（焦点节点） */
-  .fnode.n-brain{padding:12px 16px;border:0;
-    background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,var(--blue),var(--blue-2)) border-box;
-    border:1.5px solid transparent;
-    box-shadow:0 1px 2px rgba(14,20,48,.05),0 24px 46px -18px rgba(67,56,202,.55),0 0 0 6px rgba(67,56,202,.07)}
-  .fnode.n-brain .fn-ic{width:31px;height:31px;border-radius:9px;flex-basis:31px;
-    background:linear-gradient(135deg,var(--blue),var(--blue-2));box-shadow:0 6px 14px -4px rgba(67,56,202,.6)}
-  .fnode.n-brain .fn-ic svg{width:17px;height:17px}
-  .fnode.n-brain .fn-t{font-size:14.5px;font-weight:820}
-  .fnode.n-brain .fn-think{display:inline-flex;gap:3px;margin-left:7px;vertical-align:middle}
-  .fnode.n-brain .fn-think i{width:4px;height:4px;border-radius:50%;background:var(--blue);animation:think 1.2s var(--ease) infinite}
-  .fnode.n-brain .fn-think i:nth-child(2){animation-delay:.18s}.fnode.n-brain .fn-think i:nth-child(3){animation-delay:.36s}
   @keyframes think{0%,100%{opacity:.22;transform:translateY(0)}50%{opacity:1;transform:translateY(-2px)}}
-  .fnode.n-brain::before,.fnode.n-brain::after{border-color:var(--blue);width:8px;height:8px}
-  /* 节点定位（与 SVG viewBox 0 0 440 470 对齐） */
-  .fnode.n-trigger{left:50%;top:16.6%}
-  .fnode.n-brain{left:50%;top:40%}
-  .fnode.n-know{left:26.8%;top:63.8%}
-  .fnode.n-tools{left:73.2%;top:63.8%}
-  .fnode.n-out{left:50%;top:88.3%}
-  /* 浮动指标徽标（保留品牌活力，呼应 Dify 运行面板） */
-  .flow-stat{position:absolute;z-index:6;background:#fff;border:1px solid var(--line);border-radius:14px;
-    box-shadow:var(--shadow);padding:11px 15px}
-  .flow-stat .fl{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
-  .flow-stat .fv{font-size:20px;font-weight:850;letter-spacing:-.02em;line-height:1.1;margin-top:3px}
-  .flow-stat.s1{left:-36px;top:28%}.flow-stat.s1 .fv{color:var(--blue)}
-  .flow-stat.s2{right:-28px;bottom:13%}.flow-stat.s2 .fv{color:var(--orange-deep)}
 
   /* ---- Hero · Mio 干活面板：一句话布置 → 自己拆步骤 → 交回成果（产品页讲成果长什么样，这里讲它怎么把活干完） ---- */
-  .mio-panel{position:relative;width:100%;display:flex;flex-direction:column;
+  .mio-panel,.dx-panel{position:relative;width:100%;display:flex;flex-direction:column;
     border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;
     background:linear-gradient(180deg,#FBFCFF,#F3F7FE);
     box-shadow:0 1px 2px rgba(14,20,48,.05),0 40px 80px -30px rgba(67,56,202,.35),0 12px 24px -12px rgba(14,20,48,.12)}
@@ -347,10 +274,69 @@
   .mio-foot span.on{color:#fff;background:var(--blue);border-color:transparent}
   @media (prefers-reduced-motion:reduce){.mio-task .caret{display:none}.mio-steps li.run .tk{animation:none}.mio-file{transition:none}}
   @media(max-width:520px){
-    .hero-seg .seg-btn{font-size:12px;padding:9px 11px}
+    .hero-seg .seg-btn{font-size:11.5px;padding:9px 10px}
     .mio-more{display:none}
     .mio-task .bubble{min-height:66px}
     .mio-steps li{font-size:12.5px}
+  }
+
+  /* ---- Hero · 懂行记忆面板：资料进来自己归档 → 冲突让人选一条 → AI 员工来取、答案带出处（产品页逐步展开讲，这里一屏走完一条资料的一生） ---- */
+  .dx-panel .chat-hd .c-av{border:0;color:#fff;font-size:16px;background:linear-gradient(135deg,var(--purple),var(--blue))}
+  .dx-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:11px}
+  .dx-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 13px 12px;box-shadow:var(--shadow-soft);transition:border-color .4s var(--ease),box-shadow .4s var(--ease)}
+  .dx-card.live{border-color:var(--blue-200);box-shadow:0 14px 30px -18px rgba(67,56,202,.45)}
+  .dx-hd{display:flex;align-items:center;gap:8px;min-width:0;margin-bottom:9px;font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+  .dx-hd b{flex:0 0 auto;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--blue);background:var(--blue-50);border:1px solid var(--blue-100);border-radius:6px;padding:2px 7px}
+  .dx-hd span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .dx-hd em{margin-left:auto;flex:0 0 auto;font-style:normal;font-size:11px;font-weight:700;color:var(--orange-deep);opacity:0;transition:opacity .4s var(--ease)}
+  .dx-hd em.show{opacity:1}
+  .dx-hd em.todo{color:#B45309}
+  .dx-file{display:flex;align-items:center;gap:11px;min-width:0}
+  .dx-file .tile{flex:0 0 34px;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:#fff;font:900 15px/1 var(--sans);background:#2B579A}
+  .dx-file .tile.d{background:var(--blue)}.dx-file .tile i{font-size:14px}
+  .dx-file .fcol{min-width:0}
+  .dx-file .fn{font-size:13px;font-weight:780;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dx-file .fm{font-size:11.5px;color:var(--ink-3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dx-steps{list-style:none;margin:11px 0 0;padding:0;display:grid;grid-auto-flow:column;grid-auto-columns:1fr}
+  .dx-steps li{position:relative;display:grid;justify-items:center;gap:5px;font-size:11px;color:var(--ink-3);white-space:nowrap;transition:color .3s var(--ease)}
+  .dx-steps li::before{content:"";position:absolute;top:8px;left:-50%;width:100%;height:1.5px;background:var(--line);transition:background .3s var(--ease)}
+  .dx-steps li:first-child::before{display:none}
+  .dx-steps li .tk{position:relative;z-index:1;width:17px;height:17px;border-radius:50%;background:#fff;border:1.5px solid var(--line);transition:background .3s,border-color .3s}
+  .dx-steps li.run{color:var(--ink);font-weight:700}
+  .dx-steps li.run .tk{border-color:var(--blue-100);border-top-color:var(--blue);animation:mioSpin .8s linear infinite}
+  .dx-steps li.done{color:var(--ink-2)}
+  .dx-steps li.done::before,.dx-steps li.run::before{background:var(--orange-deep)}
+  .dx-steps li.done .tk{background:var(--orange-deep);border-color:transparent}
+  .dx-steps li.done .tk::after{content:"";position:absolute;left:5px;top:2px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .dx-ph{display:grid;place-items:center;text-align:center;border:1.5px dashed var(--blue-200);border-radius:10px;font-size:11.5px;line-height:1.5;color:var(--ink-3);padding:0 12px}
+  .dx-ct{display:none}
+  .dx-card.on .dx-ph{display:none}
+  .dx-card.on .dx-ct{display:grid;animation:viewIn .45s var(--ease)}
+  /* 占位和内容同高，轮播时面板不跳 */
+  .dx-audit .dx-ph,.dx-audit .dx-ct{min-height:99px}
+  .dx-use .dx-ph,.dx-use .dx-ct{min-height:70px}
+  .dx-ct{gap:6px;align-content:start}
+  .dx-topic{font-size:12.5px;font-weight:780;color:var(--ink)}
+  .dx-opt{display:flex;align-items:center;gap:8px;min-width:0;border:1px solid var(--line);border-radius:9px;padding:6px 8px 6px 10px;font-size:12px;color:var(--ink-2);
+    transition:border-color .35s var(--ease),background .35s var(--ease),opacity .35s var(--ease)}
+  .dx-opt span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dx-opt i{margin-left:auto;flex:0 0 auto;font-style:normal;font-size:10.5px;font-weight:700;color:var(--blue);background:var(--blue-50);border:1px solid var(--blue-100);border-radius:999px;padding:2px 8px;white-space:nowrap;
+    transition:color .35s,background .35s,border-color .35s}
+  .dx-opt.pick{border-color:var(--orange-deep);background:var(--green-lt);color:var(--ink)}
+  .dx-opt.pick i{color:#fff;background:var(--orange-deep);border-color:transparent}
+  .dx-opt.drop{opacity:.5}
+  .dx-opt.drop span{text-decoration:line-through}
+  .dx-opt.drop i{visibility:hidden}
+  .dx-ask{font-size:12.5px;color:var(--ink-2);min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dx-ask b{display:inline-block;margin-right:7px;font-size:10.5px;font-weight:750;color:#fff;background:var(--ink-2);border-radius:5px;padding:1px 6px}
+  .dx-ans{font-size:13px;font-weight:700;line-height:1.5;color:var(--ink);opacity:0;transition:opacity .4s var(--ease)}
+  .dx-src{font-family:var(--mono);font-size:10.5px;letter-spacing:.02em;color:var(--orange-deep);opacity:0;transition:opacity .4s var(--ease);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dx-use.ans .dx-ans,.dx-use.ans .dx-src{opacity:1}
+  .dx-foot em{font-style:normal;font-size:11px;color:var(--ink-3);margin-right:4px;align-self:center}
+  @media (prefers-reduced-motion:reduce){.dx-steps li.run .tk{animation:none}.dx-card.on .dx-ct{animation:none}}
+  @media(max-width:520px){
+    .dx-hd span{display:none}
+    .dx-steps li{font-size:10.5px}
   }
 
   /* ---- Hero · AI 客服对话面板（沿用品牌浅色体系） ---- */
@@ -423,15 +409,9 @@
     .hero-art{order:2}
     .hero-ghost{display:none}
     .hero-art-inner{max-width:420px}
-    .flow-wrap{max-width:420px}
   }
   @media(max-width:520px){
     .hero-kpis{grid-template-columns:repeat(2,1fr);gap:22px}
-    .fnode{padding:8px 10px}
-    .fnode .fn-t{font-size:11.5px}.fnode .fn-s{display:none}
-    .fnode.n-know{left:24%}.fnode.n-tools{left:76%}
-    .flow-stat{padding:9px 12px}.flow-stat .fv{font-size:17px}
-    .flow-stat.s1{left:-12px}.flow-stat.s2{right:-10px}
   }
 
   /* ---- Hero 信任墙 ---- */
@@ -1416,7 +1396,7 @@
   html.anim .sec-top.rv{transform:translateY(42px);transition-duration:1.05s}
   html.anim .rv-d1{transition-delay:.08s}html.anim .rv-d2{transition-delay:.16s}html.anim .rv-d3{transition-delay:.24s}
   @media (prefers-reduced-motion:reduce){.rv{opacity:1!important;transform:none!important;transition:none!important}
-    .eyebrow .dot::after{animation:none}.flow-wrap{animation:none}}
+    .eyebrow .dot::after{animation:none}}
 
   /* ============ 阅读进度条 + 右侧分节导航 ============ */
   .read-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;pointer-events:none}
@@ -1546,8 +1526,8 @@ html{overflow-x:clip}
         <div class="hero-seg" id="heroSeg" data-view="mio" role="tablist" aria-label="切换 Hero 演示视图">
           <span class="seg-thumb" aria-hidden="true"></span>
           <button type="button" class="seg-btn active" role="tab" aria-selected="true" data-view="mio">Mio 办公搭子</button>
+          <button type="button" class="seg-btn" role="tab" aria-selected="false" tabindex="-1" data-view="dx">句子懂行 · 记忆</button>
           <button type="button" class="seg-btn" role="tab" aria-selected="false" tabindex="-1" data-view="chat">AI 对话</button>
-          <button type="button" class="seg-btn" role="tab" aria-selected="false" tabindex="-1" data-view="flow">Agent 工作流</button>
         </div>
 
         <div class="art-stage">
@@ -1591,7 +1571,54 @@ html{overflow-x:clip}
             </div>
           </div>
 
-          <!-- 视图二 · AI 客服对话 -->
+          <!-- 视图二 · 懂行记忆面板：一条资料从进来、归档、人审到被 AI 员工取用（内容为脱敏示例，文档和业务规则两条线轮播） -->
+          <div class="art-view view-dx" data-view="dx" aria-hidden="true">
+            <div class="dx-panel" id="dxPanel">
+              <div class="chat-hd">
+                <span class="c-av"><i class="fa-solid fa-book-bookmark"></i></span>
+                <div class="c-meta">
+                  <div class="c-nm">句子懂行 · 记忆</div>
+                  <div class="c-st"><i></i><span id="dxStatus">已生效 · AI 员工从这里取</span></div>
+                </div>
+                <a class="mio-more" href="products/dongxing.html" data-track-name="了解懂行" data-track-source="首页·Hero" data-track-area="首屏">了解懂行 →</a>
+              </div>
+              <div class="dx-body">
+                <section class="dx-card dx-in" id="dxIn">
+                  <div class="dx-hd"><b>进 · 建</b><span>资料进来，懂行自己归档</span><em class="show" id="dxCount">6 个段落 · 5 条问答 · v2</em></div>
+                  <div class="dx-file">
+                    <span class="tile" id="dxTile">W</span>
+                    <div class="fcol"><div class="fn" id="dxFn">售后保修政策 2026.docx</div><div class="fm" id="dxNote">上传时交代：「旧版作废，以这份为准」</div></div>
+                  </div>
+                  <ol class="dx-steps" id="dxSteps">
+                    <li class="done"><i class="tk"></i><span>读内容</span></li><li class="done"><i class="tk"></i><span>认表头</span></li><li class="done"><i class="tk"></i><span>定文件夹</span></li><li class="done"><i class="tk"></i><span>拆段落</span></li><li class="done"><i class="tk"></i><span>上架</span></li>
+                  </ol>
+                </section>
+                <section class="dx-card dx-audit on" id="dxAudit">
+                  <div class="dx-hd"><b>审</b><span>人只做选择题</span><em class="show" id="dxAuditSt">已处理</em></div>
+                  <div class="dx-ph">归档时顺手比对，说法不一致的列到这里</div>
+                  <div class="dx-ct">
+                    <div class="dx-topic" id="dxTopic">内容冲突 · 耗材是否保修</div>
+                    <div class="dx-opt pick" id="dxOptA"><span>保修期内，耗材可免费更换一次</span><i>以这条为准</i></div>
+                    <div class="dx-opt drop" id="dxOptB"><span>滤芯等耗材不计入保修范围</span><i>以这条为准</i></div>
+                  </div>
+                </section>
+                <section class="dx-card dx-use on ans" id="dxUse">
+                  <div class="dx-hd"><b>用</b><span>谁来取，答案都带出处、带版本</span></div>
+                  <div class="dx-ph">上架以后，秒懂、Mio 和 AI 员工都从这里取</div>
+                  <div class="dx-ct">
+                    <div class="dx-ask" id="dxAsk"><b>AI 客服</b>“滤芯坏了能免费换吗？”</div>
+                    <div class="dx-ans" id="dxAns">保修期内可以免费换一次。</div>
+                    <div class="dx-src" id="dxSrc">出处 · 售后保修政策 2026.docx · v2</div>
+                  </div>
+                </section>
+              </div>
+              <div class="mio-foot dx-foot" id="dxDoors" aria-label="三个入口直接取">
+                <em>三个入口直接取</em><span>秒懂节点</span><span>Mio 对话</span><span class="on">AI 员工</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 视图三 · AI 客服对话 -->
           <div class="art-view view-chat" data-view="chat" aria-hidden="true">
             <div class="chat-panel">
               <div class="chat-hd">
@@ -1619,94 +1646,6 @@ html{overflow-x:clip}
             </div>
           </div>
 
-          <!-- 视图三 · Agent 工作流画布（Dify 风） -->
-          <div class="art-view view-flow" data-view="flow" aria-hidden="true">
-            <div class="flow-wrap">
-              <div class="flow-canvas">
-                <div class="flow-bar">
-                  <span class="d r"></span><span class="d y"></span><span class="d g"></span>
-                  <span class="ttl">ai-employee · workflow</span>
-                  <span class="run"><i></i>运行中</span>
-                </div>
-
-                <svg class="flow-edges" viewBox="0 0 440 470" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="fxgrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0" stop-color="#6366F1"/>
-                      <stop offset="1" stop-color="#4338CA"/>
-                    </linearGradient>
-                  </defs>
-                  <path class="wire" d="M220,100 C220,124 220,134 220,158"/>
-                  <path class="flux" d="M220,100 C220,124 220,134 220,158"/>
-                  <path class="wire" d="M190,218 C152,244 118,250 118,274"/>
-                  <path class="flux" d="M190,218 C152,244 118,250 118,274"/>
-                  <path class="wire" d="M250,218 C288,244 322,250 322,274"/>
-                  <path class="flux" d="M250,218 C288,244 322,250 322,274"/>
-                  <path class="wire" d="M118,326 C118,362 168,386 198,392"/>
-                  <path class="flux" d="M118,326 C118,362 168,386 198,392"/>
-                  <path class="wire" d="M322,326 C322,362 272,386 242,392"/>
-                  <path class="flux" d="M322,326 C322,362 272,386 242,392"/>
-                </svg>
-
-                <div class="fnode n-trigger">
-                  <div class="fn-hd">
-                    <span class="fn-ic"><svg viewBox="0 0 18 18"><path d="M3 4h12v8H7l-3 3v-3H3z"/></svg></span>
-                    <div>
-                      <div class="fn-t">客户消息接入</div>
-                      <div class="fn-s">微信客服 · 抖音 · 飞书 · 10+ 渠道</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="fnode n-brain">
-                  <div class="fn-hd">
-                    <span class="fn-ic"><svg viewBox="0 0 18 18"><path d="M9 2l1.7 4.6L15 8l-4.3 1.4L9 14l-1.7-4.6L3 8l4.3-1.4z"/></svg></span>
-                    <div>
-                      <div class="fn-t">AI 员工 · 大脑</div>
-                      <div class="fn-s">理解 · 决策 · 编排<span class="fn-think"><i></i><i></i><i></i></span></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="fnode n-know">
-                  <div class="fn-hd">
-                    <span class="fn-ic"><svg viewBox="0 0 18 18"><ellipse cx="9" cy="5" rx="5.5" ry="2.2"/><path d="M3.5 5v8c0 1.2 2.5 2.2 5.5 2.2s5.5-1 5.5-2.2V5"/></svg></span>
-                    <div>
-                      <div class="fn-t">知识库检索</div>
-                      <div class="fn-s">带出处 · 可追溯</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="fnode n-tools">
-                  <div class="fn-hd">
-                    <span class="fn-ic"><svg viewBox="0 0 18 18"><path d="M3 3h5v5H3zM10 3h5v5h-5zM3 10h5v5H3zM10 10h5v5h-5z"/></svg></span>
-                    <div>
-                      <div class="fn-t">工具 · 系统操作</div>
-                      <div class="fn-s">CRM · 工单 · 句子 CLI</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="fnode n-out">
-                  <div class="fn-hd">
-                    <span class="fn-ic"><svg viewBox="0 0 18 18"><path d="M16 2L2 8l5 2 2 5z"/></svg></span>
-                    <div class="fn-t">自动回复 / 转人工</div>
-                  </div>
-                  <div class="fn-tags"><span>自动发送</span><span>置信度 89%</span></div>
-                </div>
-              </div>
-
-              <div class="flow-stat s1">
-                <div class="fl">本月转化</div>
-                <div class="fv">+38%</div>
-              </div>
-              <div class="flow-stat s2">
-                <div class="fl">自动完成率</div>
-                <div class="fv">89%</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -3358,15 +3297,21 @@ if(!sessionStorage.getItem('intro_shown')){
   }
 })();
 
-/* ── Hero 视图切换：Mio 办公搭子 ⟷ AI 对话 ⟷ Agent 工作流 ── */
+/* ── Hero 视图切换：Mio 办公搭子 ⟷ 句子懂行 · 记忆 ⟷ AI 对话 ── */
 (function(){
   var seg=document.getElementById('heroSeg');if(!seg)return;
   var inner=seg.parentElement;
   var stage=inner.querySelector('.art-stage');
   var btns=[].slice.call(seg.querySelectorAll('.seg-btn'));
+  /* 三个按钮字数不同：滑块的位置和宽度跟着当前按钮量 */
+  function moveThumb(){
+    var b=seg.querySelector('.seg-btn.active');if(!b)return;
+    seg.style.setProperty('--tx',b.offsetLeft+'px');seg.style.setProperty('--tw',b.offsetWidth+'px');
+  }
   function show(view){
     seg.dataset.view=view;
     btns.forEach(function(b){var on=b.dataset.view===view;b.classList.toggle('active',on);b.setAttribute('aria-selected',on?'true':'false');b.tabIndex=on?0:-1;});
+    moveThumb();
     stage.querySelectorAll('.art-view').forEach(function(v){
       var on=v.dataset.view===view;v.classList.toggle('is-active',on);v.setAttribute('aria-hidden',on?'false':'true');
     });
@@ -3382,6 +3327,10 @@ if(!sessionStorage.getItem('intro_shown')){
       }
     });
   });
+  moveThumb();
+  window.addEventListener('resize',moveThumb);
+  window.addEventListener('load',moveThumb);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(moveThumb);
 })();
 
 /* ── Hero Mio 面板（纯前端示意）：三个任务轮播，每个任务 打字布置 → 逐步打勾 → 交回成果 ── */
@@ -3430,6 +3379,72 @@ if(!sessionStorage.getItem('intro_shown')){
   }
   /* 首屏先停在完成态给人看清楚，再开始轮播 */
   idx=1;after(3200,play);
+})();
+
+/* ── Hero 懂行面板（纯前端示意）：文档、业务规则两条线轮播，每条线 归档打勾 → 冲突选一条 → 被取用 ── */
+(function(){
+  var panel=document.getElementById('dxPanel');if(!panel)return;
+  function $(id){return document.getElementById(id);}
+  var statusEl=$('dxStatus'),inCard=$('dxIn'),audit=$('dxAudit'),use=$('dxUse'),
+      tile=$('dxTile'),fn=$('dxFn'),note=$('dxNote'),count=$('dxCount'),stepsEl=$('dxSteps'),
+      auditSt=$('dxAuditSt'),topic=$('dxTopic'),optA=$('dxOptA'),optB=$('dxOptB'),
+      ask=$('dxAsk'),ans=$('dxAns'),src=$('dxSrc'),
+      doors=[].slice.call(document.querySelectorAll('#dxDoors span'));
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;   /* 减少动效：停在第一条线的完成态 */
+  var SCENES=[
+    {tile:'',ic:'W',fn:'售后保修政策 2026.docx',note:'上传时交代：「旧版作废，以这份为准」',
+     steps:['读内容','认表头','定文件夹','拆段落','上架'],count:'6 个段落 · 5 条问答 · v2',
+     topic:'内容冲突 · 耗材是否保修',a:'保修期内，耗材可免费更换一次',b:'滤芯等耗材不计入保修范围',pick:'a',
+     who:'AI 客服',q:'滤芯坏了能免费换吗？',ans:'保修期内可以免费换一次。',src:'出处 · 售后保修政策 2026.docx · v2',door:'AI 员工'},
+    {tile:'d',ic:'<i class="fa-solid fa-database"></i>',fn:'采购到付款 · 表结构和流程说明',note:'FDE 和业务专家先建这一条链路',
+     steps:['读表','连关系','读规则','生成初稿'],count:'7 个对象 · 规则库 v2',
+     topic:'内容冲突 · 计划交货时间',a:'物料主数据写 14 天',b:'采购信息记录写 10 天',pick:'b',
+     who:'Mio',q:'这个物料的再订货点怎么算？',ans:'安全库存 + 日均消耗 × 交货天数，交货按 10 天。',src:'出处 · 规则 R-03 · 计划流程说明 · v2',door:'Mio 对话'}
+  ];
+  var idx=1;
+  function visible(){return !document.hidden&&panel.offsetParent!==null;}
+  function after(ms,fn){setTimeout(function wait(){if(visible())fn();else setTimeout(wait,600);},ms);}
+  function live(card){[inCard,audit,use].forEach(function(c){c.classList.toggle('live',c===card);});}
+  function play(){
+    var sc=SCENES[idx],lis;
+    audit.classList.remove('on');use.classList.remove('on','ans');count.classList.remove('show');auditSt.className='';
+    doors.forEach(function(d){d.classList.remove('on');});
+    tile.className='tile'+(sc.tile?' '+sc.tile:'');tile.innerHTML=sc.ic;fn.textContent=sc.fn;note.textContent=sc.note;
+    stepsEl.innerHTML=sc.steps.map(function(t){return '<li><i class="tk"></i><span>'+t+'</span></li>';}).join('');
+    lis=[].slice.call(stepsEl.children);live(inCard);
+    after(500,function(){step(0);});
+    function step(n){
+      if(n>=lis.length){
+        count.textContent=sc.count;count.classList.add('show');statusEl.textContent='已上架 · 归档记录查得到';
+        after(700,review);return;
+      }
+      lis[n].className='run';statusEl.textContent='归档中 · 第 '+(n+1)+' 步 / 共 '+lis.length+' 步';
+      after(640,function(){lis[n].className='done';step(n+1);});
+    }
+    function review(){
+      topic.textContent=sc.topic;optA.className='dx-opt';optB.className='dx-opt';
+      optA.querySelector('span').textContent=sc.a;optB.querySelector('span').textContent=sc.b;
+      auditSt.textContent='待处理';auditSt.className='show todo';
+      audit.classList.add('on');live(audit);statusEl.textContent='1 条待办 · 等人选一条为准';
+      after(1700,function(){
+        (sc.pick==='a'?optA:optB).className='dx-opt pick';(sc.pick==='a'?optB:optA).className='dx-opt drop';
+        auditSt.textContent='已处理';auditSt.className='show';statusEl.textContent='已选定 · 另一条不再被检索到';
+        after(1000,fetchIt);
+      });
+    }
+    function fetchIt(){
+      ask.innerHTML='<b></b>';ask.querySelector('b').textContent=sc.who;ask.appendChild(document.createTextNode('“'+sc.q+'”'));
+      ans.textContent=sc.ans;src.textContent=sc.src;
+      use.classList.add('on');live(use);statusEl.textContent='已生效 · '+sc.who+' 正在取';
+      doors.forEach(function(d){d.classList.toggle('on',d.textContent===sc.door);});
+      after(800,function(){
+        use.classList.add('ans');
+        idx=(idx+1)%SCENES.length;after(4200,function(){live(null);play();});
+      });
+    }
+  }
+  /* 切到这个页签之前停在完成态；第一次看到时先停一会儿再开始轮播 */
+  after(3000,play);
 })();
 
 /* ── Hero AI 客服对话（纯前端演示）：开场自动演一轮 + 引导式追问 ── */
