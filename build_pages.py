@@ -24,7 +24,7 @@ def nav_html(rel):
         <div class="dropdown wide">
           <a href="{rel}products/miaodong.html"><div class="d-title">句子秒懂 · 大脑</div><div class="d-desc">业务人员不写代码也能搭 Agent</div></a>
           <a href="{rel}products/shouhu.html"><div class="d-title">句子守护 · 主管</div><div class="d-desc">Agent 上线前测过、上线后管着</div></a>
-          <a href="{rel}products/canmou.html"><div class="d-title">句子参谋 · 参谋</div><div class="d-desc">对话式数据洞察，一句话问数</div></a>
+          <a href="{rel}products/mio.html"><div class="d-title">Mio · AI 办公搭子</div><div class="d-desc">每人一个 AI，一句话搞定七类活</div></a>
           <a href="{rel}products/dongxing.html"><div class="d-title">句子懂行 · 记忆</div><div class="d-desc">资料入库、问题检索、缺口回流</div></a>
           <a href="{rel}products/miaohui.html"><div class="d-title">句子秒回 · 工位</div><div class="d-desc">Agent 和人协作的 IM 工作台</div></a>
           <a href="{rel}products/cli.html"><div class="d-title">句子 CLI · 手</div><div class="d-desc">操作一切人用软件的执行层</div></a>
@@ -80,7 +80,7 @@ def footer_html(rel):
           <li><a href="{rel}products/miaohui.html">句子秒回 · 工位</a></li>
           <li><a href="{rel}products/miaodong.html">句子秒懂 · 大脑</a></li>
           <li><a href="{rel}products/shouhu.html">句子守护 · 主管</a></li>
-          <li><a href="{rel}products/canmou.html">句子参谋 · 参谋</a></li>
+          <li><a href="{rel}products/mio.html">Mio · AI 办公搭子</a></li>
           <li><a href="{rel}products/dongxing.html">句子懂行 · 记忆</a></li>
           <li><a href="{rel}products/cli.html">句子 CLI · 手</a></li>
           <li><a href="{rel}products/zhizao.html">句子智造 · 地基</a></li>
