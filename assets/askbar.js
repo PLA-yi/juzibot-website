@@ -16,10 +16,10 @@
   // ---- 实体库：对话即导航 ----
   var P = function (s) { return REL + 'products/' + s; }, W = function (s) { return REL + 'workforce/' + s; };
   var ENT = {
+    mio:      { nm: 'Mio · AI 办公搭子', ds: '每人一个 AI，一句话搞定七类活', ic: 'fa-wand-magic-sparkles', href: P('mio.html') },
     miaohui:  { nm: '句子秒回 · 工作台', ds: '11 个 IM 通道汇成一个工作台', ic: 'fa-comments', href: P('miaohui.html') },
     miaodong: { nm: '句子秒懂 · 大脑', ds: '不写代码也能搭 Agent', ic: 'fa-diagram-project', href: P('miaodong.html') },
     shouhu:   { nm: '句子守护 · 主管', ds: '上线前测过、上线后管着', ic: 'fa-shield-halved', href: P('shouhu.html') },
-    mio:      { nm: 'Mio · AI 办公搭子', ds: '每人一个 AI，一句话搞定七类活', ic: 'fa-wand-magic-sparkles', href: P('mio.html') },
     dongxing: { nm: '句子懂行 · 记忆', ds: '资料入库、问题检索、缺口回流', ic: 'fa-book-bookmark', href: P('dongxing.html') },
     cli:      { nm: '句子 CLI · 手', ds: '操作一切人用软件的执行层', ic: 'fa-terminal', href: P('cli.html') },
     zhizao:   { nm: '句子制造 · 地基', ds: '补齐数字化基建，一客一环境', ic: 'fa-cubes', href: P('zhizao.html') },
@@ -48,7 +48,7 @@
     { re: /(数据|报表|图表|问数|分析|看板|bi)/i, a: 'Mio 接着企业自己的数据：一句话问经营数据，秒级出图表，一层层追问到底，答案带出处；想盯的指标一句话搭成看板，异动主动提醒。不写 SQL、不约 BI。', cards: ['mio'] },
     { re: /(知识|文档|资料|检索|出处|知识库)/i, a: '句子懂行是 AI 员工的记忆：素材进来先变成可维护、可追溯的组织记忆；问题进来先看绑定范围，再按出处、片段、原文和表结构逐层取证，答不上就回流成缺口待办。', cards: ['dongxing'] },
     { re: /(演示|预约|联系|试用|demo|怎么买|顾问)/i, a: '好的，我帮你接一下——留个联系方式，工作日当天会有顾问带着你所在行业的真实场景做演示。', cards: [], lead: true },
-    { re: /(产品|有哪些|功能|能力|矩阵)/i, a: '句子有 7 个产品组成 AI 员工的基建：秒回(工作台)、Mio(办公搭子)、秒懂(大脑)、守护(主管)、懂行(记忆)、CLI(手)、制造(地基)。点开看：', cards: ['miaohui', 'mio', 'miaodong', 'shouhu'] },
+    { re: /(产品|有哪些|功能|能力|矩阵)/i, a: '句子有 7 个产品组成 AI 员工的基建：Mio(办公搭子)、秒回(工作台)、秒懂(大脑)、守护(主管)、懂行(记忆)、CLI(手)、制造(地基)。点开看：', cards: ['mio', 'miaohui', 'miaodong', 'shouhu'] },
     { re: /(员工|岗位|招聘|团队|岗)/i, a: '句子的 AI 员工已在销售、客服、导购、理财顾问、社工/调解、HR 等岗位真实当班。看看他们：', cards: ['sales', 'service', 'finance', 'government'] },
   ];
 
