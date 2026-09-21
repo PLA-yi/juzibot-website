@@ -30,6 +30,8 @@ Hand-edit these directly:
 
 Subpages inject the shared nav/footer at runtime: `<div id="site-nav"></div>` / `<div id="site-footer"></div>` + `window.SITE_REL` + `assets/site.js`. **The product/workforce menus live in the `NAV`/`FOOTER` strings in `assets/site.js`** — adding a product or AI-员工 role means editing those (plus the `ENT` map + a route in `assets/askbar.js` so the page shows up as a related card / intent answer). `index.html` and `careers/index.html` carry their **own inline nav/footer** (not injected), so update those two by hand as well. Each page sets `window.PAGE_CTX = {entity, type, title}`.
 
+**Cache-busting:** every page references the shared files as `assets/site.js?v=YYYYMMDD` (same for `site.css`, `askbar.js`, `analytics.js`; `site.js` also stamps the two scripts it loads dynamically). The server sends no `Cache-Control`, so browsers keep an old `site.js` for days — on 2026-09-21 佳芮 still saw the old product name in the nav after the rename was live. **When you change any of these four files, bump the `?v=` value everywhere** (`grep -rl "?v=2026" --include="*.html" .` plus the two strings in `assets/site.js`).
+
 When adding a workforce page, the fastest correct path is to **copy an existing `workforce/*.html` (e.g. `hr.html`)** and rewrite the content — it already has the right chrome, `rel='../'` paths, and reveal animations.
 
 ## Styling & assets
