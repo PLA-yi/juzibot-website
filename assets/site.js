@@ -124,11 +124,11 @@
     wire();
     // DataFinder 埋点层：先于 askbar 加载，保证对话问题和 CTA 都能被记录。
     if (!window.JZAnalytics && !document.querySelector('script[data-jz-analytics]')) {
-      var a = document.createElement('script'); a.src = REL + 'assets/analytics.js'; a.defer = true; a.setAttribute('data-jz-analytics', '1'); document.body.appendChild(a);
+      var a = document.createElement('script'); a.src = REL + 'assets/analytics.js?v=20260921'; a.defer = true; a.setAttribute('data-jz-analytics', '1'); document.body.appendChild(a);
     }
     // 全站对话层：加载 askbar.js（AI-native 大改核心）
     if (!window.__jzab && !document.querySelector('script[data-jzab]')) {
-      var s = document.createElement('script'); s.src = REL + 'assets/askbar.js'; s.defer = true; s.setAttribute('data-jzab', '1'); document.body.appendChild(s);
+      var s = document.createElement('script'); s.src = REL + 'assets/askbar.js?v=20260921'; s.defer = true; s.setAttribute('data-jzab', '1'); document.body.appendChild(s);
     }
   }
 

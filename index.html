@@ -203,12 +203,13 @@
   @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
   @media (prefers-reduced-motion:reduce){.flow-wrap{animation:none}}
 
-  /* ---- Hero · 分段切换器（AI 对话 ⟷ Agent 工作流） ---- */
-  .hero-seg{position:relative;align-self:center;display:grid;grid-template-columns:1fr 1fr;background:#fff;
+  /* ---- Hero · 分段切换器（Mio 办公搭子 ⟷ AI 对话 ⟷ Agent 工作流） ---- */
+  .hero-seg{position:relative;align-self:center;display:grid;grid-template-columns:repeat(3,1fr);background:#fff;
     border:1px solid var(--line);border-radius:999px;padding:4px;box-shadow:var(--shadow-soft);z-index:2}
-  .hero-seg .seg-thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;
+  .hero-seg .seg-thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px) / 3);border-radius:999px;
     background:var(--blue);box-shadow:0 8px 18px -8px rgba(67,56,202,.6);transition:transform .4s var(--ease)}
-  .hero-seg[data-view="flow"] .seg-thumb{transform:translateX(100%)}
+  .hero-seg[data-view="chat"] .seg-thumb{transform:translateX(100%)}
+  .hero-seg[data-view="flow"] .seg-thumb{transform:translateX(200%)}
   .hero-seg .seg-btn{position:relative;z-index:1;border:0;background:none;font:inherit;font-size:13px;font-weight:700;
     letter-spacing:-.01em;color:var(--ink-2);padding:9px 18px;border-radius:999px;cursor:pointer;white-space:nowrap;
     transition:color .3s var(--ease)}
@@ -296,6 +297,61 @@
   .flow-stat .fv{font-size:20px;font-weight:850;letter-spacing:-.02em;line-height:1.1;margin-top:3px}
   .flow-stat.s1{left:-36px;top:28%}.flow-stat.s1 .fv{color:var(--blue)}
   .flow-stat.s2{right:-28px;bottom:13%}.flow-stat.s2 .fv{color:var(--orange-deep)}
+
+  /* ---- Hero · Mio 干活面板：一句话布置 → 自己拆步骤 → 交回成果（产品页讲成果长什么样，这里讲它怎么把活干完） ---- */
+  .mio-panel{position:relative;width:100%;display:flex;flex-direction:column;
+    border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;
+    background:linear-gradient(180deg,#FBFCFF,#F3F7FE);
+    box-shadow:0 1px 2px rgba(14,20,48,.05),0 40px 80px -30px rgba(67,56,202,.35),0 12px 24px -12px rgba(14,20,48,.12)}
+  .mio-panel .chat-hd .c-av{border-radius:50%;border:0;overflow:hidden}
+  .mio-panel .chat-hd .c-av img{width:100%;height:100%;object-fit:cover}
+  .mio-more{margin-left:auto;flex:0 0 auto;font-size:12px;font-weight:750;color:var(--blue);white-space:nowrap;
+    background:var(--blue-50);border:1px solid var(--blue-100);border-radius:999px;padding:6px 12px;transition:background .2s,border-color .2s}
+  .mio-more:hover{background:#fff;border-color:var(--blue-200)}
+  .mio-body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:15px}
+  .mio-lbl{display:block;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;color:var(--ink-3);margin-bottom:8px}
+  .mio-task{display:flex;flex-direction:column;align-items:flex-end}
+  .mio-task .mio-lbl{align-self:flex-end}
+  .mio-task .bubble{width:88%;min-height:44px;background:var(--blue);color:#fff;border-radius:14px 4px 14px 14px;
+    padding:11px 14px;font-size:13.5px;font-weight:600;line-height:1.6;box-shadow:0 8px 18px -10px rgba(67,56,202,.6)}
+  .mio-task .caret{display:inline-block;width:2px;height:1.05em;margin-left:2px;vertical-align:-2px;background:#fff;animation:mioCaret 1s steps(1) infinite}
+  @keyframes mioCaret{50%{opacity:0}}
+  .mio-steps ol{list-style:none;margin:0;display:grid;gap:9px;background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:13px 14px;box-shadow:var(--shadow-soft)}
+  .mio-steps li{display:flex;align-items:center;gap:10px;min-width:0;font-size:13px;line-height:1.35;color:var(--ink-3);transition:color .3s var(--ease)}
+  .mio-steps li span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mio-steps li .tk{position:relative;flex:0 0 18px;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line);transition:background .3s,border-color .3s}
+  .mio-steps li.run{color:var(--ink);font-weight:650}
+  .mio-steps li.run .tk{border-color:var(--blue-100);border-top-color:var(--blue);animation:mioSpin .8s linear infinite}
+  @keyframes mioSpin{to{transform:rotate(360deg)}}
+  .mio-steps li.done{color:var(--ink-2)}
+  .mio-steps li.done .tk{background:var(--orange-deep);border-color:transparent}
+  .mio-steps li.done .tk::after{content:"";position:absolute;left:5.5px;top:2.5px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .mio-slot{position:relative;border-radius:14px}
+  .mio-slot::before{content:"做完交回到这里";position:absolute;inset:0;display:grid;place-items:center;border:1.5px dashed var(--blue-200);border-radius:14px;
+    font-size:12px;color:var(--ink-3);letter-spacing:.02em}
+  .mio-file{position:relative;display:flex;align-items:center;gap:12px;min-width:0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;
+    box-shadow:0 14px 30px -18px rgba(14,20,48,.3);opacity:0;transform:translateY(8px);transition:opacity .45s var(--ease),transform .45s var(--ease)}
+  .mio-file.in{opacity:1;transform:none}
+  .mio-file .tile{flex:0 0 38px;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;color:#fff;font:900 17px/1 var(--sans)}
+  .mio-file .tile i{font-size:15px}
+  .mio-file .tile.w{background:#2B579A}.mio-file .tile.x{background:#1D6F42}.mio-file .tile.d{background:var(--blue)}
+  .mio-file .fcol{min-width:0}
+  .mio-file .fn{font-size:13.5px;font-weight:780;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mio-file .fm{font-size:11.5px;color:var(--ink-3);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mio-file .ok{margin-left:auto;flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:750;color:var(--orange-deep);
+    background:var(--green-lt);border-radius:999px;padding:5px 10px;white-space:nowrap}
+  .mio-foot{display:flex;flex-wrap:wrap;gap:5px;padding:12px 14px 14px;border-top:1px solid var(--line);background:rgba(255,255,255,.78)}
+  .mio-foot span{font-size:11px;font-weight:650;color:var(--ink-3);background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 8.5px;white-space:nowrap;
+    transition:color .3s var(--ease),background .3s var(--ease),border-color .3s var(--ease)}
+  .mio-foot span.on{color:#fff;background:var(--blue);border-color:transparent}
+  @media (prefers-reduced-motion:reduce){.mio-task .caret{display:none}.mio-steps li.run .tk{animation:none}.mio-file{transition:none}}
+  @media(max-width:520px){
+    .hero-seg .seg-btn{font-size:12px;padding:9px 11px}
+    .mio-more{display:none}
+    .mio-task .bubble{min-height:66px}
+    .mio-steps li{font-size:12.5px}
+  }
 
   /* ---- Hero · AI 客服对话面板（沿用品牌浅色体系） ---- */
   .chat-panel{position:relative;width:100%;display:flex;flex-direction:column;
@@ -1485,15 +1541,56 @@ html{overflow-x:clip}
 
     <div class="hero-art">
       <div class="hero-art-inner">
-        <div class="hero-seg" id="heroSeg" data-view="chat" role="tablist" aria-label="切换 Hero 演示视图">
+        <div class="hero-seg" id="heroSeg" data-view="mio" role="tablist" aria-label="切换 Hero 演示视图">
           <span class="seg-thumb" aria-hidden="true"></span>
-          <button type="button" class="seg-btn active" role="tab" aria-selected="true" data-view="chat">AI 对话</button>
-          <button type="button" class="seg-btn" role="tab" aria-selected="false" data-view="flow">Agent 工作流</button>
+          <button type="button" class="seg-btn active" role="tab" aria-selected="true" data-view="mio">Mio 办公搭子</button>
+          <button type="button" class="seg-btn" role="tab" aria-selected="false" tabindex="-1" data-view="chat">AI 对话</button>
+          <button type="button" class="seg-btn" role="tab" aria-selected="false" tabindex="-1" data-view="flow">Agent 工作流</button>
         </div>
 
         <div class="art-stage">
-          <!-- 视图一 · AI 客服对话 -->
-          <div class="art-view view-chat is-active" data-view="chat">
+          <!-- 视图一 · Mio 干活面板：一句话布置 → 自己拆步骤 → 交回成果（内容为脱敏示例，三个任务轮播） -->
+          <div class="art-view view-mio is-active" data-view="mio">
+            <div class="mio-panel" id="mioPanel">
+              <div class="chat-hd">
+                <span class="c-av"><img src="assets/brand/mio-cat-logo.png" alt="Mio" width="38" height="38" decoding="async" /></span>
+                <div class="c-meta">
+                  <div class="c-nm">Mio · AI 办公搭子</div>
+                  <div class="c-st"><i></i><span id="mioStatus">已交回 · 等你验收</span></div>
+                </div>
+                <a class="mio-more" href="products/mio.html" data-track-name="了解 Mio" data-track-source="首页·Hero" data-track-area="首屏">了解 Mio →</a>
+              </div>
+              <div class="mio-body">
+                <div class="mio-task">
+                  <span class="mio-lbl">一句话布置</span>
+                  <div class="bubble" id="mioTask">“把上周的渠道数据做成周报，周一早上发我。”</div>
+                </div>
+                <div class="mio-steps">
+                  <span class="mio-lbl">Mio 自己拆步骤</span>
+                  <ol id="mioSteps">
+                    <li class="done"><i class="tk"></i><span>读数据库 · 3 张表，12,436 条线索</span></li>
+                    <li class="done"><i class="tk"></i><span>写代码重算环比，核对口径</span></li>
+                    <li class="done"><i class="tk"></i><span>写周报，配 2 张图表</span></li>
+                    <li class="done"><i class="tk"></i><span>排版成 Word，定好每周一 9:00 发</span></li>
+                  </ol>
+                </div>
+                <div class="mio-out">
+                  <span class="mio-lbl">交回的成果</span>
+                  <div class="mio-slot"><div class="mio-file in" id="mioFile">
+                    <span class="tile w">W</span>
+                    <div class="fcol"><div class="fn">渠道业务周报-第37周.docx</div><div class="fm">3 页 · 2 张图表 · 每个数带出处</div></div>
+                    <span class="ok"><i class="fa-solid fa-check"></i>已交回</span>
+                  </div></div>
+                </div>
+              </div>
+              <div class="mio-foot" id="mioKinds" aria-label="Mio 能干的七类活">
+                <span class="on">写方案</span><span>做 PPT</span><span>理数据</span><span>查资料</span><span>问数</span><span>搭看板</span><span>盯指标</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 视图二 · AI 客服对话 -->
+          <div class="art-view view-chat" data-view="chat" aria-hidden="true">
             <div class="chat-panel">
               <div class="chat-hd">
                 <span class="c-av"><img src="logo.png" alt="句子互动" /></span>
@@ -1520,7 +1617,7 @@ html{overflow-x:clip}
             </div>
           </div>
 
-          <!-- 视图二 · Agent 工作流画布（Dify 风） -->
+          <!-- 视图三 · Agent 工作流画布（Dify 风） -->
           <div class="art-view view-flow" data-view="flow" aria-hidden="true">
             <div class="flow-wrap">
               <div class="flow-canvas">
@@ -1729,7 +1826,7 @@ html{overflow-x:clip}
       <div class="ft-row">
         <div class="ft-cell ft-c0">你买到的</div>
         <div class="ft-cell"><span class="chip chip-no"><span class="st">✕</span>买席位</span>员工用不用、用得好不好，公司自己背</div>
-        <div class="ft-cell ft-new"><span class="chip chip-yes"><span class="st">✓</span>按结果付费</span>AI 带来的转化是人工对照组的 <b><span class="cnum" data-to="3">0</span> 倍</b>，直接帮你把业绩做出来</div>
+        <div class="ft-cell ft-new"><span class="chip chip-yes"><span class="st">✓</span>按结果交付</span>AI 带来的转化是人工对照组的 <b><span class="cnum" data-to="3">0</span> 倍</b>，直接帮你把业绩做出来</div>
       </div>
       <div class="ft-row">
         <div class="ft-cell ft-c0">多久见效</div>
@@ -1857,7 +1954,7 @@ html{overflow-x:clip}
     <div class="sec-head rv">
       <span class="sec-eyebrow">FDE · 我们怎么交付</span>
       <h2>一个团队，懂生意也懂 AI，<span class="hl"><span>对结果负责</span></span>。</h2>
-      <p class="sub">大模型本身不会直接变成业务生产力——中间缺的是把模型真正嵌入业务流程的角色。句子互动派出 FDE（Forward Deployed Engineer，前端部署工程师）团队补上这一层：以七大产品基建为支撑，把 AI 嵌入客户的真实业务，对最终的业务结果负责。</p>
+      <p class="sub">大模型本身不会直接变成业务生产力——中间缺的是把模型真正嵌入业务流程的角色。句子互动派出 FDE（Forward Deployed Engineer，前线部署工程师）团队补上这一层：以七大产品基建为支撑，把 AI 嵌入客户的真实业务，对最终的业务结果负责。</p>
     </div>
     <div class="fde-flow" id="fdeFlow">
       <div class="fde-stepper" id="fdeStepper" role="group" aria-label="FDE 四步交付 · 步骤导航">
@@ -1879,7 +1976,7 @@ html{overflow-x:clip}
         <div class="fde-card rv is-active" role="button" tabindex="0" aria-pressed="true">
           <div class="fde-num">01</div>
           <h4>先理解业务，再落地系统</h4>
-          <p>懂行业的成员先驻场，摸清客户的 SOP、知识库和获客转化全链路。先弄懂业务，再上 AI。</p>
+          <p>懂行业的成员先到客户业务现场，摸清客户的 SOP、知识库和获客转化全链路。先弄懂业务，再上 AI。</p>
         </div>
         <div class="fde-card rv rv-d1" role="button" tabindex="0" aria-pressed="false">
           <div class="fde-num">02</div>
@@ -2019,7 +2116,7 @@ html{overflow-x:clip}
           <p>把客户的业务流程、合规规则、知识积累，封装成可执行的 Agent workflow。</p>
           <span class="fs-pill">workflow</span>
           <div class="fs-more">
-            <p>FDE 驻场把客户的业务流程、合规红线、私域知识，拆成一个个可执行节点，配成能复用的 Agent workflow——不是写死的脚本，是能改、能扩的工作流。</p>
+            <p>FDE 把客户的业务流程、合规红线、私域知识，拆成一个个可执行节点，配成能复用的 Agent workflow——不是写死的脚本，是能改、能扩的工作流。</p>
             <div class="fm-tags"><span>流程拆解</span><span>合规规则</span><span>知识接入</span></div>
           </div>
         </div>
@@ -3259,7 +3356,7 @@ if(!sessionStorage.getItem('intro_shown')){
   }
 })();
 
-/* ── Hero 视图切换：AI 对话 ⟷ Agent 工作流 ── */
+/* ── Hero 视图切换：Mio 办公搭子 ⟷ AI 对话 ⟷ Agent 工作流 ── */
 (function(){
   var seg=document.getElementById('heroSeg');if(!seg)return;
   var inner=seg.parentElement;
@@ -3276,11 +3373,61 @@ if(!sessionStorage.getItem('intro_shown')){
     b.addEventListener('click',function(){show(b.dataset.view);});
     b.addEventListener('keydown',function(e){
       if(e.key==='ArrowLeft'||e.key==='ArrowRight'){
-        e.preventDefault();var v=e.key==='ArrowLeft'?'chat':'flow';
+        e.preventDefault();
+        var i=btns.indexOf(b)+(e.key==='ArrowRight'?1:-1);
+        var v=btns[(i+btns.length)%btns.length].dataset.view;
         show(v);seg.querySelector('[data-view="'+v+'"]').focus();
       }
     });
   });
+})();
+
+/* ── Hero Mio 面板（纯前端示意）：三个任务轮播，每个任务 打字布置 → 逐步打勾 → 交回成果 ── */
+(function(){
+  var panel=document.getElementById('mioPanel');if(!panel)return;
+  var taskEl=document.getElementById('mioTask'),stepsEl=document.getElementById('mioSteps'),
+      fileEl=document.getElementById('mioFile'),statusEl=document.getElementById('mioStatus'),
+      kinds=[].slice.call(document.querySelectorAll('#mioKinds span'));
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;   /* 减少动效：停在第一个任务的完成态 */
+  var SCENES=[
+    {kinds:['写方案'],task:'把上周的渠道数据做成周报，周一早上发我。',
+     steps:['读数据库 · 3 张表，12,436 条线索','写代码重算环比，核对口径','写周报，配 2 张图表','排版成 Word，定好每周一 9:00 发'],
+     tile:'w',ic:'W',fn:'渠道业务周报-第37周.docx',fm:'3 页 · 2 张图表 · 每个数带出处'},
+    {kinds:['理数据'],task:'把这三张门店报表合并清洗，出一张对比表。',
+     steps:['读 3 个 Excel，对齐门店编号','清掉重复行和空值','按门店汇总，算出同比','交回对比表，附清洗说明'],
+     tile:'x',ic:'X',fn:'门店经营对比.xlsx',fm:'3 张表合成 1 张 · 清洗说明在第 2 个工作表'},
+    {kinds:['问数','搭看板','盯指标'],task:'各渠道转化率做成看板盯着，有异动提醒我。',
+     steps:['读订单库和线索库','算各渠道转化率，画分天趋势','搭成看板，时间范围自己选','每天 9:00 对比近 30 天基线'],
+     tile:'d',ic:'<i class="fa-solid fa-table-columns"></i>',fn:'各渠道转化率 · 数据看板',fm:'异动提醒已开 · 明细点得进去'}
+  ];
+  var idx=0;
+  function visible(){return !document.hidden&&panel.offsetParent!==null;}
+  function after(ms,fn){setTimeout(function wait(){if(visible())fn();else setTimeout(wait,600);},ms);}
+  function play(){
+    var sc=SCENES[idx],lis;
+    fileEl.classList.remove('in');
+    statusEl.textContent='收到任务';
+    stepsEl.innerHTML=sc.steps.map(function(t){return '<li><i class="tk"></i><span>'+t+'</span></li>';}).join('');
+    lis=[].slice.call(stepsEl.children);
+    kinds.forEach(function(k){k.classList.toggle('on',sc.kinds.indexOf(k.textContent)>-1);});
+    var i=0;taskEl.innerHTML='“<span class="caret"></span>';
+    (function type(){
+      i++;taskEl.innerHTML='“'+sc.task.slice(0,i)+(i<sc.task.length?'<span class="caret"></span>':'”');
+      if(i<sc.task.length)after(38,type);else after(420,function(){step(0);});
+    })();
+    function step(n){
+      if(n>=lis.length){
+        fileEl.querySelector('.tile').className='tile '+sc.tile;fileEl.querySelector('.tile').innerHTML=sc.ic;
+        fileEl.querySelector('.fn').textContent=sc.fn;fileEl.querySelector('.fm').textContent=sc.fm;
+        fileEl.classList.add('in');statusEl.textContent='已交回 · 等你验收';
+        idx=(idx+1)%SCENES.length;after(3600,play);return;
+      }
+      lis[n].className='run';statusEl.textContent='在干活 · 第 '+(n+1)+' 步 / 共 '+lis.length+' 步';
+      after(880,function(){lis[n].className='done';step(n+1);});
+    }
+  }
+  /* 首屏先停在完成态给人看清楚，再开始轮播 */
+  idx=1;after(3200,play);
 })();
 
 /* ── Hero AI 客服对话（纯前端演示）：开场自动演一轮 + 引导式追问 ── */
@@ -3469,9 +3616,20 @@ if(!sessionStorage.getItem('intro_shown')){
       });
     });
   }
-  /* Hero 在首屏，加载后稍候自动开演（用户已交互则不演） */
-  if('requestIdleCallback' in window)requestIdleCallback(function(){playDemo();},{timeout:1200});
-  else setTimeout(playDemo,700);
+  /* 对话不再是默认视图：切到「AI 对话」那一刻才开演（用户已交互则不演） */
+  var chatView=document.querySelector('.art-view.view-chat'),segEl=document.getElementById('heroSeg');
+  function startWhenShown(){
+    if(chatView&&!chatView.classList.contains('is-active'))return false;
+    setTimeout(playDemo,300);return true;
+  }
+  if(!startWhenShown()&&segEl){
+    segEl.addEventListener('click',function onSeg(){
+      setTimeout(function(){if(startWhenShown())segEl.removeEventListener('click',onSeg);},60);
+    });
+    segEl.addEventListener('keydown',function onKey(){
+      setTimeout(function(){if(startWhenShown())segEl.removeEventListener('keydown',onKey);},60);
+    });
+  }
 })();
 
 
@@ -3561,8 +3719,8 @@ if(!sessionStorage.getItem('intro_shown')){
 })();
 </script>
 <!-- 全站对话层（AI-native 大改核心） -->
-<script src="assets/analytics.js" defer></script>
+<script src="assets/analytics.js?v=20260921" defer></script>
 <script>window.SITE_REL='';window.PAGE_CTX=null;</script>
-<script src="assets/askbar.js" defer></script>
+<script src="assets/askbar.js?v=20260921" defer></script>
 </body>
 </html>
