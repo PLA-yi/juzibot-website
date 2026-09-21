@@ -4,275 +4,833 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>句子懂行 · 记忆 | 句子互动</title>
-<meta name="description" content="句子懂行是 AI 员工的记忆：原件上传后自动归档成记忆单元，持续体检冲突、缺口与过期内容，并让 Agent 在指定范围内精准检索、带出处回答。" />
+<meta name="description" content="句子懂行是 AI 员工的记忆：文档、表格、视频传进来自动归档成段落和问答，说法不一致的、没覆盖到的自己列成待办；业务系统里的表结构和规则整理成对象、关系、规则、动作，AI 建初稿，业务专家只审拿不准的。秒懂、Mio 直接调用，答案带出处、带版本。" />
 <link rel="icon" href="../logo.png" />
+<link rel="canonical" href="https://juzibot.com/products/dongxing.html" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="../assets/site.css" />
 <style>
-  .dh-page{background:#fff;color:var(--ink)}
-  .dh-wrap{width:min(1180px,calc(100% - 2 * var(--gut)));margin:0 auto}
-  .dh-hero{padding:118px 0 72px;background:linear-gradient(180deg,#FAFCFF 0%,#FFFFFF 88%);border-bottom:1px solid #EEF2F8}
-  .crumbs{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-3);margin-bottom:24px;flex-wrap:wrap}
-  .crumbs a{color:var(--ink-2)}.crumbs a:hover{color:var(--blue)}
-  .crumbs .sep{color:var(--line)}.crumbs .here{font-weight:650;color:var(--ink-2)}
-  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 500px;gap:64px;align-items:center}
-  .eyebrow-line{display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;font-size:13px;font-weight:760;color:var(--green)}
-  .eyebrow-line::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
-  .dh-hero h1{font-size:72px;line-height:1.04;font-weight:880;letter-spacing:-.035em;margin:0 0 14px;word-break:keep-all}
-  .hero-sub{font-size:32px;line-height:1.18;font-weight:820;letter-spacing:-.025em;color:var(--blue);margin-bottom:24px;word-break:keep-all;text-wrap:balance}
-  .hero-lede{font-size:18px;line-height:1.82;color:var(--ink-2);max-width:560px}
-  .hero-lede strong{color:var(--ink);font-weight:760}
-  .hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:30px}
-  .hub-panel{border:1px solid #E5EAF4;border-radius:8px;background:#fff;box-shadow:0 28px 70px -52px rgba(23,31,56,.36)}
-  .hub-top{height:42px;display:flex;align-items:center;padding:0 14px;border-bottom:1px solid #E9EDF5}
-  .hub-dots{display:flex;gap:7px;margin-right:12px}.hub-dots i{width:8px;height:8px;border-radius:50%;background:#FF5F57}.hub-dots i:nth-child(2){background:#FEBC2E}.hub-dots i:nth-child(3){background:#28C840}
-  .hub-title{font-family:var(--mono);font-size:11px;letter-spacing:0;color:var(--ink-3)}
-  .hub-body{padding:22px}
-  .hub-status{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;padding-bottom:20px;border-bottom:1px solid #E9EDF5}
-  .hub-status h2{font-size:24px;line-height:1.25;letter-spacing:0;margin-bottom:8px}
-  .hub-status p{font-size:13px;line-height:1.62;color:var(--ink-3);max-width:340px}
-  .health-score{width:78px;height:78px;border:1px solid #CFE9E4;border-radius:50%;display:grid;place-items:center;font-size:15px;font-weight:850;color:var(--green);background:#F2FFFC}
-  .hub-rows{display:grid;margin-top:18px}
-  .hub-row{display:grid;grid-template-columns:38px 1fr auto;gap:14px;align-items:center;padding:13px 0;border-bottom:1px solid #F0F3F8}
-  .hub-row:last-child{border-bottom:0}
-  .hub-no{width:34px;height:34px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;line-height:1;font-weight:850;color:#fff;background:var(--blue);box-shadow:0 10px 20px -16px rgba(67,56,202,.5)}
-  .hub-row:nth-child(2) .hub-no{background:var(--green)}.hub-row:nth-child(3) .hub-no{background:#C47A12}.hub-row:nth-child(4) .hub-no{background:var(--purple)}
-  .hub-row > div b{display:block;font-size:14px;color:var(--ink);line-height:1.25}.hub-row > div span{display:block;margin-top:3px;font-size:12px;color:var(--ink-3)}
-  .hub-tag{font-family:var(--mono);font-size:11px;color:var(--ink-3);background:#F6F8FC;border:1px solid #E9EDF5;border-radius:999px;padding:5px 8px;white-space:nowrap}
-  .dh-section{padding:74px 0;border-bottom:1px solid #EEF2F8;scroll-margin-top:90px}
-  .section-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,420px);gap:42px;align-items:end;margin-bottom:34px}
-  .kicker{font-size:13px;font-weight:780;color:var(--green);margin-bottom:12px}
-  .section-head h2{font-size:42px;line-height:1.14;font-weight:840;letter-spacing:-.035em;word-break:keep-all;text-wrap:balance}
-  .section-head h2 span{color:var(--blue);white-space:nowrap}
-  .section-head p{font-size:15px;line-height:1.78;color:var(--ink-2)}
-  .flow-duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
-  .flow-panel{border:1px solid #E5EAF4;border-radius:8px;background:#fff;padding:30px;box-shadow:0 1px 2px rgba(14,20,48,.04),0 26px 70px -58px rgba(23,31,56,.34)}
-  .flow-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding-bottom:22px;border-bottom:1px solid #EEF2F8}
-  .flow-panel .flow-label{font-size:13px;font-weight:850;letter-spacing:0;color:var(--blue);margin-bottom:10px}
-  .flow-panel.retrieve .flow-label{color:var(--green)}
-  .flow-panel h3{font-size:27px;line-height:1.22;font-weight:860;letter-spacing:-.025em;margin:0 0 10px}
-  .flow-panel p{font-size:14px;line-height:1.74;color:var(--ink-2);margin:0}
-  .flow-badge{flex:0 0 auto;font-family:var(--mono);font-size:11px;font-weight:850;color:var(--blue);background:#F4F6FF;border:1px solid #DDE2FF;border-radius:999px;padding:7px 10px;white-space:nowrap}
-  .flow-panel.retrieve .flow-badge{color:#0D9488;background:#F0FDFA;border-color:#CCFBF1}
-  .flow-steps{display:grid;margin-top:8px}
-  .flow-step{display:grid;grid-template-columns:34px minmax(0,1fr);gap:14px;align-items:start;padding:18px 0;border-bottom:1px solid #F0F3F8}
-  .flow-step:last-child{border-bottom:0;padding-bottom:4px}
-  .flow-step-no{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-family:var(--mono);font-size:12px;line-height:1;font-weight:880;color:#fff;background:var(--blue);box-shadow:0 12px 24px -18px rgba(67,56,202,.5)}
-  .flow-panel.retrieve .flow-step-no{background:var(--green)}
-  .flow-step b{display:block;font-size:15px;line-height:1.36;color:var(--ink);margin-bottom:5px}
-  .flow-step span{display:block;font-size:13px;line-height:1.68;color:var(--ink-2)}
-  .flow-note{margin-top:16px;padding-top:18px;border-top:1px solid #EEF2F8;font-size:13px;line-height:1.72;color:var(--ink-2)}
-  .flow-note strong{color:var(--ink);font-weight:760}
-  .screen-stack{display:grid;border-top:1px solid #E6EBF4}
-  .screen-proof{position:relative;display:grid;grid-template-columns:minmax(240px,.36fr) minmax(0,.64fr);gap:64px;align-items:start;padding:54px 0;border-bottom:1px solid #E6EBF4;background:transparent}
-  .screen-copy{display:flex;flex-direction:column;justify-content:flex-start;max-width:360px;padding-top:4px}
-  .screen-copy .screen-no{display:inline-flex;align-items:center;gap:10px;width:auto;height:auto;margin-bottom:18px;font-family:var(--mono);font-size:13px;line-height:1;font-weight:850;color:var(--blue);letter-spacing:.04em;background:transparent;box-shadow:none}
-  .screen-copy .screen-no::before{content:"";width:24px;height:1px;background:currentColor;opacity:.42}
-  .screen-proof:nth-child(2) .screen-no{color:#C47A12}.screen-proof:nth-child(3) .screen-no{color:var(--green)}
-  .screen-copy h3{font-size:25px;line-height:1.3;font-weight:840;letter-spacing:-.025em;margin:0 0 14px;word-break:keep-all;text-wrap:balance}
-  .screen-copy p{font-size:14px;line-height:1.78;color:var(--ink-2);margin:0}
-  .screen-meta{display:grid;gap:10px;margin-top:24px}
-  .screen-meta span{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;line-height:1.55;color:var(--ink-2)}
-  .screen-meta i{width:18px;height:1px;margin-top:.8em;border-radius:0;background:var(--blue);opacity:.42;flex:0 0 18px}.screen-proof:nth-child(2) .screen-meta i{background:#C47A12}.screen-proof:nth-child(3) .screen-meta i{background:var(--green)}
-  .screen-stage{background:transparent;border:0;border-radius:0;overflow:visible;box-shadow:none}
-  .screen-top{height:auto;display:flex;align-items:center;justify-content:space-between;padding:0 2px 10px;border-bottom:0;background:transparent}
-  .screen-top span{font-size:12px;font-weight:760;letter-spacing:0;color:var(--ink-2)}
-  .screen-image{aspect-ratio:16/9;overflow:hidden;background:#fff;border:1px solid #E1E7F1;border-radius:14px;box-shadow:0 1px 2px rgba(14,20,48,.04),0 28px 72px -56px rgba(23,31,56,.36)}
-  .screen-image img{width:100%;height:100%;display:block;object-fit:contain;object-position:center;background:#fff}
-  .agent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .agent-card{border:1px solid #E5EAF4;border-radius:8px;background:#fff;padding:24px}
-  .agent-card i{width:36px;height:36px;border-radius:8px;display:grid;place-items:center;color:#fff;background:var(--blue);margin-bottom:18px}
-  .agent-card:nth-child(2) i{background:#C47A12}.agent-card:nth-child(3) i{background:var(--green)}
-  .agent-card h3{font-size:22px;line-height:1.28;letter-spacing:0;margin-bottom:10px}.agent-card p{font-size:14px;line-height:1.74;color:var(--ink-2)}
-  @media(max-width:1080px){
-    .hero-grid,.section-head,.screen-proof,.flow-duo{grid-template-columns:1fr}
-    .screen-copy{max-width:none}
-    .dh-hero h1{font-size:56px}.hero-sub{font-size:30px}
+  /* scoped · 仅用 site.css 既有变量；骨架与 products/mio.html 一致 */
+  /* —— 产品页头 —— */
+  .ph{position:relative;overflow:hidden;padding:clamp(104px,13vh,150px) var(--gut) clamp(48px,6vw,76px);
+    background:radial-gradient(1100px 540px at 82% 4%,var(--blue-100),transparent 60%),
+               radial-gradient(680px 480px at 4% 10%,var(--orange-lt),transparent 56%),
+               linear-gradient(180deg,var(--blue-50),#fff 78%)}
+  .ph .wrap{position:relative}
+  .crumbs{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-3);margin-bottom:clamp(16px,2.4vw,24px);flex-wrap:wrap}
+  .crumbs a{color:var(--ink-2)}
+  .crumbs a:hover{color:var(--blue)}
+  .crumbs .sep{color:var(--line)}
+  .crumbs .here{color:var(--ink-2);font-weight:650}
+  .ph-grid{display:grid;grid-template-columns:1fr 1.02fr;gap:clamp(34px,5vw,72px);align-items:center}
+  .ph h1{font-size:clamp(32px,4.2vw,54px);font-weight:850;letter-spacing:-.04em;line-height:1.16;
+    word-break:keep-all;text-wrap:balance;margin-bottom:clamp(14px,2vw,24px)}
+  .ph h1 .accent{color:var(--blue)}
+  .ph-lede{font-size:clamp(16px,1.4vw,18.5px);color:var(--ink-2);max-width:52ch;line-height:1.7}
+  .ph-lede strong{color:var(--ink);font-weight:700}
+  .ph-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:clamp(20px,2.6vw,30px)}
+  .dh-brand{display:inline-flex;align-items:center;gap:10px;margin-bottom:clamp(12px,2vw,20px)}
+  .dh-brand .mark{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:16px;
+    background:linear-gradient(135deg,var(--blue),var(--purple));box-shadow:0 6px 16px -8px rgba(67,56,202,.55)}
+  .dh-brand .nm{font-size:15px;font-weight:800;letter-spacing:-.01em}
+  .dh-brand .nm small{display:block;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--ink-3);margin-top:2px}
+  @media(max-width:980px){
+    .ph-grid{grid-template-columns:1fr;gap:clamp(32px,6vw,48px)}
+    .ph-art{order:2}
   }
-  @media(max-width:720px){
-    .agent-grid{grid-template-columns:1fr}
-    .section-head h2 span{white-space:normal}
-    .screen-proof{padding:34px 0;gap:22px}
+
+  .sec-top h2{word-break:keep-all}
+
+  /* —— 示意图舞台（脱敏：全部手画，不放真实后台截图） —— */
+  .mk{position:relative;overflow:hidden;border-radius:var(--radius);border:1px solid var(--line);
+    background:radial-gradient(520px 260px at 90% -10%,var(--blue-100),transparent 70%),linear-gradient(180deg,#FBFCFF,var(--blue-50));
+    padding:clamp(18px,2.4vw,28px);display:flex;flex-direction:column;gap:14px}
+  .mk-cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-3);margin-top:2px}
+  .mk-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 18px 40px -24px rgba(14,20,48,.25)}
+  .mk-h{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;font-weight:800;color:var(--ink);margin-bottom:12px}
+  .mk-h small{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.06em;color:var(--ink-3)}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;border-radius:999px;padding:4px 10px;border:1px solid var(--line);background:var(--blue-50);color:var(--blue);white-space:nowrap}
+  .chip.ok{color:var(--orange-deep);background:var(--green-lt)}
+  .chip.warn{color:#B45309;background:#FFF7E6;border-color:#FDE7B8}
+  .chip.mute{color:var(--ink-2);background:#fff}
+  .ln{display:block;height:8px;border-radius:4px;background:var(--line-2)}
+  .ln.d{background:var(--line)}
+
+  /* 页头示意：一份资料的归档记录 */
+  .mk-file{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:14px}
+  .mk-file .fi{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;color:#fff;font-size:15px;background:var(--blue)}
+  .mk-file b{display:block;font-size:14px;color:var(--ink)}
+  .mk-file span{display:block;font-size:12px;color:var(--ink-3);margin-top:2px}
+  .mk-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+  .mk-steps div{text-align:center;font-size:11.5px;font-weight:700;color:var(--ink-2);padding:9px 2px;border-radius:9px;background:var(--blue-50);border:1px solid var(--line)}
+  .mk-steps div i{display:block;font-size:11px;color:var(--orange-deep);margin-bottom:5px}
+  .mk-out{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+  .mk-out div{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .mk-out b{display:block;font-size:18px;font-weight:850;letter-spacing:-.02em;color:var(--ink)}
+  .mk-out span{font-size:11.5px;color:var(--ink-3)}
+  .mk-todo{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;line-height:1.55;color:var(--ink-2)}
+  .mk-todo .chip{flex:0 0 auto;margin-top:1px}
+
+  /* —— 记什么 · 两类 —— */
+  .dh-two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
+  .dh-bcard{background:var(--blue-50);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column}
+  .dh-bcard.alt{background:#fff}
+  .dh-bcard .k{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--orange-deep);margin-bottom:12px;display:block}
+  .dh-bcard h3{font-size:clamp(20px,2vw,26px);font-weight:820;letter-spacing:-.02em;line-height:1.3;margin-bottom:10px}
+  .dh-bcard .lead{font-size:14.5px;line-height:1.7;color:var(--ink-2);margin-bottom:16px}
+  .dh-bcard ul{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:11px}
+  .dh-bcard li{position:relative;padding-left:26px;font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+  .dh-bcard li b{color:var(--ink);font-weight:750}
+  .dh-bcard li::before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:6px;background:var(--blue-100)}
+  .dh-bcard li::after{content:"";position:absolute;left:5.5px;top:7px;width:6px;height:3px;border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg)}
+  .dh-bcard .foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:14px;line-height:1.6;color:var(--ink)}
+  @media(max-width:760px){.dh-two{grid-template-columns:1fr}}
+
+  /* —— 步骤条（五步 / 六步） —— */
+  .dh-how{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(12px,1.4vw,18px);margin-top:clamp(28px,3.4vw,44px)}
+  .dh-how.six{grid-template-columns:repeat(6,1fr);margin-top:clamp(14px,1.6vw,20px)}
+  .dh-step{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,2vw,24px)}
+  .dh-step .n{font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--blue);margin-bottom:12px;display:block}
+  .dh-step h3{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+  .dh-step p{font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+  .dh-step::after{content:"";position:absolute;right:-12px;top:50%;width:9px;height:9px;border-top:2px solid var(--blue-200);border-right:2px solid var(--blue-200);transform:translateY(-50%) rotate(45deg)}
+  .dh-step:last-child::after{display:none}
+  .dh-notes{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.4vw,18px);margin-top:clamp(14px,1.6vw,20px)}
+  .dh-notes div{background:var(--blue-50);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;font-size:14px;line-height:1.65;color:var(--ink-2)}
+  .dh-notes b{display:block;color:var(--ink);font-weight:800;margin-bottom:3px}
+  @media(max-width:1100px){.dh-how.six{grid-template-columns:repeat(3,1fr)}.dh-how.six .dh-step::after{display:none}}
+  @media(max-width:900px){.dh-how,.dh-how.six,.dh-notes{grid-template-columns:1fr 1fr}.dh-step::after{display:none}}
+  @media(max-width:600px){.dh-how,.dh-how.six,.dh-notes{grid-template-columns:1fr}}
+
+  /* —— 左文右示意图 —— */
+  .dh-row{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(24px,4vw,64px);align-items:center;margin-top:clamp(28px,3.4vw,44px);
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:clamp(22px,3vw,40px)}
+  .dh-row.flip .dh-copy{order:2}
+  .dh-copy .k{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.14em;color:var(--orange-deep);display:block;margin-bottom:12px}
+  .dh-copy h3{font-size:clamp(22px,2.3vw,30px);font-weight:830;letter-spacing:-.025em;line-height:1.25;margin-bottom:12px;text-wrap:balance;word-break:keep-all}
+  .dh-copy p{font-size:15px;line-height:1.72;color:var(--ink-2)}
+  .dh-copy ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+  .dh-copy li{position:relative;padding-left:16px;border-left:2px solid var(--blue-200);font-size:14.5px;line-height:1.6;color:var(--ink-2)}
+  .dh-copy li b{display:block;color:var(--ink);font-weight:750;margin-bottom:2px}
+  @media(max-width:860px){
+    .dh-row{grid-template-columns:1fr}
+    .dh-row.flip .dh-copy{order:0}
+  }
+  @media(max-width:640px){.dh-row{padding:18px}}
+
+  /* 冲突示意 */
+  .mk-vs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .mk-side{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff;display:flex;flex-direction:column;align-items:flex-start}
+  .mk-side .mk-btn{margin-top:auto}
+  .mk-side p{margin-bottom:12px}
+  .mk-side.b{border-color:#FDE7B8}
+  .mk-side .src{font-size:11.5px;font-weight:750;color:var(--blue);margin-bottom:8px;display:block}
+  .mk-side.b .src{color:#B45309}
+  .mk-side p{font-size:13px;line-height:1.6;color:var(--ink-2)}
+  .mk-side mark{background:#FFF1C9;color:var(--ink);padding:0 2px;border-radius:3px}
+  .mk-side.a mark{background:var(--blue-100)}
+  .mk-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .mk-btn{font-size:12px;font-weight:750;border-radius:999px;padding:6px 12px;border:1px solid var(--line);color:var(--ink-2);background:#fff}
+  .mk-btn.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  @media(max-width:600px){.mk-vs{grid-template-columns:1fr}}
+
+  /* 问答示意 */
+  .mk .say{align-self:flex-end;max-width:88%;background:var(--blue);color:#fff;padding:10px 14px;border-radius:14px 4px 14px 14px;
+    font-size:13.5px;font-weight:600;line-height:1.5;box-shadow:0 8px 18px -10px rgba(67,56,202,.6)}
+  .mk-ans{display:grid;gap:10px}
+  .mk-ans p{font-size:13.5px;line-height:1.65;color:var(--ink)}
+  .mk-pic{display:flex;align-items:center;justify-content:center;height:84px;border-radius:10px;border:1px dashed var(--blue-200);background:var(--blue-50);font-size:12px;color:var(--ink-3)}
+  .mk-pic i{margin-right:6px}
+  .mk-trace{display:flex;flex-wrap:wrap;gap:6px;padding-top:10px;border-top:1px solid var(--line)}
+
+  /* —— 待办六类 · 管得住六条 —— */
+  .dh-six{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(14px,1.6vw,20px)}
+  .dh-chk{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,2vw,24px)}
+  .dh-chk > i{flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#fff;font-size:13px;background:linear-gradient(135deg,var(--blue),var(--purple))}
+  .dh-chk.g > i{background:linear-gradient(135deg,var(--green),#0D9488)}
+  .dh-chk h3{font-size:16.5px;font-weight:800;letter-spacing:-.01em;margin-bottom:5px}
+  .dh-chk p{font-size:13.5px;line-height:1.62;color:var(--ink-2)}
+  #control .dh-six{margin-top:clamp(28px,3.4vw,44px)}
+  @media(max-width:900px){.dh-six{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.dh-six{grid-template-columns:1fr}}
+
+  /* —— 本体 · 四样 —— */
+  .dh-group{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px;font-size:14px;line-height:1.6;font-weight:600;color:var(--ink-2)}
+  .dh-group .tag{flex:0 0 auto;font-size:12px;font-weight:750;color:#fff;background:var(--blue);padding:5px 11px;border-radius:999px}
+  .tier-cards.dh-four{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.tier-cards.dh-four{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.tier-cards.dh-four{grid-template-columns:1fr}}
+  .pcard .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:16px;margin-bottom:14px;
+    background:linear-gradient(135deg,var(--blue),var(--purple))}
+  .pcard h3.sm{font-size:19px}
+  .mk-onto{display:grid;grid-template-columns:1fr 1.1fr;gap:12px}
+  .mk-graph svg{display:block;width:100%;height:auto}
+  .mk-rule{display:grid;gap:4px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .mk-rule:last-child{border-bottom:0;padding-bottom:0}
+  .mk-rule:first-of-type{padding-top:0}
+  .mk-rule .top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .mk-rule .id{font-family:var(--mono);font-size:11px;font-weight:800;color:var(--blue);letter-spacing:.06em}
+  .mk-rule p{font-size:12.5px;line-height:1.55;color:var(--ink)}
+  .mk-rule .src{font-size:11px;color:var(--ink-3)}
+  @media(max-width:700px){.mk-onto{grid-template-columns:1fr}}
+  .dh-band{margin-top:clamp(14px,1.6vw,20px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.4vw,18px)}
+  .dh-band div{background:var(--blue-50);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+  .dh-band b{color:var(--ink);font-weight:800}
+  @media(max-width:760px){.dh-band{grid-template-columns:1fr}}
+
+  /* —— 谁来用 —— */
+  .dh-use{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px);margin-top:clamp(28px,3.4vw,44px)}
+  .dh-ucard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,2.2vw,26px);display:grid;gap:10px;align-content:start}
+  .dh-ucard .ico{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:16px;background:linear-gradient(135deg,var(--blue),var(--purple))}
+  .dh-ucard h3{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .dh-ucard p{font-size:14px;line-height:1.65;color:var(--ink-2)}
+  .dh-ucard p a{color:var(--blue);font-weight:700}
+  @media(max-width:900px){.dh-use{grid-template-columns:1fr}}
+
+  /* —— 为什么 · 四条 / 常被问到 · 六条 —— */
+  .dh-use.four{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:1000px){.dh-use.four{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.dh-use.four{grid-template-columns:1fr}}
+  .dh-ucard .q{font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--blue)}
+
+  /* —— 进 · 建 · 审 · 用 · 管 —— */
+  .dh-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(10px,1.2vw,16px);margin-top:clamp(14px,1.6vw,20px)}
+  .dh-act{display:block;background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;transition:border-color .2s,transform .2s}
+  .dh-act:hover{border-color:var(--blue-200);transform:translateY(-2px)}
+  .dh-act .c{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;color:#fff;font-size:16px;font-weight:850;margin-bottom:10px;
+    background:linear-gradient(135deg,var(--blue),var(--purple))}
+  .dh-act b{display:block;font-size:15px;font-weight:800;color:var(--ink);margin-bottom:4px}
+  .dh-act span{display:block;font-size:13px;line-height:1.6;color:var(--ink-2)}
+  @media(max-width:1000px){.dh-flow{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.dh-flow{grid-template-columns:1fr}}
+
+  /* —— 小节内的二级块 —— */
+  .dh-lead{margin-top:clamp(22px,2.6vw,32px);font-size:15px;line-height:1.72;color:var(--ink-2);max-width:78ch}
+  .dh-subhead{margin-top:clamp(36px,4.4vw,60px)}
+  .dh-subhead h3{font-size:clamp(21px,2.2vw,28px);font-weight:830;letter-spacing:-.025em;line-height:1.3;margin-bottom:8px;word-break:keep-all}
+  .dh-subhead p{font-size:15px;line-height:1.72;color:var(--ink-2);max-width:60em}
+  .dh-subhead + .dh-how,.dh-subhead + .dh-two{margin-top:clamp(16px,2vw,24px)}
+  .dh-how.four{grid-template-columns:repeat(4,1fr)}
+  .dh-band.three{grid-template-columns:repeat(3,1fr)}
+  .dh-two.three{grid-template-columns:repeat(3,1fr)}
+  .dh-bcard .chip{align-self:flex-start;margin-bottom:12px}
+  .dh-bcard h3.sm{font-size:19px}
+  @media(max-width:900px){.dh-how.four{grid-template-columns:1fr 1fr}.dh-band.three,.dh-two.three{grid-template-columns:1fr}}
+  @media(max-width:600px){.dh-how.four{grid-template-columns:1fr}}
+
+  /* 原因卡示意 */
+  .mk-kv{display:grid;grid-template-columns:42px 1fr;gap:7px 10px;font-size:12.5px;line-height:1.55;color:var(--ink)}
+  .mk-kv span{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--ink-3);padding-top:2px}
+
+  @media(max-width:640px){
+    .ph-lede{font-size:15px;line-height:1.65}
+    .ph-cta .btn{flex:1 1 auto;justify-content:center}
+    .mk-steps div{font-size:10.5px}
   }
 </style>
 </head>
 <body>
 <div id="site-nav"></div>
-<main class="dh-page">
+<main>
 
-  <header class="dh-hero" id="top">
-    <div class="dh-wrap">
+  <!-- ════════════ 产品页头 ════════════ -->
+  <header class="ph" id="top">
+    <div class="wrap">
       <div class="crumbs">
         <a href="../index.html">首页</a><span class="sep">/</span>
         <span class="here">产品</span><span class="sep">/</span>
         <span class="here">句子懂行</span>
       </div>
-      <div class="hero-grid">
-        <div>
-          <span class="eyebrow-line">产品 · 懂行 · 记忆</span>
-          <h1>句子懂行 · 记忆</h1>
-          <div class="hero-sub">把客户资料，沉淀成 AI 员工可用的组织记忆。</div>
-          <p class="hero-lede">句子懂行是 AI 员工的记忆。客户把资料丢进来，<strong>归档 Agent 自动拆成记忆单元；体检 Agent 持续找冲突和缺口；检索 Agent 在指定范围内带出处作答</strong>。AI 答得准不准，先看记忆是否干净、可追溯。</p>
-          <div class="hero-actions">
+      <div class="ph-grid">
+        <div class="ph-copy">
+          <div class="dh-brand">
+            <span class="mark"><i class="fa-solid fa-book-bookmark" aria-hidden="true"></i></span>
+            <span class="nm">句子懂行<small>记忆</small></span>
+          </div>
+          <h1>把资料和业务规则，变成 AI 员工的<span class="accent">记忆</span></h1>
+          <p class="ph-lede">文档、表格、视频传进来，懂行自己归档、拆段、生成问答。业务系统里的表结构和规则也放进来，<strong>AI 建初稿，人只审拿不准的</strong>。秒懂、Mio 和每个 AI 员工都从这里取，答案带出处、带版本。</p>
+          <div class="ph-cta">
             <button type="button" class="btn btn-blue btn-lg ar-host" onclick="openContact('句子懂行·页头','预约演示')">
               预约演示
               <span class="ar"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h11M10 4l5 5-5 5"/></svg><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9h11M10 4l5 5-5 5"/></svg></span>
             </button>
-            <a href="#flows" class="btn btn-ghost btn-lg">看两条闭环</a>
+            <a href="#in" class="btn btn-ghost btn-lg">看资料怎么进来</a>
+          </div>
+          <div class="hero-kpis">
+            <div class="hero-kpi"><div class="v">2 类</div><div class="l">知识，都进懂行</div></div>
+            <div class="hero-kpi"><div class="v">5 步</div><div class="l">归档，每步看得见</div></div>
+            <div class="hero-kpi"><div class="v">9 类</div><div class="l">待办，问题自己找</div></div>
+            <div class="hero-kpi"><div class="v">4 样</div><div class="l">对象、关系、规则、动作</div></div>
           </div>
         </div>
-
-        <div class="hub-panel" aria-label="句子懂行记忆概览">
-          <div class="hub-top"><span class="hub-dots"><i></i><i></i><i></i></span><span class="hub-title">句子懂行 · 记忆</span></div>
-          <div class="hub-body">
-            <div class="hub-status">
-              <div>
-                <h2>组织记忆运行中</h2>
-                <p>素材、问答指引、可发资产、取数路径和检索出处在同一条链路里持续更新。</p>
+        <div class="ph-art">
+          <div class="mk" aria-label="一份资料的归档记录示意图">
+            <div class="mk-card">
+              <div class="mk-file">
+                <span class="fi"><i class="fa-solid fa-file-word" aria-hidden="true"></i></span>
+                <div><b>售后保修政策 2026.docx</b><span>上传时交代：「旧版作废，以这份为准」</span></div>
               </div>
-              <div class="health-score">体检中</div>
+              <div class="mk-steps">
+                <div><i class="fa-solid fa-check" aria-hidden="true"></i>读内容</div>
+                <div><i class="fa-solid fa-check" aria-hidden="true"></i>认表头</div>
+                <div><i class="fa-solid fa-check" aria-hidden="true"></i>定文件夹</div>
+                <div><i class="fa-solid fa-check" aria-hidden="true"></i>拆段落</div>
+                <div><i class="fa-solid fa-check" aria-hidden="true"></i>上架</div>
+              </div>
+              <div class="mk-out">
+                <div><b>6</b><span>个段落</span></div>
+                <div><b>5</b><span>条问答</span></div>
+                <div><b>v2</b><span>替换旧版</span></div>
+              </div>
             </div>
-            <div class="hub-rows">
-              <div class="hub-row"><span class="hub-no">01</span><div><b>多入口接收</b><span>文件、表格、图片、视频和秒回素材先统一进来。</span></div><span class="hub-tag">批次中</span></div>
-              <div class="hub-row"><span class="hub-no">02</span><div><b>拆成记忆单元</b><span>正文段、问答指引、可发资产各归其位。</span></div><span class="hub-tag">归档中</span></div>
-              <div class="hub-row"><span class="hub-no">03</span><div><b>先范围再检索</b><span>先看绑定范围，再拿出处和原文证据。</span></div><span class="hub-tag">带出处</span></div>
-              <div class="hub-row"><span class="hub-no">04</span><div><b>缺口回流待办</b><span>答不上如实回流，生成补料任务回到入库链路。</span></div><span class="hub-tag">可追溯</span></div>
+            <div class="mk-card">
+              <div class="mk-todo"><span class="chip warn">内容冲突</span><span>和《售后配件更换说明》有 1 处说法不一致，等你选一条为准。</span></div>
             </div>
+            <span class="mk-cap">示意图 · 一份资料的归档记录</span>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <section class="dh-section" id="flows">
-    <div class="dh-wrap">
-      <div class="section-head">
+  <!-- ════════════ 为什么 · 四条 ════════════ -->
+  <section class="sec pad" id="why">
+    <div class="wrap">
+      <div class="sec-top rv">
         <div>
-          <div class="kicker">两条闭环</div>
-          <h2>素材怎么进来，<span>问题怎么被找到。</span></h2>
+          <span class="sec-eyebrow">为什么</span>
+          <h2>资料不少，AI 员工还是<span class="hl"><span>答错、办不了</span></span>。</h2>
         </div>
-        <p>懂行不是把资料塞进库里就结束。它把入库和检索拆成两条稳定流程：资料进入时先变成可维护的组织记忆，客户提问时再按范围、出处和证据逐层找到答案。</p>
+        <p class="sub">模型够聪明，但不了解这家企业。文档散在各处，业务逻辑写在程序里、记在老员工脑子里，没有一处把它们放在一起讲清楚。</p>
       </div>
-      <div class="flow-duo">
-        <article class="flow-panel ingest">
-          <div class="flow-panel-head">
-            <div>
-              <div class="flow-label">资料入库</div>
-              <h3>资料进来，先分清形态和归属。</h3>
-              <p>一个编排 Agent 统筹整批素材，每份资料由子 Agent 端到端处理，不让表格、图片、视频和历史对话散落在不同链路里。</p>
-            </div>
-            <span class="flow-badge">入库闭环</span>
-          </div>
-          <div class="flow-steps">
-            <div class="flow-step"><span class="flow-step-no">01</span><div><b>多入口统一接收</b><span>文档、表格、PDF、图片、视频、压缩包、秒回素材都进入同一个批次账本。</span></div></div>
-            <div class="flow-step"><span class="flow-step-no">02</span><div><b>先判断形态，再批量展开</b><span>SKU 表这类资料先识别产品名列、属性列和分类依据，再按行列展开成问答指引，避免人工漏项。</span></div></div>
-            <div class="flow-step"><span class="flow-step-no">03</span><div><b>资产也进入记忆</b><span>图片、视频片段、PDF 内嵌图和数据表句柄都保留下来，后续回答需要发素材或取数时能被流程调用。</span></div></div>
-            <div class="flow-step"><span class="flow-step-no">04</span><div><b>问题当场进入待办</b><span>冲突、没把握的归属、需要人工确认的展开结果，在入库现场生成待办，确认后再写入组织记忆。</span></div></div>
-          </div>
-          <div class="flow-note"><strong>关键变化：</strong>资料不是“存起来”，而是变成带来源、归属、可调用资产和处理状态的记忆单元。</div>
-        </article>
-        <article class="flow-panel retrieve">
-          <div class="flow-panel-head">
-            <div>
-              <div class="flow-label">范围检索</div>
-              <h3>问题进来，先看范围再找证据。</h3>
-              <p>检索 Agent 不直接全库语义搜。它先进入机器人绑定的范围，拿到带出处的候选，再判断证据是否足够。</p>
-            </div>
-            <span class="flow-badge">检索闭环</span>
-          </div>
-          <div class="flow-steps">
-            <div class="flow-step"><span class="flow-step-no">01</span><div><b>先匹配问答指引</b><span>候选连同出处交回模型，作为行动指引，不直接当标准话术甩给客户。</span></div></div>
-            <div class="flow-step"><span class="flow-step-no">02</span><div><b>证据不够再深度检索</b><span>先看索引，确认范围内有什么内容和数据表；再收窄到文件夹或标签。</span></div></div>
-            <div class="flow-step"><span class="flow-step-no">03</span><div><b>按问题类型取证</b><span>一般问题走语义检索，型号和条款走关键词，取数问题先看表结构再定向取数，必要时读整份原文。</span></div></div>
-            <div class="flow-step"><span class="flow-step-no">04</span><div><b>答不上就回流</b><span>找到就给答案、出处和可发素材；找不到就如实说明，并落一张缺口卡回到入库待办。</span></div></div>
-          </div>
-          <div class="flow-note"><strong>关键变化：</strong>回答不是靠模型猜，而是按范围、索引、片段、原文和表结构逐层拿证据。</div>
-        </article>
+      <div class="dh-use four">
+        <div class="dh-ucard rv">
+          <span class="ico"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i></span>
+          <h3>资料散在各处</h3>
+          <p>文档、表格、PPT、视频、网页、聊天素材各在一处，格式不同，没人整理成一套。</p>
+        </div>
+        <div class="dh-ucard rv rv-d1">
+          <span class="ico"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
+          <h3>逻辑写在程序里</h3>
+          <p>安全库存怎么算、一笔账什么条件下能清，写在程序里，记在老员工脑子里。文档和系统对不上。</p>
+        </div>
+        <div class="dh-ucard rv rv-d1">
+          <span class="ico"><i class="fa-solid fa-not-equal" aria-hidden="true"></i></span>
+          <h3>资料说法不一致</h3>
+          <p>同一个价格，这张表写 3000，那张表写 5000。AI 不知道该听哪个。</p>
+        </div>
+        <div class="dh-ucard rv rv-d2">
+          <span class="ico"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i></span>
+          <h3>能答，不能办</h3>
+          <p>问一句能回答，办一件事还得人去系统里点。AI 不知道该看哪些表、按什么规则办。</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="dh-section" id="agents">
-    <div class="dh-wrap">
-      <div class="section-head">
+  <!-- ════════════ 记什么 · 两类 ════════════ -->
+  <section class="sec pad" id="what">
+    <div class="wrap">
+      <div class="sec-top rv">
         <div>
-          <div class="kicker">三个 Agent</div>
-          <h2>三个 Agent，<span>各守一段组织记忆。</span></h2>
+          <span class="sec-eyebrow">记什么</span>
+          <h2>企业的知识分两类，<span class="hl"><span>都进懂行</span></span>。</h2>
         </div>
-        <p>总分结构保持不变：归档负责资料进入，体检负责发现问题，检索负责按范围找证据。每一步都能被看见，也能被人接管。</p>
+        <p class="sub">一类写在文档里：制度、手册、报价表。一类在业务系统里：表结构、字段关系、计算规则。小企业先传文档，大企业把数据库结构也放进来。</p>
       </div>
-      <div class="agent-grid">
-        <article class="agent-card"><i class="fa-solid fa-box-archive" aria-hidden="true"></i><h3>归档 Agent</h3><p>判断素材形态和归属，把正文段、问答指引、可发资产、取数路径放到正确范围。</p></article>
-        <article class="agent-card"><i class="fa-solid fa-stethoscope" aria-hidden="true"></i><h3>体检 Agent</h3><p>入库当场查冲突和没把握的地方，长期追踪缺口、过期、重复与表达歧义。</p></article>
-        <article class="agent-card"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><h3>检索 Agent</h3><p>问题先进入绑定范围，带出处取证，不够再深度检索，答不上就回流成缺口待办。</p></article>
+      <div class="dh-two">
+        <div class="dh-bcard rv">
+          <span class="k">写在文档里的</span>
+          <h3>制度、手册、报价、话术</h3>
+          <p class="lead">文档、表格、PDF、PPT、图片、视频、网页，还有句子秒回里的素材。</p>
+          <ul>
+            <li><b>段落</b>：每份资料拆成能被检索的段落，另写一句话摘要</li>
+            <li><b>问答</b>：常问的问题和答案，一个答案可以挂多种问法</li>
+            <li><b>图片和素材</b>：PPT 和 PDF 里的图单独摘出来配上描述，回答时带着图一起发</li>
+          </ul>
+          <div class="foot">产品里现成，上传完就能被检索到。</div>
+        </div>
+        <div class="dh-bcard alt rv rv-d1">
+          <span class="k">在业务系统里的</span>
+          <h3>表结构、字段关系、业务规则</h3>
+          <p class="lead">ERP、财务、订单这类系统跑了很多年，逻辑散在表里、程序里和老员工的经验里。</p>
+          <ul>
+            <li><b>对象和关系</b>：每张表是什么，表和表靠哪个字段连</li>
+            <li><b>规则</b>：安全库存怎么算、一笔账什么条件下能清，写成一条条带出处的规则</li>
+            <li><b>报错和处置</b>：系统报错是什么原因，该找谁，怎么办</li>
+          </ul>
+          <div class="foot">这一类随项目交付：FDE 和你的业务专家选一条业务链路，一起建。</div>
+        </div>
+      </div>
+      <div class="dh-flow rv">
+        <a class="dh-act" href="#in"><span class="c">进</span><b>什么能进来</b><span>文档、表结构、配置项、接口。源代码不用给。</span></a>
+        <a class="dh-act" href="#archive"><span class="c">建</span><b>AI 建初稿</b><span>文档归档五步。表结构六步变成对象、关系、规则。</span></a>
+        <a class="dh-act" href="#todo"><span class="c">审</span><b>人只做选择题</b><span>待办 9 类，冲突选一条为准，拿得准的自动过。</span></a>
+        <a class="dh-act" href="#use"><span class="c">用</span><b>三个入口直接取</b><span>秒懂节点、Mio 对话、AI 员工。先查问答，再翻原文。</span></a>
+        <a class="dh-act" href="#control"><span class="c">管</span><b>查得到、改得动</b><span>出处、版本、操作记录，检索范围可圈定。</span></a>
       </div>
     </div>
   </section>
 
-  <section class="dh-section" id="screens">
-    <div class="dh-wrap">
-      <div class="section-head">
+  <!-- ════════════ 进 · 什么能进来 ════════════ -->
+  <section class="sec pad" id="in">
+    <div class="wrap">
+      <div class="sec-top rv">
         <div>
-          <div class="kicker">真实界面</div>
-          <h2>三个 Agent 的关键界面，<span>串起记忆闭环。</span></h2>
+          <span class="sec-eyebrow">进 · 什么能进来</span>
+          <h2>文档拖进来，表结构导出来，<span class="hl warm"><span>源代码不用给</span></span>。</h2>
         </div>
-        <p>从一批素材进入，到一次问题被回答，来源、处理状态、人工确认和命中证据都能看清。</p>
+        <p class="sub">客户常先问：源代码也要读吗？不读。数据库里自带表结构，配置项里写着表和表怎么关联，文档讲业务是什么，懂行读的是这些。</p>
       </div>
-      <div class="screen-stack">
-        <article class="screen-proof">
-          <div class="screen-copy">
-            <span class="screen-no">01</span>
-            <h3>一批素材进来，归档 Agent 先分清形态和归属。</h3>
-            <p>上传后不是简单存文件，而是判断资料类型、建议归档目录、拆出记忆单元。表格、图片、视频和秒回素材都走同一条入库链路。</p>
-            <div class="screen-meta">
-              <span><i aria-hidden="true"></i>表格先判形态，SKU 类资料按行列展开成问答指引</span>
-              <span><i aria-hidden="true"></i>图片、视频和 PDF 内嵌图保留为后续可发资产</span>
-            </div>
-          </div>
-          <div class="screen-stage">
-            <div class="screen-top"><span>原始素材库</span></div>
-            <div class="screen-image"><img src="../assets/product-shots/dongxing-materials.png" alt="句子懂行原始素材上传与归档建议界面" loading="lazy" /></div>
-          </div>
-        </article>
-        <article class="screen-proof">
-          <div class="screen-copy">
-            <span class="screen-no">02</span>
-            <h3>冲突和没把握的地方，当场变成待办。</h3>
-            <p>体检 Agent 把同范围内的真冲突、缺口、过期和重复内容找出来。需要人工判断的，不会静默写进记忆，而是进入任务流。</p>
-            <div class="screen-meta">
-              <span><i aria-hidden="true"></i>入库当场只比对刚落的这一批，问题还在用户眼前</span>
-              <span><i aria-hidden="true"></i>定位到单元粒度，确认后再重新投影到可用范围</span>
-            </div>
-          </div>
-          <div class="screen-stage">
-            <div class="screen-top"><span>知识体检 · 任务中心</span></div>
-            <div class="screen-image"><img src="../assets/product-shots/dongxing-health-conflict.png" alt="句子懂行知识体检内容冲突裁决界面" loading="lazy" /></div>
-          </div>
-        </article>
-        <article class="screen-proof">
-          <div class="screen-copy">
-            <span class="screen-no">03</span>
-            <h3>先确定范围，再逐层取证，不把无关材料塞给模型。</h3>
-            <p>检索 Agent 先查范围内的问答指引和出处；不够再看索引、收窄文件夹或标签，最后才读片段、原文或表结构。</p>
-            <div class="screen-meta">
-              <span><i aria-hidden="true"></i>候选答案带出处交回模型，不直接当标准话术发送</span>
-              <span><i aria-hidden="true"></i>找不到就生成缺口待办，而不是臆造答案</span>
-            </div>
-          </div>
-          <div class="screen-stage">
-            <div class="screen-top"><span>检索调试台</span></div>
-            <div class="screen-image"><img src="../assets/product-shots/dongxing-retrieval-fragment.png" alt="句子懂行 Agentic 检索片段召回界面" loading="lazy" /></div>
-          </div>
-        </article>
+      <div class="dh-two">
+        <div class="dh-bcard rv">
+          <span class="k">文档这一类</span>
+          <h3>文件、粘贴正文、网址，三个口</h3>
+          <p class="lead">文档、表格、PDF、PPT、图片、视频都收。飞书文档、旧知识库、句子秒回里的素材可以整批导入，导过的自动跳过。</p>
+          <ul>
+            <li><b>重复的它自己认</b>：库里已有的会标出来，写明已在哪份资料里</li>
+            <li><b>视频也能当知识</b>：打开一个开关，视频里讲的内容一起读进来</li>
+            <li><b>上传时交代一句话</b>：比如「这批是 2026 新款，旧型号作废」，归档时照办</li>
+            <li><b>文件夹可以不选</b>：不选就由懂行按内容定，也可以由你指定</li>
+          </ul>
+        </div>
+        <div class="dh-bcard alt rv rv-d1">
+          <span class="k">业务系统这一类</span>
+          <h3>表结构、文档、配置项、接口</h3>
+          <p class="lead">有什么给什么，缺的先不补。</p>
+          <ul>
+            <li><b>表结构和样本数据</b>：库里自带表名、字段、键、注释，先导出一部分，样本脱敏后再给</li>
+            <li><b>业务文档</b>：流程说明、字段说明、匹配规则、操作手册、报错手册</li>
+            <li><b>配置项</b>：配置里写着表和表怎么关联，只拿这一小部分。规则也可以手工加</li>
+            <li><b>现有接口</b>：成熟的计算和过账逻辑不重写，留在原系统里，通过接口调用</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dh-band three rv">
+        <div><b>读的是一份副本</b>：表结构和数据同步一份进隔离沙盒，AI 写的查询只在沙盒里跑，不直连你的生产库。</div>
+        <div><b>实时数据走接口</b>：运行时要查最新数据，调你开放的接口，接口可以加限频。</div>
+        <div><b>先用脱敏数据验证</b>：脱敏样本先在公有云上跑通，正式合作再谈私有部署。</div>
       </div>
     </div>
   </section>
 
+  <!-- ════════════ 建 · 文档 · 归档五步 ════════════ -->
+  <section class="sec pad" id="archive">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">建 · 文档这一类</span>
+          <h2>上传只是开始，<span class="hl warm"><span>归档五步</span></span>每一步看得见。</h2>
+        </div>
+        <p class="sub">最重的一步是读内容：先看清这份资料讲什么，再决定放哪、怎么拆。表格多一步认表头。</p>
+      </div>
+      <div class="dh-how">
+        <div class="dh-step rv"><span class="n">STEP 1</span><h3>读内容</h3><p>看清这份资料讲什么，写成一句话摘要。检索时先看这一句，再决定读不读全文。</p></div>
+        <div class="dh-step rv rv-d1"><span class="n">STEP 2</span><h3>认表头</h3><p>表格先认出每一列是什么，再按行展开，产品多也不漏项。</p></div>
+        <div class="dh-step rv rv-d1"><span class="n">STEP 3</span><h3>定文件夹</h3><p>按内容放进合适的文件夹，也可以由你指定。</p></div>
+        <div class="dh-step rv rv-d2"><span class="n">STEP 4</span><h3>拆段落</h3><p>拆成能被检索的段落，图片单独摘出来。</p></div>
+        <div class="dh-step rv rv-d2"><span class="n">STEP 5</span><h3>上架</h3><p>进库，开始被检索到。拆了几段、放在哪，都有记录。</p></div>
+      </div>
+      <div class="dh-notes rv">
+        <div><b>问答预先生成</b>上传时按档位生成问答，分关、少、标准、多、尽量多五档。标准档按正文约每 1000 字 1 条。</div>
+        <div><b>图单独摘出来</b>PPT、PDF 里的图存成素材，配一句描述，检索时带着图一起回。</div>
+        <div><b>换版本全量重读</b>旧版被替换，受影响的问答进待复核，每个版本的原文件都还能看。</div>
+        <div><b>每次归档有记录</b>一份资料拆了几段、放进哪个文件夹，事后都查得到。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 建 · 表和规则 · 本体 ════════════ -->
+  <section class="sec pad" id="ontology">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">建 · 表和规则这一类</span>
+          <h2>把业务逻辑说清楚，<span class="hl"><span>AI 来建，人来审</span></span>。</h2>
+        </div>
+        <p class="sub">大型企业上 AI，会被问到有没有「本体层」：业务里有哪些对象、怎么关联、按什么规则办、能做哪些动作，要有一处讲清楚，AI 才能照着做事。</p>
+      </div>
+      <div class="arch rv" style="padding:clamp(18px,2.4vw,28px)">
+        <div class="dh-group"><span class="tag">懂行交出来的</span>过去这一层靠建模顾问逐个对象定义。现在把表结构、数据字典和业务文档交给懂行，AI 生成初稿，业务专家来审。</div>
+        <div class="tier-cards dh-four">
+          <div class="pcard c-blue rv">
+            <span class="ico"><i class="fa-solid fa-cubes" aria-hidden="true"></i></span>
+            <h3 class="sm">对象字典</h3>
+            <p>物料、供应商、采购订单、凭证，各自来自哪张表，有哪些属性。</p>
+          </div>
+          <div class="pcard c-blue rv rv-d1">
+            <span class="ico"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></span>
+            <h3 class="sm">关系图</h3>
+            <p>订单挂哪个供应商，行项目挂哪个物料。顺着字段一层层连起来，每条关系标明验证过没有。</p>
+          </div>
+          <div class="pcard c-purple rv rv-d1">
+            <span class="ico"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></span>
+            <h3 class="sm">规则库</h3>
+            <p>安全库存怎么算，一笔账什么条件下能清。拆成条目，每条带出处、状态和版本。</p>
+          </div>
+          <div class="pcard c-purple rv rv-d2">
+            <span class="ico"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
+            <h3 class="sm">动作清单</h3>
+            <p>创建订单、收货过账、发票校验。每个动作一条，AI 员工能调用。</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="dh-lead rv">以采购到付款为例。以前是人进到表里一张张跟，跟完记在脑子里。现在 AI 进去跟，跟完写成对象、关系和规则，每一步留记录。</p>
+      <div class="dh-how six">
+        <div class="dh-step rv"><span class="n">01</span><h3>读表</h3><p>表结构、字段、注释进来，每张表写清是什么。</p></div>
+        <div class="dh-step rv"><span class="n">02</span><h3>连关系</h3><p>顺着字段把表连起来，供应商编号连到供应商主数据。</p></div>
+        <div class="dh-step rv rv-d1"><span class="n">03</span><h3>读规则</h3><p>从业务文档和报错处理手册里，把规则整理成条目。</p></div>
+        <div class="dh-step rv rv-d1"><span class="n">04</span><h3>生成</h3><p>对象字典、关系图、规则库自动生成，每条带出处。</p></div>
+        <div class="dh-step rv rv-d2"><span class="n">05</span><h3>人审</h3><p>不一致的、没依据的进待办，业务专家逐条拍板。</p></div>
+        <div class="dh-step rv rv-d2"><span class="n">06</span><h3>沉淀</h3><p>进库带版本，秒懂和 Mio 直接调用。</p></div>
+      </div>
+      <div class="dh-row rv">
+        <div class="dh-copy">
+          <span class="k">人审</span>
+          <h3>专家不用翻文档，只处理待办</h3>
+          <p>AI 建出来的初稿一定有说不清的地方。懂行把它们列出来：两份文档说法不一致的进内容冲突，库里找不到依据的进知识缺口，样本里对不上的关系标成待验证。</p>
+          <ul>
+            <li><b>每条规则带出处</b>出自哪份文档、落在哪张表哪个字段，点开能核。</li>
+            <li><b>改规则不改代码</b>规则是一段人能读的文字，业务专家自己能改。改完出新版本，下游下一次就按新版本跑。</li>
+            <li><b>数据留在你的库里</b>懂行存的是定义。规则算得对不对，Mio 在隔离沙盒里读库验算。</li>
+          </ul>
+        </div>
+        <div class="mk" aria-label="对象关系与规则库示意图">
+          <div class="mk-onto">
+            <div class="mk-card mk-graph">
+              <div class="mk-h">关系图<small>7 个对象</small></div>
+              <svg viewBox="0 0 220 286" fill="none" aria-hidden="true" font-family="inherit">
+                <g stroke="#C9CEFB" stroke-width="1.6">
+                  <path d="M110 44 L36 110"/><path d="M110 44 L110 110"/><path d="M110 44 L184 110"/><path d="M110 140 L110 206"/><path d="M184 140 L184 206"/>
+                </g>
+                <path d="M36 140 L36 206" stroke="#F5C26B" stroke-width="1.6" stroke-dasharray="4 4"/>
+                <g font-size="12.5" font-weight="700" text-anchor="middle">
+                  <rect x="66" y="14" width="88" height="30" rx="9" fill="#4338CA"/><text x="110" y="33.5" fill="#fff">采购订单</text>
+                  <rect x="3" y="110" width="66" height="30" rx="9" fill="#fff" stroke="#C9CEFB"/><text x="36" y="129.5" fill="#0F172A">供应商</text>
+                  <rect x="77" y="110" width="66" height="30" rx="9" fill="#fff" stroke="#C9CEFB"/><text x="110" y="129.5" fill="#0F172A">行项目</text>
+                  <rect x="151" y="110" width="66" height="30" rx="9" fill="#fff" stroke="#C9CEFB"/><text x="184" y="129.5" fill="#0F172A">发票</text>
+                  <rect x="3" y="206" width="66" height="30" rx="9" fill="#fff" stroke="#F5C26B"/><text x="36" y="225.5" fill="#0F172A">合同</text>
+                  <rect x="77" y="206" width="66" height="30" rx="9" fill="#fff" stroke="#C9CEFB"/><text x="110" y="225.5" fill="#0F172A">物料</text>
+                  <rect x="151" y="206" width="66" height="30" rx="9" fill="#fff" stroke="#C9CEFB"/><text x="184" y="225.5" fill="#0F172A">会计凭证</text>
+                </g>
+                <g font-size="10.5" fill="#97A1B5"><text x="3" y="274">实线 已验证 · 虚线 待验证</text></g>
+              </svg>
+            </div>
+            <div class="mk-card">
+              <div class="mk-h">规则库<small>v2</small></div>
+              <div class="mk-rule">
+                <div class="top"><span class="id">R-03</span><span class="chip ok">已生效</span></div>
+                <p>再订货点 = 安全库存 + 日均消耗 × 交货天数</p>
+                <span class="src">出处 · 计划流程说明 · 物料工厂视图</span>
+              </div>
+              <div class="mk-rule">
+                <div class="top"><span class="id">R-05</span><span class="chip warn">内容冲突</span></div>
+                <p>计划交货时间：物料主数据写 14 天，采购信息记录写 10 天</p>
+                <span class="src">等专家选一条为准</span>
+              </div>
+              <div class="mk-rule">
+                <div class="top"><span class="id">R-07</span><span class="chip mute">知识缺口</span></div>
+                <p>净需求的口径，资料里没找到</p>
+                <span class="src">等补材料</span>
+              </div>
+            </div>
+          </div>
+          <span class="mk-cap">示意图 · 以采购到付款为例</span>
+        </div>
+      </div>
+
+      <div class="dh-row flip rv">
+        <div class="dh-copy">
+          <span class="k">建完之后</span>
+          <h3>有了这一层，AI 员工能办事</h3>
+          <p>以月结清账为例。财务在 Mio 里说一句话，Mio 读懂行里的对象和规则，把这件事办完。原来系统只给一行报错日志，现在清不了的账给原因和处理办法。</p>
+          <ul>
+            <li><b>找账</b>按操作人的权限找到要清的账，不用人填查询条件。</li>
+            <li><b>预检</b>符合查询条件但业务上清不了的，先按规则筛出来。</li>
+            <li><b>清账和冲销</b>动作只写沙盒，不直连改库。清错了可以冲销。</li>
+            <li><b>解释</b>清不了的给一张原因卡：错在哪张表哪个字段，为什么，该找谁。</li>
+          </ul>
+        </div>
+        <div class="mk" aria-label="清账原因卡示意图">
+          <div class="say">“把这个月的供应商往来账清了”</div>
+          <div class="mk-card mk-ans">
+            <p>找到 10 组未清项：4 组已清，6 组清不了，原因逐条列在下面。</p>
+          </div>
+          <div class="mk-card">
+            <div class="mk-h">第 6 组 · 清不了<small>原因卡</small></div>
+            <div class="mk-kv">
+              <span>原因</span><div>这笔账挂的项目已经关闭，不允许再记账。</div>
+              <span>依据</span><div>规则 R-06 · 项目表 · 系统状态字段</div>
+              <span>处置</span><div>联系项目负责人重新打开，或改挂其他项目。</div>
+            </div>
+            <div class="mk-trace" style="margin-top:12px">
+              <span class="chip">规则 R-06 · v2</span>
+              <span class="chip mute">找账 → 预检 → 清账 → 解释</span>
+            </div>
+          </div>
+          <span class="mk-cap">示意图 · 以月结清账为例，随项目一起建</span>
+        </div>
+      </div>
+
+      <div class="dh-band rv">
+        <div><b>这一层随项目交付</b>：从一条链路开始，比如采购到付款。FDE 和你的业务专家先把这一条建出来、审一遍，再一条条复制。</div>
+        <div><b>建出来的东西是你的</b>：对象、关系、规则都是看得懂的条目，业务专家能自己改，不依赖建模顾问。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 审 · 待办 ════════════ -->
+  <section class="sec pad" id="todo">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">审 · 人只做选择题</span>
+          <h2>库里哪里不对，<span class="hl"><span>懂行自己列出来</span></span>。</h2>
+        </div>
+        <p class="sub">一次交给人一万条待审，等于没交，我们做交付踩过这个坑。懂行把库里的问题分成 9 类待办，拿得准的自动过，到人手里的都是选择题。</p>
+      </div>
+      <div class="dh-notes rv" style="margin-top:clamp(28px,3.4vw,44px)">
+        <div><b>全是选择题</b>冲突并排摆出两段原文，选「以这条为准」。不让人填空，不让人写答案。</div>
+        <div><b>分 9 类，各有计数</b>冲突、缺口、解析失败、相似资料、问答待审各是一类，分开处理。</div>
+        <div><b>拿得准的先过</b>AI 生成的问答，置信度高的默认通过并通知你，拿不准的才进待办。</div>
+        <div><b>到期自动确认</b>待审的问答 7 天没人处理就自动生效。天数可以改成 30 天、90 天，或一直保留。</div>
+      </div>
+      <div class="dh-row rv">
+        <div class="dh-copy">
+          <span class="k">内容冲突</span>
+          <h3>两段原文并排摆出来，选一条为准</h3>
+          <p>同一件事两份资料说法不一样，AI 不知道该听谁的。懂行在归档时就比对，把不一致的两段找出来，等人拍板。</p>
+          <ul>
+            <li><b>选了就生效</b>另一段以后不再被检索到，随时可以撤销。</li>
+            <li><b>可以不算冲突</b>两种说法各有适用条件的，备注里写清，两条都留。</li>
+            <li><b>处理原则能复用</b>备注里反复出现的处理办法，懂行会建议写进企业规则。</li>
+          </ul>
+        </div>
+        <div class="mk" aria-label="内容冲突处理示意图">
+          <div class="mk-card">
+            <div class="mk-h">内容冲突 · 耗材是否保修<small>待处理</small></div>
+            <div class="mk-vs">
+              <div class="mk-side a"><span class="src">售后保修政策 2026.docx</span><p>保修期内，<mark>耗材可免费更换一次</mark>。</p><span class="mk-btn on">以这条为准</span></div>
+              <div class="mk-side b"><span class="src">售后配件更换说明.pdf</span><p>滤芯等<mark>耗材不计入保修范围</mark>，按配件价收费。</p><span class="mk-btn">以这条为准</span></div>
+            </div>
+            <div class="mk-acts"><span class="mk-btn">不算冲突，两条都留</span></div>
+          </div>
+          <span class="mk-cap">示意图 · 内容冲突待办</span>
+        </div>
+      </div>
+      <div class="dh-six">
+        <div class="dh-chk rv"><i class="fa-solid fa-not-equal" aria-hidden="true"></i><div><h3>内容冲突</h3><p>两份资料说法不一致，并排摆出来，选一条为准。</p></div></div>
+        <div class="dh-chk rv rv-d1"><i class="fa-solid fa-circle-question" aria-hidden="true"></i><div><h3>知识缺口</h3><p>秒懂或 Mio 里被问过、库里没有的，记下被问了几次。补资料、录问答，或者设成不回答。</p></div></div>
+        <div class="dh-chk rv rv-d1"><i class="fa-solid fa-rotate" aria-hidden="true"></i><div><h3>来源变更待复核</h3><p>资料被删或换了版本，相关问答进待复核，由人决定停用还是保留。</p></div></div>
+        <div class="dh-chk rv"><i class="fa-solid fa-copy" aria-hidden="true"></i><div><h3>相似资料确认</h3><p>新上传的和库里某份很像，确认是新版本还是重复。</p></div></div>
+        <div class="dh-chk rv rv-d1"><i class="fa-solid fa-file-circle-xmark" aria-hidden="true"></i><div><h3>解析失败</h3><p>文件没读出内容，提示换格式或转成 PDF 重传。</p></div></div>
+        <div class="dh-chk rv rv-d1"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i><div><h3>任务卡住</h3><p>归档任务没跑完，重试这一份。</p></div></div>
+        <div class="dh-chk rv"><i class="fa-solid fa-list-check" aria-hidden="true"></i><div><h3>问答待审核</h3><p>自动积累的问答过目即可，到期自动确认。</p></div></div>
+        <div class="dh-chk rv rv-d1"><i class="fa-solid fa-user-pen" aria-hidden="true"></i><div><h3>人工答案待核</h3><p>人工录的答案，等人核一遍。</p></div></div>
+        <div class="dh-chk rv rv-d1"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i><div><h3>规则建议</h3><p>懂行发现某个标签或分类需要说明，提一条建议，采纳后写进企业规则。</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 用 · 三个入口 ════════════ -->
+  <section class="sec pad" id="use">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">用 · 三个入口直接取</span>
+          <h2>一套记忆，<span class="hl warm"><span>三个入口</span></span>直接取。</h2>
+        </div>
+        <p class="sub">秒懂的流程、Mio 的对话、AI 销售和 AI 客服的回复，取的是同一份资料、同一版规则。懂行自己不直接面对客户。</p>
+      </div>
+      <div class="dh-use">
+        <div class="dh-ucard rv">
+          <span class="ico"><i class="fa-solid fa-brain" aria-hidden="true"></i></span>
+          <h3>在秒懂里：一个节点接上</h3>
+          <p>大模型节点的工具设置里加上句子懂行，圈定文件夹或标签。文字、图片、素材排成一条组合消息直接发，中间不用再配一串判断节点。</p>
+        </div>
+        <div class="dh-ucard rv rv-d1">
+          <span class="ico"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+          <h3>在 Mio 里：对话里直接问</h3>
+          <p>让 Mio 做一份对外报告，它列出资料来源。搜「保修」，它命中两份资料，指出口径不一致，建议先内部确认。</p>
+        </div>
+        <div class="dh-ucard rv rv-d2">
+          <span class="ico"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
+          <h3>AI 员工对客：按范围取</h3>
+          <p><a href="../workforce/sales.html">AI 销售</a>、<a href="../workforce/service.html">AI 客服</a>回答客户时，只在绑定的范围里取。答不上的问题回到懂行，变成一条知识缺口。</p>
+        </div>
+      </div>
+      <div class="dh-band rv">
+        <div><b>IT 在懂行里管数据</b>：文档、表、关系、规则都放在懂行，带出处、带版本。</div>
+        <div><b>业务在 Mio 里干活</b>：对话、查询、动作在 Mio 里，读的是懂行里的同一份。</div>
+      </div>
+      <div class="dh-band rv">
+        <div><b>十个群，十套问答</b>：十个社区群各有各的常见问题。传一张 Excel，群名、问题、答案三列。</div>
+        <div><b>不用配十套流程</b>：提示词里写清「只查这个群下面的内容」。常问的走几次就变成问答，直接命中。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 用 · 怎么答 · 检索 ════════════ -->
+  <section class="sec pad" id="answer">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">用 · 怎么答</span>
+          <h2>先查问答，再翻原文，<span class="hl"><span>答案带出处</span></span>。</h2>
+        </div>
+        <p class="sub">常问的问题直接命中问答，一步答完。没命中的，懂行去翻资料：看目录、拉全文核对、精搜片段，依据原文作答。</p>
+      </div>
+      <div class="dh-row flip rv">
+        <div class="dh-copy">
+          <span class="k">检索</span>
+          <h3>每一步怎么找到的，看得见</h3>
+          <p>问答测试里问一句，能看到懂行这次走了哪几步、读了哪份资料。</p>
+          <ul>
+            <li><b>范围先圈好</b>按文件夹或标签指定检索范围，范围外的不取。</li>
+            <li><b>图文一起回</b>文字和图片按原文顺序排好，可以直接发给客户。</li>
+            <li><b>常问的自动变成问答</b>翻原文答出来的，存成待审核问答，下次直接命中，越用越快。</li>
+            <li><b>答不上就说答不上</b>不编答案，记成一条知识缺口。</li>
+          </ul>
+        </div>
+        <div class="mk" aria-label="带出处回答示意图">
+          <div class="say">“这款净水器的滤芯多久换一次？”</div>
+          <div class="mk-card mk-ans">
+            <p>PP 棉滤芯建议 3 到 6 个月更换，RO 膜 24 个月。更换步骤见下图。</p>
+            <div class="mk-pic"><i class="fa-regular fa-image" aria-hidden="true"></i>原文配图 · 滤芯更换步骤</div>
+            <div class="mk-trace">
+              <span class="chip">出处 · 产品手册 2026 · 第 3 节</span>
+              <span class="chip mute">翻目录 → 拉全文 → 精搜片段 → 作答</span>
+              <span class="chip ok"><i class="fa-solid fa-check" aria-hidden="true"></i>已存成问答</span>
+            </div>
+          </div>
+          <span class="mk-cap">示意图 · 问答测试</span>
+        </div>
+      </div>
+      <div class="dh-notes rv">
+        <div><b>一个答案多种问法</b>同一个答案可以挂多种问法，问法越多命中越快。</div>
+        <div><b>手动录入</b>可以标明出自哪份资料，那份资料更新时，这条问答进待复核。</div>
+        <div><b>不够就再生成</b>参考已有问答，只补没覆盖到的角度，先进待复核。</div>
+        <div><b>用了几次看得见</b>每条问答有命中次数和最后命中时间。</div>
+      </div>
+
+      <div class="dh-subhead rv">
+        <h3>怎么知道它懂没懂：考它</h3>
+        <p>带新人靠考试，AI 也一样。资料放进去，在问答测试里按真实业务反复问。答错的地方，就是资料缺的地方。</p>
+      </div>
+      <div class="dh-how four">
+        <div class="dh-step rv"><span class="n">01</span><h3>传</h3><p>文档、表结构、规则传进懂行。</p></div>
+        <div class="dh-step rv rv-d1"><span class="n">02</span><h3>问</h3><p>在问答测试里按真实业务提问，检索每一步看得见。</p></div>
+        <div class="dh-step rv rv-d1"><span class="n">03</span><h3>补</h3><p>答错或答不上的，补材料、改规则，缺口进待办。</p></div>
+        <div class="dh-step rv rv-d2"><span class="n">04</span><h3>再问</h3><p>同一个问题再问一遍，直到答对。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 管 · 管得住 ════════════ -->
+  <section class="sec pad" id="control">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">管 · 查得到、改得动</span>
+          <h2>出处、版本、操作记录，<span class="hl"><span>都查得到</span></span>。</h2>
+        </div>
+        <p class="sub">AI 员工说错一句话，要能查到它依据的是哪一段、那一段是谁传的、什么时候改过。</p>
+      </div>
+      <div class="dh-six">
+        <div class="dh-chk g rv"><i class="fa-solid fa-check" aria-hidden="true"></i><div><h3>每个答案带出处</h3><p>指回原文件的哪一段，点开就能核。</p></div></div>
+        <div class="dh-chk g rv rv-d1"><i class="fa-solid fa-check" aria-hidden="true"></i><div><h3>每份资料有版本</h3><p>传新版本替换旧版，每个版本的原文件都还能看。</p></div></div>
+        <div class="dh-chk g rv rv-d1"><i class="fa-solid fa-check" aria-hidden="true"></i><div><h3>每步操作有记录</h3><p>谁上传、谁改了问答、谁处理了冲突，都查得到。</p></div></div>
+        <div class="dh-chk g rv rv-d2"><i class="fa-solid fa-check" aria-hidden="true"></i><div><h3>检索范围可圈定</h3><p>按文件夹或标签给每个 AI 员工划范围，范围外的不取。</p></div></div>
+        <div class="dh-chk g rv rv-d2"><i class="fa-solid fa-check" aria-hidden="true"></i><div><h3>企业规则一处写</h3><p>归档、整理、查询都按同一份规则，有历史版本。</p></div></div>
+        <div class="dh-chk g rv rv-d2"><i class="fa-solid fa-check" aria-hidden="true"></i><div><h3>可以设成不回答</h3><p>指定的问题只回一句固定话术，不检索，可设到某日再答。</p></div></div>
+      </div>
+
+      <div class="dh-subhead rv">
+        <h3>哪些现成，哪些在建，哪些随项目一起建</h3>
+        <p>「建设中」这几项，正在客户项目里拿真实的表结构做。</p>
+      </div>
+      <div class="dh-two three">
+        <div class="dh-bcard alt rv">
+          <span class="chip ok">已在产品里</span>
+          <h3 class="sm">今天就能演示</h3>
+          <ul>
+            <li>文档、表格、PPT、视频、网页归档五步</li>
+            <li>冲突、缺口、版本，9 类待办</li>
+            <li>带出处检索，图文一起回</li>
+            <li>秒懂节点、Mio 对话直接调用</li>
+          </ul>
+        </div>
+        <div class="dh-bcard alt rv rv-d1">
+          <span class="chip warn">建设中</span>
+          <h3 class="sm">正在做</h3>
+          <ul>
+            <li>表结构和表样本直接进懂行</li>
+            <li>数据表放独立库，可跨表关联查询，和文档库隔离</li>
+            <li>对象、关系、规则的全局浏览界面</li>
+          </ul>
+        </div>
+        <div class="dh-bcard alt rv rv-d2">
+          <span class="chip">随项目一起建</span>
+          <h3 class="sm">拿你的表和文档做出来</h3>
+          <ul>
+            <li>表结构变成对象字典、关系图</li>
+            <li>业务文档、报错手册变成规则库、处置知识</li>
+            <li>库封成 Mio 的 Skill：查结构、查询、写入</li>
+            <li>验收三条：本体能被读，动作能被调，测试能天天跑</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 常被问到 ════════════ -->
+  <section class="sec pad" id="faq">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">常被问到</span>
+          <h2>客户现场问过的<span class="hl"><span>六个问题</span></span>。</h2>
+        </div>
+        <p class="sub">来自客户研发团队的现场提问，按当时的回答整理。</p>
+      </div>
+      <div class="dh-use">
+        <div class="dh-ucard rv"><span class="q">Q1</span><h3>是按相似度匹配的知识库吗</h3><p>不只靠相似度。没命中问答时，懂行像人翻文件夹一样找：看目录、拉全文、精搜片段，依据原文作答，答案带出处。</p></div>
+        <div class="dh-ucard rv rv-d1"><span class="q">Q2</span><h3>每个问题都要把资料翻一遍吗</h3><p>不用。先命中已有的问答，直接答。没命中才去翻原文，答出来的存成问答，下次直接命中。</p></div>
+        <div class="dh-ucard rv rv-d2"><span class="q">Q3</span><h3>资料量到 ERP 级别会不会慢</h3><p>逐个文件找会慢，所以不全靠它。问答和 Skill 沉淀在前面，简单问题不用翻原文，系统自己分流。</p></div>
+        <div class="dh-ucard rv"><span class="q">Q4</span><h3>ERP 里已有的逻辑要重写吗</h3><p>不动。成熟的计算和过账能力通过接口调用。新的业务动作才由 AI 生成小服务，重写一个不影响别的。</p></div>
+        <div class="dh-ucard rv rv-d1"><span class="q">Q5</span><h3>规则不够、不对怎么办</h3><p>直接改。规则是一段人能读的文字，AI 照着执行。可以让 AI 改，也可以自己写，改完留版本。</p></div>
+        <div class="dh-ucard rv rv-d2"><span class="q">Q6</span><h3>只能用国产模型行不行</h3><p>能用，模型不绑定。翻原文和写代码这一段对模型的推理能力有要求，已经沉淀的问答和 Skill 不受影响。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 怎么开始 ════════════ -->
+  <section class="sec pad" id="start">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div>
+          <span class="sec-eyebrow">怎么开始</span>
+          <h2>你先给材料，<span class="hl warm"><span>我们先建出来</span></span>，你再看。</h2>
+        </div>
+        <p class="sub">我们不会先发一张清单让你填。从 2023 年做到现在的教训：一旦要客户多做事，项目就一直拖。先看到生成出来的东西，才说得清要什么。</p>
+      </div>
+      <div class="dh-how">
+        <div class="dh-step rv"><span class="n">第 1 步</span><h3>选一个场景</h3><p>一条链路，比如月结里的清账，边界清楚、数据现成。只有文档的，从一批资料开始。</p></div>
+        <div class="dh-step rv rv-d1"><span class="n">第 2 步</span><h3>给现成的材料</h3><p>表结构、脱敏样本、业务文档、接口清单。有什么给什么。</p></div>
+        <div class="dh-step rv rv-d1"><span class="n">第 3 步</span><h3>我们先建</h3><p>懂行建出对象、关系、规则初稿，Mio 接上，能问能查。</p></div>
+        <div class="dh-step rv rv-d2"><span class="n">第 4 步</span><h3>你们来审</h3><p>看待办里的冲突和缺口，不满意的地方再补材料。</p></div>
+        <div class="dh-step rv rv-d2"><span class="n">第 5 步</span><h3>过了再部署</h3><p>公有云上验证通过，再谈私有部署和下一条链路。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ 终极 CTA ════════════ -->
   <section class="cta" id="cta">
     <div class="wrap cta-inner">
       <div class="rv">
-        <h2>先把组织记忆跑通，<br/>再让 <span class="acc">AI 员工</span> 上岗。</h2>
-        <p class="sub">从一批客户资料开始，归档、体检、检索先跑通；简单角色最快 1 天上岗，复杂角色 90 天。</p>
+        <h2>先把资料和规则理清楚，<br/>再让 <span class="acc">AI 员工</span> 上岗。</h2>
+        <p class="sub">从一批资料开始，归档、待办、检索先跑一遍。最快 1 天，从立项到员工上岗。</p>
         <div class="cta-actions">
           <button type="button" class="btn btn-blue btn-lg ar-host" onclick="openContact('句子懂行·底部CTA','预约演示')">
             预约演示
@@ -281,9 +839,9 @@
         </div>
       </div>
       <div class="cta-stats">
-        <div class="cta-stat rv" style="--ac:#4338CA"><div class="csv">入库闭环</div><div class="csl">素材进来先变成可维护的记忆</div></div>
-        <div class="cta-stat rv rv-d1" style="--ac:#14B8A6"><div class="csv">检索闭环</div><div class="csl">问题先进范围，再按出处取证</div></div>
-        <div class="cta-stat rv rv-d2" style="--ac:#6366F1"><div class="csv">缺口回流</div><div class="csl">答不上就生成补料待办</div></div>
+        <div class="cta-stat rv" style="--ac:#4338CA"><div class="csv">5 步归档</div><div class="csl">资料进来，每一步看得见</div></div>
+        <div class="cta-stat rv rv-d1" style="--ac:#14B8A6"><div class="csv">9 类待办</div><div class="csl">冲突和缺口自己找出来</div></div>
+        <div class="cta-stat rv rv-d2" style="--ac:#6366F1"><div class="csv">带出处</div><div class="csl">每个答案指回原文</div></div>
       </div>
     </div>
   </section>
