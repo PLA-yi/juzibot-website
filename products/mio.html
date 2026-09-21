@@ -55,6 +55,7 @@
   .mio-rows{display:grid;gap:clamp(22px,3vw,40px);margin-top:clamp(28px,3.4vw,44px)}
   .mio-row{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(24px,4vw,64px);align-items:center;
     background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:clamp(22px,3vw,40px)}
+  .mio-row.flip{grid-template-columns:1.15fr 1fr}
   .mio-row.flip .mio-copy{order:2}
   .mio-copy .k{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange-deep);display:block;margin-bottom:12px}
   .mio-copy h3{font-size:clamp(22px,2.3vw,30px);font-weight:830;letter-spacing:-.025em;line-height:1.25;margin-bottom:12px;text-wrap:balance}
@@ -63,7 +64,7 @@
   .mio-copy li{position:relative;padding-left:16px;border-left:2px solid var(--blue-200);font-size:14.5px;line-height:1.6;color:var(--ink-2)}
   .mio-copy li b{display:block;color:var(--ink);font-weight:750;margin-bottom:2px}
   @media(max-width:860px){
-    .mio-row{grid-template-columns:1fr}
+    .mio-row,.mio-row.flip{grid-template-columns:1fr}
     .mio-row.flip .mio-copy{order:0}
   }
 
@@ -79,23 +80,47 @@
   .ln{display:block;height:8px;border-radius:4px;background:var(--line-2)}
   .ln.h{height:12px;background:var(--blue-100)}
   .ln.d{background:var(--line)}
-  /* 应用窗：标题栏带文件图标 + 文件名 + 格式，一眼看出是 Word / PPT / 看板 */
+  /* 应用窗：标题栏用各软件自己的主色 + 字母图标 + 文件名，下面跟选项卡和状态栏，一眼看出是 Word / PPT / 图片 */
   .mk-app{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 18px 40px -22px rgba(14,20,48,.28);min-width:0}
   .mk-app-hd{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);background:#F8FAFF}
   .mk-app-hd .ic{font-size:15px;flex:0 0 auto}
-  .mk-app-hd .ic.w{color:#2B579A}
-  .mk-app-hd .ic.p{color:#D24726}
   .mk-app-hd .ic.d{color:var(--blue)}
   .mk-app-hd .fn{font-size:12px;font-weight:750;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
   .mk-app-hd .fmt{margin-left:auto;flex:0 0 auto;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink-3);background:#fff;border:1px solid var(--line);border-radius:999px;padding:2px 8px}
-  .mk-tools{display:flex;align-items:center;gap:6px;padding:6px 12px;border-bottom:1px solid var(--line)}
-  .mk-tools i{display:block;height:6px;border-radius:3px;background:var(--line);width:30px}
-  .mk-tools i:nth-child(2){width:18px}.mk-tools i:nth-child(3){width:44px}.mk-tools i:nth-child(4){width:14px}.mk-tools i:nth-child(5){width:26px}
-  /* Word：灰色画布上一张白纸，页面往下延伸出窗 */
-  .mk-app.word{width:min(100%,380px);margin:0 auto}
-  .mk-canvas{background:#EDF0F7;padding:14px 16px 0}
-  .mk-page{margin:0 auto;width:min(100%,330px);background:#fff;border:1px solid var(--line);border-bottom:0;border-radius:4px 4px 0 0;
-    padding:18px 20px 6px;box-shadow:0 -2px 12px -8px rgba(14,20,48,.2);display:grid;gap:7px;font-size:10.5px;line-height:1.55;color:var(--ink-2)}
+  .mk-app-hd.w,.mk-app-hd.p,.mk-app-hd.g{border-bottom:0}
+  .mk-app-hd.w{background:#2B579A}
+  .mk-app-hd.p{background:#C43E1C}
+  .mk-app-hd.g{background:var(--ink)}
+  .mk-app-hd.w .fn,.mk-app-hd.p .fn,.mk-app-hd.g .fn{color:#fff}
+  .mk-app-hd.w .fmt,.mk-app-hd.p .fmt,.mk-app-hd.g .fmt{background:rgba(255,255,255,.16);border-color:transparent;color:#fff}
+  .mk-tile{flex:0 0 auto;width:18px;height:18px;border-radius:4px;background:#fff;display:grid;place-items:center;font:900 12px/1 var(--sans)}
+  .mk-app-hd.w .mk-tile{color:#2B579A}
+  .mk-app-hd.p .mk-tile{color:#C43E1C}
+  .mk-app-hd.g .mk-tile{color:var(--ink);font-size:9.5px}
+  .mk-tabs{display:flex;flex-wrap:wrap;align-content:flex-start;gap:0 2px;height:28px;padding:0 8px;border-bottom:1px solid var(--line);background:#F8FAFF;font-size:10.5px;line-height:16px;color:var(--ink-2);white-space:nowrap;overflow:hidden}
+  .mk-tabs span{padding:6px 7px 4px;border-bottom:2px solid transparent}
+  .mk-tabs .on{font-weight:750}
+  .mk-app.word .mk-tabs .on{color:#2B579A;border-bottom-color:#2B579A}
+  .mk-app.ppt .mk-tabs .on{color:#C43E1C;border-bottom-color:#C43E1C}
+  .mk-ribbon{display:flex;flex-wrap:wrap;align-content:flex-start;align-items:center;gap:12px 7px;height:31px;padding:6px 10px;border-bottom:1px solid var(--line);background:#fff;white-space:nowrap;overflow:hidden;font-size:10px;color:var(--ink-2)}
+  .mk-ribbon .box{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;height:18px;padding:0 6px;border:1px solid var(--line);border-radius:4px}
+  .mk-ribbon .box i{font-size:7px;color:var(--ink-3)}
+  .mk-ribbon .g{flex:0 0 auto;display:inline-flex;align-items:center;gap:1px}
+  .mk-ribbon .g i{width:18px;height:18px;display:grid;place-items:center;font-size:9.5px;border-radius:3px;color:var(--ink-2)}
+  .mk-ribbon .g i.on{background:var(--blue-100);color:var(--ink)}
+  .mk-ribbon .sep{flex:0 0 auto;width:1px;height:14px;background:var(--line)}
+  .mk-ribbon .sty{flex:0 0 auto;display:inline-flex;align-items:center;height:18px;padding:0 8px;border:1px solid var(--line);border-radius:4px;font-size:9.5px}
+  .mk-ribbon .sty.on{border-color:#2B579A;color:var(--ink);font-weight:700}
+  .mk-status{display:flex;align-items:center;gap:12px;padding:4px 12px;border-top:1px solid var(--line);background:#F8FAFF;font-size:9.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden}
+  .mk-status .r{margin-left:auto;display:inline-flex;align-items:center;gap:6px}
+  .mk-status .zoom{position:relative;width:44px;height:2px;border-radius:2px;background:var(--line)}
+  .mk-status .zoom::after{content:"";position:absolute;left:50%;top:-3px;width:2px;height:8px;border-radius:1px;background:var(--ink-3)}
+  /* Word：灰色画布上一张白纸，纸往下延伸到状态栏后面 */
+  .mk-app.word{width:min(100%,470px);margin:0 auto}
+  .mk-canvas{position:relative;background:#EDF0F7;padding:14px 16px 0;max-height:248px;overflow:hidden}
+  .mk-app.word .mk-canvas::after{content:"";position:absolute;left:0;right:0;bottom:0;height:26px;background:linear-gradient(180deg,rgba(237,240,247,0),#EDF0F7)}
+  .mk-page{margin:0 auto;width:min(100%,390px);background:#fff;border:1px solid var(--line);border-bottom:0;border-radius:4px 4px 0 0;
+    padding:18px 24px 6px;box-shadow:0 -2px 12px -8px rgba(14,20,48,.2);display:grid;gap:7px;font-size:10.5px;line-height:1.55;color:var(--ink-2)}
   .mk-page .t{font-size:14px;font-weight:800;color:var(--ink);text-align:center;letter-spacing:.02em}
   .mk-page .meta{font-size:9.5px;color:var(--ink-3);text-align:center;margin-bottom:2px}
   .mk-page p{margin:0;text-align:justify}
@@ -105,8 +130,9 @@
   .mk-table th{background:var(--blue-50);color:var(--ink);font-weight:750}
   .mk-table td{color:var(--ink-2)}
   .mk-table td.up{color:var(--orange-deep);font-weight:700}
-  /* PPT + 海报并排 */
-  .mk-two{display:grid;grid-template-columns:1fr 150px;gap:14px;align-items:start}
+  /* PPT + 海报：左列对话气泡 + PPT 窗，右列一整张竖版海报 */
+  .mk.mk-duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,38%);gap:14px;align-items:start;padding-bottom:clamp(18px,2.4vw,28px)}
+  .mk-col{display:flex;flex-direction:column;gap:14px;min-width:0;padding-bottom:46px}
   .mk-pptbody{display:grid;grid-template-columns:44px 1fr;gap:8px;padding:10px;background:#EDF0F7}
   .mk-pptbody .thumbs{display:grid;gap:6px;align-content:start}
   .mk-pptbody .thumbs i{position:relative;display:block;aspect-ratio:16/9;border-radius:3px;background:#fff;border:1px solid var(--line)}
@@ -114,23 +140,32 @@
   .mk-pptbody .thumbs i.on{border-color:#D24726;box-shadow:0 0 0 2px rgba(210,71,38,.18)}
   .mk-slide{position:relative;aspect-ratio:16/9;background:#fff;border:1px solid var(--line);border-radius:6px;padding:12px 14px 20px;box-shadow:0 8px 20px -12px rgba(14,20,48,.25);display:grid;grid-template-rows:auto auto 1fr;gap:6px;min-width:0}
   .mk-slide .t{font-size:12px;font-weight:800;color:var(--ink);line-height:1.2}
-  .mk-slide .sub{font-size:9px;color:var(--ink-3);line-height:1.3}
+  .mk-slide .sub{font-size:9px;color:var(--ink-3);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .mk-slide .pg{position:absolute;right:10px;bottom:6px;font:700 8px/1 var(--mono);color:var(--ink-3)}
-  .mk-bars{display:flex;align-items:flex-end;gap:7px;height:100%;padding-top:4px;border-bottom:1px solid var(--line)}
+  .mk-bars{display:flex;align-items:flex-end;gap:7px;height:100%;min-height:22px;padding-top:4px;border-bottom:1px solid var(--line)}
   .mk-bars i{flex:1;border-radius:3px 3px 0 0;background:var(--blue-200)}
   .mk-bars i.b{background:var(--blue)}.mk-bars i.t{background:var(--teal)}
-  .mk-posterwrap{display:grid;gap:8px;justify-items:center}
-  .mk-poster{position:relative;overflow:hidden;width:100%;aspect-ratio:3/4;border-radius:10px;padding:14px 12px;color:#fff;
-    background:linear-gradient(165deg,#0D9488 0%,#2DD4BF 28%,#6366F1 62%,#3730A3 100%);box-shadow:0 18px 40px -18px rgba(67,56,202,.6);display:flex;flex-direction:column;gap:4px}
-  .mk-poster::before{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.18)}
-  .mk-poster::after{content:"";position:absolute;left:-24px;bottom:34px;width:70px;height:70px;border-radius:50%;border:8px solid rgba(255,255,255,.14)}
-  .mk-poster .ey{position:relative;font:700 8px/1 var(--mono);letter-spacing:.16em;opacity:.92;white-space:nowrap}
-  .mk-poster .big{position:relative;font-size:19px;font-weight:900;line-height:1.12;letter-spacing:-.01em;margin-top:6px;text-shadow:0 2px 10px rgba(14,20,48,.25)}
-  .mk-poster .date{position:relative;margin-top:auto;font-size:11px;font-weight:800;letter-spacing:.04em}
-  .mk-poster .loc{position:relative;font-size:9px;opacity:.9}
-  .mk-poster .qr{position:absolute;right:10px;bottom:10px;width:26px;height:26px;border-radius:4px;background:
-    repeating-linear-gradient(0deg,#fff 0 3px,transparent 3px 6px),repeating-linear-gradient(90deg,#fff 0 3px,transparent 3px 6px);background-blend-mode:multiply;opacity:.85}
-  .mk-posterwrap .cap{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink-3);background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+  /* 海报：竖版 5:8，大标题 + 议程 + 白底页脚（日期、二维码），字号跟海报宽度走（cqw） */
+  .mk-app.poster .mk-canvas{padding:10px;max-height:none}
+  .mk-poster{container-type:inline-size;position:relative;overflow:hidden;width:100%;aspect-ratio:5/8;border-radius:3px;color:#fff;display:flex;flex-direction:column;
+    background:linear-gradient(162deg,#0D9488 0%,#14B8A6 20%,#4F46E5 60%,#312E81 100%);box-shadow:0 10px 24px -12px rgba(14,20,48,.5)}
+  .mk-poster::before{content:"";position:absolute;right:-22%;top:-12%;width:74%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.16)}
+  .mk-poster::after{content:"";position:absolute;left:-18%;top:40%;width:46%;aspect-ratio:1;border-radius:50%;border:2px solid rgba(255,255,255,.22);box-shadow:0 0 0 10px rgba(255,255,255,.06)}
+  .mk-poster .pin{position:relative;z-index:1;flex:1;min-height:0;display:flex;flex-direction:column;padding:15px 15px 12px;padding:8cqw 8cqw 6cqw}
+  .mk-poster .ptop{display:flex;justify-content:space-between;font:700 7px/1 var(--mono);font-size:3.6cqw;letter-spacing:.16em;opacity:.9;white-space:nowrap}
+  .mk-poster .pre{display:block;margin-top:22px;margin-top:12cqw;font-size:10.5px;font-size:5.6cqw;font-weight:700;letter-spacing:.08em}
+  .mk-poster .big{display:block;margin-top:2px;font-size:29px;font-size:15.5cqw;font-weight:900;line-height:1.1;letter-spacing:-.01em;text-shadow:0 2px 10px rgba(14,20,48,.25);white-space:nowrap}
+  .mk-poster .inv{display:flex;align-items:center;gap:8px;margin-top:8px;margin-top:4cqw;font-size:12px;font-size:6.4cqw;font-weight:700;letter-spacing:.42em;white-space:nowrap}
+  .mk-poster .inv::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.55)}
+  .mk-poster .pag{list-style:none;margin:auto 0 0;padding:0;display:block}
+  .mk-poster .pag li{display:flex;gap:8px;gap:4cqw;padding:3px 0;padding:1.7cqw 0;border:0;border-top:1px solid rgba(255,255,255,.26);font-size:8.5px;font-size:4.5cqw;line-height:1.3;color:#fff}
+  .mk-poster .pag li b{display:inline;margin:0;color:#fff;font-family:var(--mono);font-weight:700}
+  .mk-poster .pfoot{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:8px;background:#fff;color:var(--ink);padding:9px 15px;padding:4.6cqw 8cqw}
+  .mk-poster .when{display:grid;gap:2px;min-width:0}
+  .mk-poster .when b{font-size:19px;font-size:10.4cqw;font-weight:900;line-height:1;letter-spacing:-.01em}
+  .mk-poster .when span{font-size:8.5px;font-size:4.5cqw;color:var(--ink-2);white-space:nowrap}
+  .mk-poster .pqr{flex:0 0 auto;display:grid;justify-items:center;gap:2px;font-size:6.5px;font-size:3.5cqw;color:var(--ink-2);white-space:nowrap}
+  .mk-poster .pqr svg{width:36px;width:19cqw;height:auto;color:var(--ink)}
   /* 看板 + 预警 */
   .mk-dash{margin-bottom:30px}
   .mk-dashbody{padding:12px;display:grid;gap:10px}
@@ -151,19 +186,21 @@
     .mk-canvas{padding:10px 10px 0}
     .mk-page{padding:14px 14px 4px;font-size:10px}
     .mk-table{font-size:9px}
-    .mk-two{grid-template-columns:1fr 104px;gap:10px}
+    .mk-ribbon .opt,.mk-ribbon .g i.opt{display:none}
     .mk-pptbody{grid-template-columns:32px 1fr;gap:6px;padding:8px}
     .mk-slide{padding:9px 10px 16px}
     .mk-slide .t{font-size:10.5px}
-    .mk-poster{padding:10px 9px}
-    .mk-poster .big{font-size:14px}
-    .mk-poster .ey{font-size:6.5px;letter-spacing:.1em}
-    .mk-poster .qr{width:20px;height:20px}
     .mk-kpis{gap:6px}
     .mk-kpi{padding:8px 9px;min-width:0;overflow:hidden}
     .mk-kpi .v{font-size:13.5px}
     .mk-kpi .v small{display:block;margin:2px 0 0}
     .mk-alert{width:min(72%,230px)}
+  }
+  /* 舞台窄的时候（手机，以及刚进双栏的平板宽度）PPT 和海报上下叠放 */
+  @media (max-width:600px),(min-width:861px) and (max-width:1100px){
+    .mk.mk-duo{grid-template-columns:1fr;padding-bottom:60px}
+    .mk-col{padding-bottom:0}
+    .mk-app.poster{width:min(100%,210px);justify-self:center}
   }
   /* CTA 双按钮 */
   #cta .cta-actions{display:flex;flex-wrap:wrap;gap:12px}
@@ -383,8 +420,17 @@
           <div class="mk" aria-label="Word 周报示意图">
             <div class="say">“把上周的渠道业务整理成周报，周一早上发我。”</div>
             <div class="mk-app word">
-              <div class="mk-app-hd"><i class="fa-solid fa-file-word ic w"></i><span class="fn">渠道业务周报-第37周.docx</span><span class="fmt">Word</span></div>
-              <div class="mk-tools"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="mk-app-hd w"><span class="mk-tile">W</span><span class="fn">渠道业务周报-第37周.docx</span><span class="fmt">Word</span></div>
+              <div class="mk-tabs" aria-hidden="true"><span>文件</span><span class="on">开始</span><span>插入</span><span>布局</span><span>引用</span><span>审阅</span><span>视图</span></div>
+              <div class="mk-ribbon" aria-hidden="true">
+                <span class="box">微软雅黑<i class="fa-solid fa-chevron-down"></i></span>
+                <span class="box opt">11<i class="fa-solid fa-chevron-down"></i></span>
+                <span class="g"><i class="fa-solid fa-bold on"></i><i class="fa-solid fa-italic"></i><i class="fa-solid fa-underline"></i><i class="fa-solid fa-highlighter opt"></i></span>
+                <span class="sep"></span>
+                <span class="g"><i class="fa-solid fa-align-left"></i><i class="fa-solid fa-align-center"></i><i class="fa-solid fa-align-justify on"></i><i class="fa-solid fa-list-ul opt"></i></span>
+                <span class="sep opt"></span>
+                <span class="sty on opt">正文</span><span class="sty opt">标题 1</span><span class="sty opt">标题 2</span>
+              </div>
               <div class="mk-canvas">
                 <div class="mk-page">
                   <div class="t">渠道业务周报</div>
@@ -402,6 +448,7 @@
                   <span class="ln" style="width:72%"></span>
                 </div>
               </div>
+              <div class="mk-status" aria-hidden="true"><span>第 1 页，共 3 页</span><span>1,286 个字</span><span class="r">100%<i class="zoom"></i></span></div>
             </div>
             <span class="badge"><i class="fa-solid fa-check"></i>Word · 已排版 · 可直接转发</span>
           </div>
@@ -419,13 +466,14 @@
               <li><b>海报、邀请函说个主题就出</b>风格、文案、排版一次成稿。</li>
             </ul>
           </div>
-          <div class="mk" aria-label="PPT 与海报示意图">
-            <div class="say">“把这个月经营情况做成汇报 PPT，再出一张峰会邀请海报。”</div>
-            <div class="mk-two">
-              <div class="mk-app">
-                <div class="mk-app-hd"><i class="fa-solid fa-file-powerpoint ic p"></i><span class="fn">经营情况-月度汇报.pptx</span><span class="fmt">12 页</span></div>
+          <div class="mk mk-duo" aria-label="PPT 与海报示意图">
+            <div class="mk-col">
+              <div class="say">“把这个月经营情况做成汇报 PPT，再出一张峰会邀请海报。”</div>
+              <div class="mk-app ppt">
+                <div class="mk-app-hd p"><span class="mk-tile">P</span><span class="fn">经营情况-月度汇报.pptx</span><span class="fmt">PPT</span></div>
+                <div class="mk-tabs" aria-hidden="true"><span>文件</span><span class="on">开始</span><span>插入</span><span>设计</span><span>切换</span><span>动画</span><span>放映</span></div>
                 <div class="mk-pptbody">
-                  <div class="thumbs"><i data-n="1"></i><i data-n="2"></i><i class="on" data-n="3"></i><i data-n="4"></i><i data-n="5"></i></div>
+                  <div class="thumbs"><i data-n="1"></i><i data-n="2"></i><i class="on" data-n="3"></i><i data-n="4"></i></div>
                   <div class="mk-slide">
                     <div class="t">各渠道转化率 · 8 月</div>
                     <div class="sub">微信客服 12.4%，是小红书的 3 倍</div>
@@ -433,16 +481,29 @@
                     <span class="pg">3 / 12</span>
                   </div>
                 </div>
+                <div class="mk-status" aria-hidden="true"><span>幻灯片 第 3 张，共 12 张</span><span class="r">备注</span></div>
               </div>
-              <div class="mk-posterwrap">
+            </div>
+            <div class="mk-app poster">
+              <div class="mk-app-hd g"><span class="mk-tile"><i class="fa-solid fa-image"></i></span><span class="fn">峰会邀请海报.png</span><span class="fmt">海报</span></div>
+              <div class="mk-canvas">
                 <div class="mk-poster" aria-label="峰会邀请海报">
-                  <span class="ey">2026 · AUTUMN</span>
-                  <b class="big">行业峰会<br/>邀请函</b>
-                  <span class="date">10.18 · 14:00</span>
-                  <span class="loc">北京 · 扫码报名</span>
-                  <span class="qr"></span>
+                  <div class="pin">
+                    <div class="ptop"><span>INVITATION</span><span>2026</span></div>
+                    <span class="pre">2026 秋季</span>
+                    <b class="big">行业峰会</b>
+                    <span class="inv">邀请函</span>
+                    <ul class="pag">
+                      <li><b>14:00</b>主旨演讲</li>
+                      <li><b>15:30</b>圆桌对话</li>
+                      <li><b>17:30</b>交流晚宴</li>
+                    </ul>
+                  </div>
+                  <div class="pfoot">
+                    <div class="when"><b>10.18</b><span>14:00 · 北京</span><span>凭邀请函入场</span></div>
+                    <div class="pqr"><svg viewBox="-1 -1 23 23" fill="currentColor" aria-hidden="true"><path d="M0 0h7v1h-7zM9 0h1v1h-1zM14 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM14 1h1v1h-1zM20 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM10 2h2v1h-2zM14 2h1v1h-1zM16 2h3v1h-3zM20 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM12 3h1v1h-1zM14 3h1v1h-1zM16 3h3v1h-3zM20 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h3v1h-3zM14 4h1v1h-1zM16 4h3v1h-3zM20 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM11 5h1v1h-1zM14 5h1v1h-1zM20 5h1v1h-1zM0 6h7v1h-7zM8 6h3v1h-3zM14 6h7v1h-7zM8 7h1v1h-1zM10 7h3v1h-3zM3 8h1v1h-1zM9 8h1v1h-1zM12 8h1v1h-1zM14 8h2v1h-2zM17 8h1v1h-1zM19 8h1v1h-1zM0 9h2v1h-2zM3 9h2v1h-2zM6 9h1v1h-1zM8 9h1v1h-1zM11 9h2v1h-2zM14 9h1v1h-1zM17 9h2v1h-2zM20 9h1v1h-1zM1 10h3v1h-3zM5 10h1v1h-1zM10 10h1v1h-1zM13 10h1v1h-1zM16 10h1v1h-1zM18 10h3v1h-3zM1 11h1v1h-1zM3 11h2v1h-2zM13 11h2v1h-2zM19 11h1v1h-1zM0 12h3v1h-3zM6 12h1v1h-1zM8 12h1v1h-1zM12 12h4v1h-4zM18 12h3v1h-3zM9 13h2v1h-2zM12 13h1v1h-1zM15 13h1v1h-1zM18 13h2v1h-2zM0 14h7v1h-7zM8 14h1v1h-1zM14 14h1v1h-1zM18 14h1v1h-1zM20 14h1v1h-1zM0 15h1v1h-1zM6 15h1v1h-1zM8 15h2v1h-2zM13 15h5v1h-5zM0 16h1v1h-1zM2 16h3v1h-3zM6 16h1v1h-1zM9 16h1v1h-1zM11 16h1v1h-1zM13 16h2v1h-2zM17 16h1v1h-1zM19 16h1v1h-1zM0 17h1v1h-1zM2 17h3v1h-3zM6 17h1v1h-1zM8 17h1v1h-1zM14 17h1v1h-1zM17 17h1v1h-1zM0 18h1v1h-1zM2 18h3v1h-3zM6 18h1v1h-1zM10 18h1v1h-1zM12 18h1v1h-1zM14 18h2v1h-2zM17 18h3v1h-3zM0 19h1v1h-1zM6 19h1v1h-1zM9 19h2v1h-2zM12 19h3v1h-3zM19 19h2v1h-2zM0 20h7v1h-7zM9 20h1v1h-1zM12 20h2v1h-2zM16 20h1v1h-1zM18 20h3v1h-3z"/></svg><span>扫码报名</span></div>
+                  </div>
                 </div>
-                <span class="cap"><i class="fa-solid fa-image"></i>海报 · PNG</span>
               </div>
             </div>
             <span class="badge"><i class="fa-solid fa-check"></i>PPT · 海报 · 一次成稿</span>
