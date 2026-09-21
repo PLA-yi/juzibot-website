@@ -33,7 +33,7 @@
     '    <div class="nav-item">' +
     '      <button>AI 员工 <span class="caret"></span></button>' +
     '      <div class="dropdown wide">' +
-    '        <a href="' + REL + 'workforce/sales.html"><div class="d-title">AI 销售</div><div class="d-desc">直播搬家、私域承接、漏斗跟进——首单成交全程接管</div></a>' +
+    '        <a href="' + REL + 'workforce/sales.html"><div class="d-title">AI 销售</div><div class="d-desc">直播搬家、私域承接、漏斗跟进，首单成交全程接管</div></a>' +
     '        <a href="' + REL + 'workforce/marketing.html"><div class="d-title">AI 导购</div><div class="d-desc">头部零售品牌的私域导购运营，长尾客户也覆盖</div></a>' +
     '        <a href="' + REL + 'workforce/service.html"><div class="d-title">AI 客服</div><div class="d-desc">从售前到售后都接得住 · 5 年 BadCase 积累</div></a>' +
     '        <a href="' + REL + 'workforce/government.html"><div class="d-title">AI 社工 / 调解员</div><div class="d-desc">政务高合规要求 + 全程可追溯 · 已稳步落地</div></a>' +
@@ -128,7 +128,7 @@
     }
     // 全站对话层：加载 askbar.js（AI-native 大改核心）
     if (!window.__jzab && !document.querySelector('script[data-jzab]')) {
-      var s = document.createElement('script'); s.src = REL + 'assets/askbar.js?v=20260921'; s.defer = true; s.setAttribute('data-jzab', '1'); document.body.appendChild(s);
+      var s = document.createElement('script'); s.src = REL + 'assets/askbar.js?v=20260921b'; s.defer = true; s.setAttribute('data-jzab', '1'); document.body.appendChild(s);
     }
   }
 
